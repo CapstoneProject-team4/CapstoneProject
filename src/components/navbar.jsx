@@ -1,7 +1,7 @@
 //import here
 import React from "react";
 
-function NavBar() {
+export const NavBar = () => {
     return (
         <div className="navbar">
             <div className="links">
