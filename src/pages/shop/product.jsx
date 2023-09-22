@@ -38,7 +38,7 @@ const dummyData = [
         price: "24.99",
     },
 ]
-    return ()
+    return 
 }
 
 export default product;
