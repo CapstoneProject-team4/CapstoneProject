@@ -1,6 +1,6 @@
 
 
-function product(){
+function Product(){
 const dummyData = [
     {
         id: 1,
@@ -41,4 +41,4 @@ const dummyData = [
     return 
 }
 
-export default product;
+export default Product;
