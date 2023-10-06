@@ -17,6 +17,20 @@ const createUser = async({ name='first last', email, password }) => {
     }
 }
 
+async function getAllUser() {
+    try {
+      const users = await db.query(`
+        SELECT * FROM users
+    
+      `);
+  
+      return users.rows;
+    } catch (error) {
+        console.log(error);
+      throw error;
+    }
+  }
+
 const getUser = async({email, password}) => {
     if(!email || !password) {
         return;
@@ -53,5 +67,6 @@ const getUserByEmail = async(email) => {
 module.exports = {
     createUser,
     getUser,
-    getUserByEmail
+    getUserByEmail,
+    getAllUser,
 };
