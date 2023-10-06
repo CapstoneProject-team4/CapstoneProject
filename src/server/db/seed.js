@@ -213,6 +213,20 @@ const createTables = async () => {
     }
 }
 
+// CREATE TABLE site_user(
+//   id SERIAL PRIMARY KEY,
+//   name VARCHAR(255) DEFAULT 'name',
+//   email VARCHAR(255) UNIQUE NOT NULL,
+//   password VARCHAR(255) NOT NULL
+
+// CREATE TABLE Orders (
+//   OrderID int NOT NULL,
+//   OrderNumber int NOT NULL,
+//   PersonID int,
+//   PRIMARY KEY (OrderID),
+//   FOREIGN KEY (PersonID) REFERENCES Persons(PersonID)
+// ); 
+
 const insertUsers = async () => {
   try {
     for (const user of users) {
