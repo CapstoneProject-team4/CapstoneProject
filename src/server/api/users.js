@@ -17,8 +17,9 @@ usersRouter.get('/', async( req, res, next) => {
         res.send({
             users
         });
-    } catch ({name, message}) {
-        next({name, message})
+    } catch (error) {
+        console.log(error)
+        next(error)
     }
 });
 
