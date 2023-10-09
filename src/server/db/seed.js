@@ -1,5 +1,9 @@
 const db = require('./client');
 const { createUser } = require('./users');
+<<<<<<< Updated upstream
+=======
+const {createProduct} = require('./products')
+>>>>>>> Stashed changes
 
 const users = [
   {
@@ -140,7 +144,7 @@ const insertUsers = async () => {
   }
 };
 
-const seedDatabse = async () => {
+const seedDatabase = async () => {
     try {
         db.connect();
         await dropTables();
@@ -155,4 +159,4 @@ const seedDatabse = async () => {
     }
 }
 
-seedDatabse()
+seedDatabase()
