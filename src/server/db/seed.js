@@ -1,6 +1,6 @@
 const db = require('./client');
 const { createUser } = require('./users');
-const {createProduct} = require('./products')
+const{createProduct} = require('./products')
 
 
 const products =[
@@ -9,6 +9,9 @@ const products =[
     img: "https://m.media-amazon.com/images/I/51QxA-98Q+L._AC_SX679_.jpg",
     brand: "Beats",
     price: "129.00",
+    quantity: 10,
+    color: "black",
+    size: "M",
     description: "High-performance wireless Bluetooth headphones.Features the Apple W1 chip and Class 1 wireless Bluetooth connectivity.With up to 40 hours of battery life, Beats Solo3 wireless is your perfect everyday headphone.Compatible with iOS and Android devices.With Fast Fuel, 5 minutes of charging gives you 3 hours of playback when battery is low.",
 
   },
@@ -17,6 +20,9 @@ const products =[
     img:"https://m.media-amazon.com/images/I/61u-OaDSfQL.__AC_SY445_SX342_QL70_FMwebp_.jpg",
     brand: "Beats",
     price: "349.95",
+    quantity: 10,
+    color: "black",
+    size: "M",
     description: "BEATS' CUSTOM ACOUSTIC PLATFORM delivers rich, immersive sound whether you’re listening to music or taking calls.LOSSLESS AUDIO via USB-C plus three distinct built-in sound profiles to enhance your listening experience.HEAR WHAT YOU WANT with two distinct listening modes: fully-adaptive Active Noise Cancelling (ANC) and Transparency mode.",
   },
   {
@@ -24,6 +30,9 @@ const products =[
     img:"https://m.media-amazon.com/images/I/61zEqUsN1tL.__AC_SY445_SX342_QL70_FMwebp_.jpg",
     brand: "Beats",
     price: "199.95",
+    quantity: 10,
+    color: "black",
+    size: "S",
     description:"Totally wireless high-performance earphones.Up to 9 hours of listening time (more than 24 hours with charging case).Adjustable, secure-fit earhooks for lightweight comfort and stability.Reinforced design for sweat & water resistance during tough workouts",
   },
   {
@@ -31,6 +40,9 @@ const products =[
     img: "https://m.media-amazon.com/images/I/513CxyIboPL.__AC_SY445_SX342_QL70_FMwebp_.jpg",
     brand:"Beats",
     price:"94.95",
+    quantity: 10,
+    color: "black",
+    size: "M",
     description:"Beats EP wired on-ear headphone in black delivers masterfully tuned sound.Durable, lightweight design reinforced with stainless steel.Take calls and control music on your iOS and Android devices with the microphone in the RemoteTalk cable",
   },
   {
@@ -38,6 +50,9 @@ const products =[
     img: "https://m.media-amazon.com/images/I/51m9fuYbhHL.__AC_SX300_SY300_QL70_FMwebp_.jpg",
     brand:"Beats",
     price: "49.00",
+    quantity: 10,
+    color: "white",
+    size: "M",
     description:"BATTERY LIFE - Up to 12 hours of listening time.CUSTOMIZED FIT - All-day comfort with Flex-Form cable and four eartip options.APPLE HEADPHONE CHIP - Powered by the Apple W1 headphone chip for seamless connectivity.THE MUSIC STOPS WHEN YOU DO - Magnetic earbuds with Auto-Play/Pause",
   },
   {
@@ -45,6 +60,9 @@ const products =[
     img: "https://m.media-amazon.com/images/I/61Xvn9KUgYL._AC_SX679_.jpg",
     brand:"Beats",
     price: "253.99",
+    quantity: 10,
+    color: "black&red",
+    size: "M",
     description: "High-performance wireless noise cancelling headphones.Compatible with iOS and Android devices.Pure adaptive noise canceling (pure ANC) actively blocks external noise.Real-time Audio calibration preserves a Premium listening experience.",
 
   },
@@ -53,6 +71,9 @@ const products =[
     img: "https://m.media-amazon.com/images/I/61LfOS0dSNL.__AC_SX300_SY300_QL70_FMwebp_.jpg",
     brand:"Sony",
     price: "169.99",
+    quantity: 10,
+    color: "gray",
+    size: "M",
     description:"SMART SOUND- Smart features and settings learn from your behavior and automatically adjust sound settings to provide the right sound for the moment.Specific uses for product : Audio.Communication system : Bluetooth Specification version 5.NEVER OFF- Automatically switches between superlative noise canceling or optimized ambient sound for listening without distractions. Sony's best transparent ambient sound in truly wireless headphones (As of May 9th 2022. Excluding Open style.)",
 
   },
@@ -61,6 +82,9 @@ const products =[
     img:"https://m.media-amazon.com/images/I/61f06KeLDrL.__AC_SX300_SY300_QL70_FMwebp_.jpg",
     brand:"Sony",
     price: "198.00",
+    quantity: 10,
+    color: "white",
+    size: "S",
     description:"SMART SOUND- Smart features and settings learn from your behavior and automatically adjust sound settings to provide the right sound for the moment.Specific uses for product : Personal, Business.NEVER OFF- Automatically switches between superlative noise canceling or optimized ambient sound for listening without distractions. Sony's best transparent ambient sound in truly wireless headphones (As of May 9th 2022. Excluding Open style.)",
 
   },
@@ -69,6 +93,9 @@ const products =[
     img:"https://m.media-amazon.com/images/I/41eETWU69xL._AC_SX679_.jpg",
     brand:"Sony",
     price: "178.00",
+    quantity: 10,
+    color: "white",
+    size: "S",
     description: "High-performance wireless noise cancelling headphones.Compatible with iOS and Android devices.Pure adaptive noise canceling (pure ANC) actively blocks external noise.Real-time Audio calibration preserves a Premium listening experience.",
 
   },
@@ -77,6 +104,9 @@ const products =[
     img:"https://m.media-amazon.com/images/I/41lArSiD5hL._AC_SX679_.jpg",
     brand:"Sony",
     price: "58.00",
+    quantity: 10,
+    color: "gray",
+    size: "M",
     description:"With up to 50-hour battery life and quick charging, you’ll have enough power for multi-day road trips and long festival weekends.Control Type:Media.Great sound quality customizable to your music preference with EQ Custom on the Sony | Headphones Connect App."
 
   },  
@@ -85,6 +115,9 @@ const products =[
     img:"https://m.media-amazon.com/images/I/61F62vYdKwL._AC_SX679_.jpg",
     brand:"Sony",
     price: "39.99",
+    quantity: 10,
+    color: "white",
+    size: "S",
     description:"Connect wirelessly - Bluetooth connectivity lets you listen for up to 8.5 hours without wires getting in your way.Be ready for splashes - Durable IPX4 design keeps the music going, even when you run in light rain.Hear the beat, feel the power - EXTRA BASS sound gives you more motivation, whether you’re at the gym or on the street. Enhanced low frequencies make music sound more powerful, so you feel energized and driven."
 
   },
@@ -93,6 +126,9 @@ const products =[
     img:"https://m.media-amazon.com/images/I/51rpbVmi9XL._AC_SX679_.jpg",
     brand:"Sony",
     price: "128.00",
+    quantity: 10,
+    color: "gray",
+    size: "M",
     description:"Sony’s lightest Wireless Noise-canceling headband ever.Specific uses for product : Entertainment.Take noise canceling to the next level with Sony’s Integrated Processor V1, so you can fully immerse yourself in the music.Super comfortable and lightweight design.",
 
   },
@@ -101,6 +137,9 @@ const products =[
     img:"https://m.media-amazon.com/images/I/61AZ9rCOSZL._AC_SX679_.jpg",
     brand:"Sony",
     price: "9.99",
+    quantity: 10,
+    color: "black",
+    size: "S",
     description:"Hybrid silicone earbuds provide long lasting comfort; small, medium and large earbuds are included to fine tune your fitment.Specific uses for product : Music.Product Note : If the size of the earbud tips does not match the size of your ear canals or the headset is not worn properly in your ears, you may not obtain the correct sound qualities or call performance. Change the earbud tips to ones that fit more snugly in your ears",
 
   },
@@ -109,6 +148,9 @@ const products =[
     img:"https://m.media-amazon.com/images/I/61BOKa62IqL._AC_SX679_.jpg",
     brand:"Apple",
     price: "329.99",
+    quantity: 10,
+    color: "black",
+    size: "M",
     description:"High-performance wireless noise cancelling headphones in black.Active Noise Cancelling (ANC) blocks external noise.Transparency helps you stay aware of your surroundings while listening",
 
   },
@@ -117,6 +159,9 @@ const products =[
     img:"https://m.media-amazon.com/images/I/31u+KjpAvKL._AC_SX679_.jpg",
     brand:"Apple",
     price: "19.00",
+    quantity: 10,
+    color: "white",
+    size: "S",
     description:"Unlike traditional, circular earbuds, the design of the EarPods is defined by the geometry of the ear. Which makes them more comfortable for more people than any other earbud-style headphones.The speakers inside the EarPods have been engineered to maximize sound output and minimize sound loss, which means you get high-quality audio.",
 
   },
@@ -125,6 +170,9 @@ const products =[
     img:"https://m.media-amazon.com/images/I/61Zh467pKjL.__AC_SY445_SX342_QL70_FMwebp_.jpg",
     brand:"Apple",
     price: "99.00",
+    quantity: 10,
+    color: "white",
+     size: "S",
     description:"Quick access to Siri by saying “ Hey Siri ”.More than 24 hours total listening time with the Charging Case.Effortless setup, in-ear detection, and automatic switching for a magical experience.Easily share audio between two sets of AirPods on your iPhone, iPad, iPod touch, or Apple TV",
 
   },
@@ -133,6 +181,9 @@ const products =[
     img:"https://m.media-amazon.com/images/I/71xEVEjRHWL._AC_SX679_.jpg",
     brand:"Apple",
     price: "479.99",
+    quantity: 10,
+    color: "white",
+    size: "M",
     description:" Apple-designed dynamic driver provides high-fidelity audio.Active Noise Cancellation blocks outside noise, so you can immerse yourself in music.Transparency mode for hearing and interacting with the world around you.Spatial audio with dynamic head tracking provides theater-like sound that surrounds you",
 
   },
@@ -141,6 +192,9 @@ const products =[
     img:"https://m.media-amazon.com/images/I/61jcsHsFN8L._AC_SX679_.jpg",
     brand:"Apple",
     price: "149.99",
+    quantity: 10,
+    color: "white",
+    size: "S",
     description:"Personalized Spatial Audio with dynamic head tracking places sound all around you.Note : If the size of the earbud tips does not match the size of your ear canals or the headset is not worn properly in your ears, you may not obtain the correct sound qualities or call performance. Change the earbud tips to ones that fit more snugly in your ear",
 
   },
@@ -174,10 +228,12 @@ const users = [
   // Add more user objects as needed
 ];  
 
+
 const dropTables = async () => {
     try {
         await db.query(`
         DROP TABLE IF EXISTS users;
+        DROP TABLE IF EXISTS products;
         `)
     }
     catch(err) {
@@ -185,74 +241,30 @@ const dropTables = async () => {
     }
 }
 
+
 const createTables = async () => {
     try{
         await db.query(`
-        CREATE TABLE site_user(
-          id SERIAL PRIMARY KEY,
-          email VARCHAR(255) UNIQUE NOT NULL,
-          phone_number VARCHAR(255) UNIQUE NOT NULL,
-          password VARCHAR(255) NOT NULL
-        );
-        CREATE TABLE user_payment_method(
-          id SERIAL PRIMARY KEY,
-          FOREIGN KEY (user_id) REFERENCES site_user(id),
-          FOREIGN KEY (payment_type_id) REFERENCES payment_type(id),
-          provider VARCHAR(255) NOT NULL,
-          account_number VARCHAR(255) UNIQUE NOT NULL,
-          expiry_date VARCHAR(255) NOT NULL,
-          is_defualt VARCHAR(255) UNIQUE NOT NULL
-        );
-        CREATE TABLE payment_type(
-          id SERIAL PRIMARY KEY,
-          value VARCHAR(255) UNIQUE NOT NULL
-        );
-        CREATE TABLE shopping_cart(
-          id SERIAL PRIMARY KEY,
-          FOREIGN KEY (user_id) REFERENCES site_user(id)
-        );
-        CREATE TABLE shopping_cart_item(
-          id SERIAL PRIMARY KEY,
-          FOREIGN KEY (cart_id) REFERENCES shopping_cart(id),
-          FOREIGN KEY (product_item_id) REFERENCES product_item(id),
-          qty VARCHAR(255) NOT NULL
-        );
-        CREATE TABLE product_item(
-          id SERIAL PRIMARY KEY,
-          FOREIGN KEY (product_id) REFERENCES product(id),
-          SKU VARCHAR(255) NOT NULL,
-          qty_in_stock VARCHAR(255) NOT NULL,
-          product_image VARCHAR(255) UNIQUE NOT NULL,
-          price VARCHAR(255) NOT NULL
-        );
-        CREATE TABLE product(
-          id SERIAL PRIMARY KEY,
-          FOREIGN KEY (category_id) REFERENCES product_category(id),
-          name VARCHAR(255) UNIQUE NOT NULL,
-          description VARCHAR(255) NOT NULL,
-          product_image VARCHAR(255) UNIQUE NOT NULL
-        );
-        CREATE TABLE user_address(
-          id SERIAL PRIMARY KEY,
-          FOREIGN KEY (user_id) REFERENCES site_user(id),
-          FOREIGN KEY (address_id) REFERENCES address(id),
-          is_defualt VARCHAR(255) UNIQUE NOT NULL
-        );
-        CREATE TABLE address(
-          id SERIAL PRIMARY KEY,
-          unit_number VARCHAR(255) NOT NULL,
-          street_number VARCHAR(255) NOT NULL,
-          address_line1 VARCHAR(255) NOT NULL,
-          address_line2 VARCHAR(255) NOT NULL,
-          city VARCHAR(255) NOT NULL,
-          region VARCHAR(255) NOT NULL,
-          postal_code VARCHAR(255) NOT NULL,
-          FOREIGN KEY (country_id) REFERENCES country(id)
-        );
-        CREATE TABLE country(
-          id SERIAL PRIMARY KEY,
-          country_name VARCHAR(255) NOT NULL
-        )`)
+        CREATE TABLE users(
+            id SERIAL PRIMARY KEY,
+            name VARCHAR(255) DEFAULT 'name',
+            email VARCHAR(255) UNIQUE NOT NULL,
+            password VARCHAR(255) NOT NULL
+        )    
+       `)
+       await  db.query(`
+       CREATE TABLE products(
+         id SERIAL PRIMARY KEY, 
+         title VARCHAR(255) NOT NULL,
+         img VARCHAR(255) NOT NULL,
+         brand VARCHAR(255) NOT NULL,
+         price VARCHAR(255) NOT NULL,
+         quantity INTEGER,
+         color VARCHAR(255) NOT NULL,
+         size VARCHAR(255) NOT NULL,
+         description TEXT NOT NULL
+       );
+     `)
     }
     catch(err) {
         throw err;
@@ -283,12 +295,24 @@ const insertUsers = async () => {
     console.error('Error inserting seed data:', error);
   }
 };
+const insertProducts = async () => {
+  try {
+    for (const product of products) {
+      await createProduct({ title: product.title, img:product.img, brand:product.brand , quantity:product.quantity,color: product.color,
+        size:product.size,price:product.price, description:product.description});
+    }
+    console.log('Seed data inserted successfully.');
+  } catch (error) {
+    console.error('Error inserting seed data:', error);
+  }
+};
 
-const seedDatabase = async () => {
+const seedDatabse = async () => {
     try {
         db.connect();
         await dropTables();
         await createTables();
+        await insertProducts();
         await insertUsers();
     }
     catch (err) {
@@ -299,4 +323,4 @@ const seedDatabase = async () => {
     }
 }
 
-seedDatabase()
+seedDatabse()
