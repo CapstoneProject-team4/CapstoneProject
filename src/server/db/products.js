@@ -5,14 +5,17 @@ const createProduct= async({
     img,
     brand,
     price,
+    quantity,
+    color,
+    size,
     description
   }) => {
     try {
       const { rows: [ product ] } = await db.query(`
-        INSERT INTO products("title", "img", "brand", "price", "description") 
-        VALUES($1, $2, $3, $4, $5)
+        INSERT INTO products("title", "img", "brand", "price", "quantity","color","size","description") 
+        VALUES($1, $2, $3, $4, $5,$6,$7,$8)
         RETURNING *
-      `, [title, img, brand, price, description]);
+      `, [title, img, brand, price,quantity,color,size, description]);
   
       return product;
     } catch (error) {
