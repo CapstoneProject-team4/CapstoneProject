@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
+import {mobile} from "../responsive";
 
 const Container = styled.div`
   display: flex;
@@ -25,6 +26,7 @@ const Wrapper = styled.div`
   text-align: center;
   margin-top: 130px;
   margin-bottom: 80px;
+  ${mobile({ width: "75%" })}
 `;
 
 const Title = styled.h1`
