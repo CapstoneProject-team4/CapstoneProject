@@ -2,24 +2,24 @@ const express = require('express');
 const apiRouter = express.Router();
 const jwt = require('jsonwebtoken');
 const { getUserById } = require('../db/users');
-const { JWT_SECRET = 'capstone'} = process.env
+const { JWT_SECRET = 'capstone' } = process.env;
 
-const volleyball = require('volleyball')
-apiRouter.use(volleyball)
+const volleyball = require('volleyball');
+apiRouter.use(volleyball);
 
 apiRouter.use(async (req, res, next) => {
   const prefix = 'Bearer ';
   const auth = req.header('Authorization');
-  
-  if (!auth) { 
+
+  if (!auth) {
     next();
   } else if (auth.startsWith(prefix)) {
     const token = auth.slice(prefix.length);
-    
+
     try {
       const parsedToken = jwt.verify(token, JWT_SECRET);
-      
-      const id = parsedToken && parsedToken.id
+
+      const id = parsedToken && parsedToken.id;
       if (id) {
         req.user = await getUserById(id);
         next();
@@ -30,7 +30,7 @@ apiRouter.use(async (req, res, next) => {
   } else {
     next({
       name: 'AuthorizationHeaderError',
-      message: `Authorization token must start with ${ prefix }`
+      message: `Authorization token must start with ${prefix}`,
     });
   }
 });
@@ -43,8 +43,11 @@ apiRouter.use('/products', productsRouter);
 const categoriesRouter = require('./categories');
 apiRouter.use('/categories', categoriesRouter);
 
-apiRouter.use((err, req, res, next) => {
-    res.status(500).send(err)
-  })
+const cartRouter = require('./cart');
+apiRouter.use('/cart', cartRouter);
 
-module.exports = apiRouter;
+apiRouter.use((err, req, res, next) => {
+  res.status(500).send(err);
+});
+
+module.exports = apiRouter;  
