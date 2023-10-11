@@ -1,41 +1,41 @@
 const db = require('./client');
 const util = require('./util');
-const createCatagory= async({ 
+const createCategory= async({ 
     brand
   }) => {
     try {
-      const { rows: [ catagory ] } = await db.query(`
-        INSERT INTO catagories("brand" )
+      const { rows: [ category ] } = await db.query(`
+        INSERT INTO categories("brand" )
         VALUES($1)
         RETURNING *
       `, [brand]);
   
-      return catagory;
+      return category;
     } catch (error) {
         console.log(error);
       throw error;
     }
   }
 
-  async function getAllCatagories() {
+  async function getAllCategories() {
     try {
-      const catagories = await db.query(`
-        SELECT * FROM catagories
+      const categories = await db.query(`
+        SELECT * FROM categories
     
       `);
   
-      return catagories.rows;
+      return categories.rows;
     } catch (error) {
         console.log(error)
       
       throw error;
     }
   }
-  async function getProductByCatagoriesId(id){
+  async function getProductByCategoriesId(id){
     try {
       const {rows:[product]}= await db.query(`
         SELECT * FROM products
-        WHERE catagories_id = $1;
+        WHERE categories_id = $1;
       `,[id]);
       return product;
     
@@ -46,7 +46,7 @@ const createCatagory= async({
 
 
   module.exports = {
-    createCatagory,
-    getAllCatagories,
-    getProductByCatagoriesId
+    createCategory,
+    getAllCategories,
+    getProductByCategoriesId
 };

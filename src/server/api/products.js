@@ -30,9 +30,9 @@ productsRouter.get('/:id', async( req, res, next) => {
 }); 
 
 
-productsRouter.post('/',requireUser,requiredNotSent({requiredParams: ['title', 'img','brand', 'price','quantity','color','size','description','catagories_id']}), async (req, res, next) => {
+productsRouter.post('/',requireUser,requiredNotSent({requiredParams: ['title', 'img','brand', 'price','quantity','color','size','description','categories_id']}), async (req, res, next) => {
   try {
-    const {title, img, brand, price, quantity,color,size,description,catagories_id} = req.body;
+    const {title, img, brand, price, quantity,color,size,description,categories_id} = req.body;
     const existingProduct = await getAllProducts();
     if(!existingProduct) {
       next({
@@ -40,7 +40,7 @@ productsRouter.post('/',requireUser,requiredNotSent({requiredParams: ['title', '
         message: `An product with title ${title} already exists`
       });
     } else {
-      const createdProduct = await createProduct({title, img, brand, price,quantity,color,size, description, catagories_id});
+      const createdProduct = await createProduct({title, img, brand, price,quantity,color,size, description, categories_id});
       if(createdProduct) {
         res.send(createdProduct);
       } else {
@@ -59,7 +59,7 @@ productsRouter.post('/',requireUser,requiredNotSent({requiredParams: ['title', '
 
 
 
-productsRouter.patch('/:id',requireUser,requiredNotSent({requiredParams: ['title', 'img','brand', 'price','quantity','color','size','description','catagories_id']}), async (req, res, next) => {
+productsRouter.patch('/:id',requireUser,requiredNotSent({requiredParams: ['title', 'img','brand', 'price','quantity','color','size','description','categories_id']}), async (req, res, next) => {
     try {
       const {id} = req.params;
       const existingProduct = await getProductById(id);
@@ -69,8 +69,8 @@ productsRouter.patch('/:id',requireUser,requiredNotSent({requiredParams: ['title
           message: `No Product by ID ${id}`
         });
       } else {
-        const {title, img,brand,price,quantity,color,size,description,catagories_id} = req.body;
-        const updateProd = await updateProduct({id: id, title, img,brand,price,quantity,color,size,description,catagories_id})
+        const {title, img,brand,price,quantity,color,size,description,categories_id} = req.body;
+        const updateProd = await updateProduct({id: id, title, img,brand,price,quantity,color,size,description,categories_id})
         if(updateProd) {
           res.send(updateProd);
         } else {

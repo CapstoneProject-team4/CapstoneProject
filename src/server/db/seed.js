@@ -304,8 +304,7 @@ const createTables = async () => {
          color VARCHAR(255) NOT NULL,
          size VARCHAR(255) NOT NULL,
          description TEXT NOT NULL,
-         categories_id INTEGER 
-        
+         categories_id INTEGER      
        )
      `)
     }
@@ -351,8 +350,8 @@ const insertProducts = async () => {
 };
 const insertCategories = async () => {
   try {
-    for (const catagory of categories) {
-      await createCatagory({brand:catagory.brand});
+    for (const category of categories) {
+      await createCategory({brand:category.brand});
     }
     console.log('Seed data inserted successfully.');
   } catch (error) {
