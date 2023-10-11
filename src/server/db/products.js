@@ -8,14 +8,15 @@ const createProduct= async({
     quantity,
     color,
     size,
-    description
+    description,
+    categories_id,
   }) => {
     try {
       const { rows: [ product ] } = await db.query(`
-        INSERT INTO products("title", "img", "brand", "price", "quantity","color","size","description") 
-        VALUES($1, $2, $3, $4, $5,$6,$7,$8)
+        INSERT INTO products("title", "img", "brand", "price", "quantity","color","size","description","categories_id") 
+        VALUES($1, $2, $3, $4, $5,$6,$7,$8,$9)
         RETURNING *
-      `, [title, img, brand, price,quantity,color,size, description]);
+      `, [title, img, brand, price,quantity,color,size, description,categories_id]);
   
       return product;
     } catch (error) {
@@ -31,6 +32,7 @@ const createProduct= async({
   
       return product.rows;
     } catch (error) {
+      
       throw error;
     }
   }

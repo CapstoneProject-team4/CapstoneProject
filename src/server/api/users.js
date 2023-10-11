@@ -104,4 +104,27 @@ usersRouter.post('/register', async(req, res, next) => {
     }
 })
 
+// GET /api/users/:name/products
+/*router.get('/:name/products', async (req, res, next) => {
+    try {
+      const {username} = req.params;
+      const user = await getUserByUsername(username);
+      if(!user) {
+        next({
+          name: 'NoUser',
+          message: `Error looking up user ${username}`
+        });
+      } else if(req.user && user.id === req.user.id) {
+        const routines = await getAllRoutinesByUser({username: username});
+        res.send(routines);
+      } else {
+        const routines = await getPublicRoutinesByUser({username: username});
+        res.send(routines);
+      }
+    } catch (error) {
+      next(error)
+    }
+  })
+  */
+
 module.exports = usersRouter;

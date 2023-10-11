@@ -1,6 +1,7 @@
 const db = require('./client');
 const { createUser } = require('./users');
 const{createProduct} = require('./products')
+const{createCatagory} = require('./categories')
 
 
 const products =[
@@ -12,8 +13,9 @@ const products =[
     quantity: 10,
     color: "black",
     size: "M",
+    categories_id:1,
     description: "High-performance wireless Bluetooth headphones.Features the Apple W1 chip and Class 1 wireless Bluetooth connectivity.With up to 40 hours of battery life, Beats Solo3 wireless is your perfect everyday headphone.Compatible with iOS and Android devices.With Fast Fuel, 5 minutes of charging gives you 3 hours of playback when battery is low.",
-
+    
   },
   {
     title: "Beats Studio Pro - Wireless Bluetooth Noise Cancelling Headphones - Personalized Spatial Audio, USB-C Lossless Audio, Apple & Android Compatibility, Up to 40 Hours Battery Life - Black",
@@ -23,6 +25,7 @@ const products =[
     quantity: 10,
     color: "black",
     size: "M",
+    categories_id:1,
     description: "BEATS' CUSTOM ACOUSTIC PLATFORM delivers rich, immersive sound whether you’re listening to music or taking calls.LOSSLESS AUDIO via USB-C plus three distinct built-in sound profiles to enhance your listening experience.HEAR WHAT YOU WANT with two distinct listening modes: fully-adaptive Active Noise Cancelling (ANC) and Transparency mode.",
   },
   {
@@ -33,6 +36,7 @@ const products =[
     quantity: 10,
     color: "black",
     size: "S",
+    categories_id:1,
     description:"Totally wireless high-performance earphones.Up to 9 hours of listening time (more than 24 hours with charging case).Adjustable, secure-fit earhooks for lightweight comfort and stability.Reinforced design for sweat & water resistance during tough workouts",
   },
   {
@@ -43,6 +47,7 @@ const products =[
     quantity: 10,
     color: "black",
     size: "M",
+    categories_id:1,
     description:"Beats EP wired on-ear headphone in black delivers masterfully tuned sound.Durable, lightweight design reinforced with stainless steel.Take calls and control music on your iOS and Android devices with the microphone in the RemoteTalk cable",
   },
   {
@@ -53,6 +58,7 @@ const products =[
     quantity: 10,
     color: "white",
     size: "M",
+    categories_id:1,
     description:"BATTERY LIFE - Up to 12 hours of listening time.CUSTOMIZED FIT - All-day comfort with Flex-Form cable and four eartip options.APPLE HEADPHONE CHIP - Powered by the Apple W1 headphone chip for seamless connectivity.THE MUSIC STOPS WHEN YOU DO - Magnetic earbuds with Auto-Play/Pause",
   },
   {
@@ -63,6 +69,7 @@ const products =[
     quantity: 10,
     color: "black&red",
     size: "M",
+    categories_id:1,
     description: "High-performance wireless noise cancelling headphones.Compatible with iOS and Android devices.Pure adaptive noise canceling (pure ANC) actively blocks external noise.Real-time Audio calibration preserves a Premium listening experience.",
 
   },
@@ -74,6 +81,7 @@ const products =[
     quantity: 10,
     color: "gray",
     size: "M",
+    categories_id:2,
     description:"SMART SOUND- Smart features and settings learn from your behavior and automatically adjust sound settings to provide the right sound for the moment.Specific uses for product : Audio.Communication system : Bluetooth Specification version 5.NEVER OFF- Automatically switches between superlative noise canceling or optimized ambient sound for listening without distractions. Sony's best transparent ambient sound in truly wireless headphones (As of May 9th 2022. Excluding Open style.)",
 
   },
@@ -85,6 +93,7 @@ const products =[
     quantity: 10,
     color: "white",
     size: "S",
+    categories_id:2,
     description:"SMART SOUND- Smart features and settings learn from your behavior and automatically adjust sound settings to provide the right sound for the moment.Specific uses for product : Personal, Business.NEVER OFF- Automatically switches between superlative noise canceling or optimized ambient sound for listening without distractions. Sony's best transparent ambient sound in truly wireless headphones (As of May 9th 2022. Excluding Open style.)",
 
   },
@@ -96,6 +105,7 @@ const products =[
     quantity: 10,
     color: "white",
     size: "S",
+    categories_id:2,
     description: "High-performance wireless noise cancelling headphones.Compatible with iOS and Android devices.Pure adaptive noise canceling (pure ANC) actively blocks external noise.Real-time Audio calibration preserves a Premium listening experience.",
 
   },
@@ -107,6 +117,7 @@ const products =[
     quantity: 10,
     color: "gray",
     size: "M",
+    categories_id:2,
     description:"With up to 50-hour battery life and quick charging, you’ll have enough power for multi-day road trips and long festival weekends.Control Type:Media.Great sound quality customizable to your music preference with EQ Custom on the Sony | Headphones Connect App."
 
   },  
@@ -118,6 +129,7 @@ const products =[
     quantity: 10,
     color: "white",
     size: "S",
+    categories_id:2,
     description:"Connect wirelessly - Bluetooth connectivity lets you listen for up to 8.5 hours without wires getting in your way.Be ready for splashes - Durable IPX4 design keeps the music going, even when you run in light rain.Hear the beat, feel the power - EXTRA BASS sound gives you more motivation, whether you’re at the gym or on the street. Enhanced low frequencies make music sound more powerful, so you feel energized and driven."
 
   },
@@ -129,6 +141,7 @@ const products =[
     quantity: 10,
     color: "gray",
     size: "M",
+    categories_id:2,
     description:"Sony’s lightest Wireless Noise-canceling headband ever.Specific uses for product : Entertainment.Take noise canceling to the next level with Sony’s Integrated Processor V1, so you can fully immerse yourself in the music.Super comfortable and lightweight design.",
 
   },
@@ -140,6 +153,7 @@ const products =[
     quantity: 10,
     color: "black",
     size: "S",
+    categories_id:2,
     description:"Hybrid silicone earbuds provide long lasting comfort; small, medium and large earbuds are included to fine tune your fitment.Specific uses for product : Music.Product Note : If the size of the earbud tips does not match the size of your ear canals or the headset is not worn properly in your ears, you may not obtain the correct sound qualities or call performance. Change the earbud tips to ones that fit more snugly in your ears",
 
   },
@@ -151,6 +165,7 @@ const products =[
     quantity: 10,
     color: "black",
     size: "M",
+    categories_id:3,
     description:"High-performance wireless noise cancelling headphones in black.Active Noise Cancelling (ANC) blocks external noise.Transparency helps you stay aware of your surroundings while listening",
 
   },
@@ -162,6 +177,7 @@ const products =[
     quantity: 10,
     color: "white",
     size: "S",
+    categories_id:3,
     description:"Unlike traditional, circular earbuds, the design of the EarPods is defined by the geometry of the ear. Which makes them more comfortable for more people than any other earbud-style headphones.The speakers inside the EarPods have been engineered to maximize sound output and minimize sound loss, which means you get high-quality audio.",
 
   },
@@ -172,7 +188,8 @@ const products =[
     price: "99.00",
     quantity: 10,
     color: "white",
-     size: "S",
+    size: "S",
+    categories_id:3,
     description:"Quick access to Siri by saying “ Hey Siri ”.More than 24 hours total listening time with the Charging Case.Effortless setup, in-ear detection, and automatic switching for a magical experience.Easily share audio between two sets of AirPods on your iPhone, iPad, iPod touch, or Apple TV",
 
   },
@@ -184,6 +201,7 @@ const products =[
     quantity: 10,
     color: "white",
     size: "M",
+    categories_id:3,
     description:" Apple-designed dynamic driver provides high-fidelity audio.Active Noise Cancellation blocks outside noise, so you can immerse yourself in music.Transparency mode for hearing and interacting with the world around you.Spatial audio with dynamic head tracking provides theater-like sound that surrounds you",
 
   },
@@ -195,6 +213,7 @@ const products =[
     quantity: 10,
     color: "white",
     size: "S",
+    categories_id:3,
     description:"Personalized Spatial Audio with dynamic head tracking places sound all around you.Note : If the size of the earbud tips does not match the size of your ear canals or the headset is not worn properly in your ears, you may not obtain the correct sound qualities or call performance. Change the earbud tips to ones that fit more snugly in your ear",
 
   },
@@ -228,18 +247,33 @@ const users = [
   // Add more user objects as needed
 ];  
 
+const categories = [
+  {
+    brand: "Beats",
+  },
+  { 
+    brand: "Sony",
+  },
+  {
+    brand: "Apple",
+  },
+
+]
+
 
 const dropTables = async () => {
     try {
         await db.query(`
         DROP TABLE IF EXISTS users;
         DROP TABLE IF EXISTS products;
+        DROP TABLE IF EXISTS categories;
         `)
     }
     catch(err) {
         throw err;
     }
 }
+
 
 
 const createTables = async () => {
@@ -252,6 +286,13 @@ const createTables = async () => {
             password VARCHAR(255) NOT NULL
         )    
        `)
+       await db.query(`
+        CREATE TABLE categories(
+            id SERIAL PRIMARY KEY,
+            brand VARCHAR(255) NOT NULL
+
+        )
+       `)
        await  db.query(`
        CREATE TABLE products(
          id SERIAL PRIMARY KEY, 
@@ -262,8 +303,9 @@ const createTables = async () => {
          quantity INTEGER,
          color VARCHAR(255) NOT NULL,
          size VARCHAR(255) NOT NULL,
-         description TEXT NOT NULL
-       );
+         description TEXT NOT NULL,
+         categories_id INTEGER      
+       )
      `)
     }
     catch(err) {
@@ -296,14 +338,37 @@ const insertUsers = async () => {
   }
 };
 
+const insertProducts = async () => {
+  try {
+    for (const product of products) {
+      await createProduct({ title: product.title, img:product.img, brand:product.brand , quantity:product.quantity,color: product.color,
+        size:product.size,price:product.price, categories_id: product.categories_id,description:product.description});
+    }
+    console.log('Seed data inserted successfully.');
+  } catch (error) {
+    console.error('Error inserting seed data:', error);
+  }
+};
+const insertCategories = async () => {
+  try {
+    for (const category of categories) {
+      await createCategory({brand:category.brand});
+    }
+    console.log('Seed data inserted successfully.');
+  } catch (error) {
+    console.error('Error inserting seed data:', error);
+  }
+};
 
 const seedDatabse = async () => {
     try {
         db.connect();
         await dropTables();
         await createTables();
+        await insertCategories();
         await insertProducts();
         await insertUsers();
+      
     }
     catch (err) {
         throw err;
