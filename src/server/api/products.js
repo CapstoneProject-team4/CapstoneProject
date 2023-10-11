@@ -21,6 +21,7 @@ productsRouter.get('/:id', async( req, res, next) => {
     try {
        
         const {id} = req.params;
+        console.log('ID:', id, typeof id);
         const products = await getProductById(id);
         res.send(products);
     } catch (error) {

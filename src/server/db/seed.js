@@ -1,7 +1,8 @@
 const db = require('./client');
 const { createUser } = require('./users');
-const{createProduct} = require('./products')
-const{createCatagory} = require('./categories')
+const{createProduct} = require('./products');
+const{createCategory} = require('./categories');
+const{createCartItems} = require('./cartItems');
 
 
 const products =[
@@ -220,9 +221,9 @@ const products =[
 ];
 const users = [
   {
-    name: 'Emily Johnson',
-    email: 'emily@example.com',
-    password: 'securepass',
+    name: 'xuan00',
+    email: 'xuan00@gmail.com',
+    password: '1234',
   },
   {
     name: 'Liu Wei',
@@ -240,9 +241,9 @@ const users = [
     password: 'mysecretpassword',
   },
   {
-    name: 'John Smith',
-    email: 'john@example.com',
-    password: 'password123',
+    name: 'xuan08',
+    email: 'xuan08@gmail.com',
+    password: '1234',
   },
   // Add more user objects as needed
 ];  
@@ -260,16 +261,55 @@ const categories = [
 
 ]
 
+const cartItems = [
+  {
+    users_id : 5,
+    products_id:1,
+    quantity : 3,
+},
+{
+  users_id : 5,
+  products_id:2,
+  quantity : 3,
+},
+{
+  users_id : 5,
+  products_id:3,
+  quantity : 3,
+},
+{
+  users_id : 5,
+  products_id:4,
+  quantity : 3,
+},
+{
+  users_id : 1,
+  products_id:7,
+  quantity : 3,
+},
+{
+  users_id : 1,
+  products_id:10,
+  quantity : 3,
+},
+{
+  users_id : 1,
+  products_id:11,
+  quantity : 3,
+},
+]
 
 const dropTables = async () => {
     try {
         await db.query(`
-        DROP TABLE IF EXISTS users;
-        DROP TABLE IF EXISTS products;
+        DROP TABLE IF EXISTS users cascade;
         DROP TABLE IF EXISTS categories;
+        DROP TABLE IF EXISTS products cascade;
+        DROP TABLE IF EXISTS cartItems;
         `)
     }
     catch(err) {
+      console.log("1234",err);
         throw err;
     }
 }
@@ -306,9 +346,19 @@ const createTables = async () => {
          description TEXT NOT NULL,
          categories_id INTEGER      
        )
-     `)
+     `) 
+     await db.query(`
+       CREATE TABLE cartItems(
+           id SERIAL PRIMARY KEY,
+           users_id INTEGER REFERENCES users(id),
+           products_id INTEGER REFERENCES products(id),
+           quantity INTEGER
+       )
+      `)
     }
+   
     catch(err) {
+      console.log("12345",err);
         throw err;
     }
 }
@@ -348,6 +398,16 @@ const insertProducts = async () => {
     console.error('Error inserting seed data:', error);
   }
 };
+const insertCartItems = async () => {
+  try {
+    for (const cartItem of cartItems) {
+      await createCartItems({user_id:cartItem.users_id, products_id:cartItems.products_id, quantity:cartItem.quantity});
+    }
+    console.log('Seed data inserted successfully.');
+  } catch (error) {
+    console.error('Error inserting seed data:', error);
+  }
+};
 const insertCategories = async () => {
   try {
     for (const category of categories) {
@@ -365,6 +425,7 @@ const seedDatabse = async () => {
         await dropTables();
         await createTables();
         await insertCategories();
+        await insertCartItems();
         await insertProducts();
         await insertUsers();
       
