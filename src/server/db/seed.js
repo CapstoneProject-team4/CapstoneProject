@@ -295,17 +295,7 @@ const insertUsers = async () => {
     console.error('Error inserting seed data:', error);
   }
 };
-const insertProducts = async () => {
-  try {
-    for (const product of products) {
-      await createProduct({ title: product.title, img:product.img, brand:product.brand , quantity:product.quantity,color: product.color,
-        size:product.size,price:product.price, description:product.description});
-    }
-    console.log('Seed data inserted successfully.');
-  } catch (error) {
-    console.error('Error inserting seed data:', error);
-  }
-};
+
 
 const seedDatabse = async () => {
     try {
