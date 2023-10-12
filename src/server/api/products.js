@@ -17,7 +17,9 @@ productsRouter.get('/', async( req, res, next) => {
     }
 });
 
+
 productsRouter.get('/:id', async( req, res, next) => {
+  console.log(req.params)
     try {
        
         const {id} = req.params;

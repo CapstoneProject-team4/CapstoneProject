@@ -18,7 +18,8 @@ export async function fetchAllProducts() {
       }
     }
   
-   /* export async function fetchSingleProduct (id){  
+   export async function fetchSingleProduct (id){ 
+    console.log(id,"ajax fetch prodcut") 
       try {
         const response = await fetch(
           `${Products_Api_Url}/${id}`
@@ -30,8 +31,8 @@ export async function fetchAllProducts() {
           console.error( err);
       }
   };
-  */
-  export async function fetchSingleProduct(id) {  
+  
+  /* export async function fetchSingleProduct(id) {  
     try {
       const product = await fetchAllProducts();
       const SingleProduct = product.filter(product => { 
@@ -44,7 +45,7 @@ export async function fetchAllProducts() {
         console.error( err);
     }
   };
-  
+  */
 
 
 

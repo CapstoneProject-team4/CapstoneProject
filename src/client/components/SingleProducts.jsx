@@ -16,8 +16,8 @@ padding: 20px;
 
 export default function SingleProduct(){
     const[product,setProduct]=useState([])
-    const {id} = useParams
- 
+    const {id} = useParams();
+   console.log(id, "inside")
    
     function renderSingleProduct(){
             return (

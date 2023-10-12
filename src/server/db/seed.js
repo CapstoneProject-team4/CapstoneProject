@@ -350,8 +350,8 @@ const createTables = async () => {
      await db.query(`
        CREATE TABLE cartItems(
            id SERIAL PRIMARY KEY,
-           users_id INTEGER REFERENCES users(id),
-           products_id INTEGER REFERENCES products(id),
+           users_id INTEGER NOT NULL REFERENCES users(id),
+           products_id INTEGER NOT NULL REFERENCES products(id),
            quantity INTEGER
        )
       `)
@@ -401,7 +401,7 @@ const insertProducts = async () => {
 const insertCartItems = async () => {
   try {
     for (const cartItem of cartItems) {
-      await createCartItems({user_id:cartItem.users_id, products_id:cartItems.products_id, quantity:cartItem.quantity});
+      await createCartItems({users_id:cartItem.users_id, products_id:cartItem.products_id, quantity:cartItem.quantity});
     }
     console.log('Seed data inserted successfully.');
   } catch (error) {
@@ -425,10 +425,9 @@ const seedDatabse = async () => {
         await dropTables();
         await createTables();
         await insertCategories();
-        await insertCartItems();
         await insertProducts();
         await insertUsers();
-      
+        await insertCartItems();
     }
     catch (err) {
         throw err;
