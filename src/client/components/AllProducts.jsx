@@ -44,7 +44,8 @@ export default function AllProducts(){
                     </div>
                  </div >
              )
-                 
+             
+             
          })
      }
      useEffect(()=>{
