@@ -1,12 +1,14 @@
 import { Add, Remove } from "@mui/icons-material";
 import styled from "styled-components";
 import React, { useState } from "react"; 
-
+import {useNavigate} from 'react-router-dom'
 import Footer from "../Components/Footer";
 import Navbar from "../Components/Navbar";
 import { mobile } from "../responsive";
 
+
 const Container = styled.div``;
+
 
 const Wrapper = styled.div`
   padding: 20px;
@@ -157,7 +159,7 @@ const Button = styled.button`
 `;
 
 const Cart = () => {
-  
+  const navigate = useNavigate();
   const [cartItems, setCartItems] = useState([
     {
       id: 1,
@@ -197,6 +199,16 @@ const Cart = () => {
     0
   );
 
+  // Confirm purchase
+  const confirmation = () => {
+    if (confirm("Are you sure you wish to complete your purchase?")) {
+      alert("Purchase completed!");
+      navigate("/");
+    } else {
+      
+    }
+  }
+
   return (
     <Container>
       <Navbar />
@@ -204,7 +216,7 @@ const Cart = () => {
         <Title>YOUR BAG</Title>
         <Top>
           <TopButton>CONTINUE SHOPPING</TopButton>
-          <TopButton type="filled">CHECKOUT NOW</TopButton>
+          <TopButton onClick={() => confirmation()} type="filled">CHECKOUT NOW</TopButton>
         </Top>
         <Bottom>
           <Info>
@@ -233,6 +245,7 @@ const Cart = () => {
                     <Add
                       onClick={() =>
                         updateQuantity(item.id, item.quantity + 1)
+
                       }
                     />
                   </ProductAmountContainer>
@@ -262,7 +275,7 @@ const Cart = () => {
                 <SummaryItemText>Total</SummaryItemText>
                 <SummaryItemPrice>$ {total}</SummaryItemPrice>
               </SummaryItem>
-              <Button>CHECKOUT NOW</Button>
+              <Button onClick ={()=> confirmation()} >CHECKOUT NOW</Button>
             </Summary>
           </Info>
         </Bottom>
