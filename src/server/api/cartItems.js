@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAllCartItems, getCartItemsByUserId, createCartItems, deletedCartItems ,updateCartItem, createProduct} = require('../db');
+const { getAllCartItems, getCartItemsByUserId, createCartItems, deletedCartItems ,updateCartItem} = require('../db');
 const cartItemsRouter = express.Router();
 const {requireUser, requiredNotSent} = require('./utils')
 

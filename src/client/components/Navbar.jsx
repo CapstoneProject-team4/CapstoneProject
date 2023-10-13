@@ -59,7 +59,7 @@ margin-left: 25px;
 ${mobile({ fontSize: "12px", marginLeft: "10px" })}
 `;
 
-const Navbar = () => {
+const Navbar = ({setToken,setRole}) => {
     return(
     <Container>
     <Wrapper>
@@ -72,12 +72,15 @@ const Navbar = () => {
       <Link to= "/"> 
         <MenuItem>Home</MenuItem>
       </Link>
+      <Link to= "/admin"> 
+        <MenuItem>AdminDashBoard</MenuItem>
+      </Link>
       <Link to= "/products">
         <MenuItem>Products</MenuItem>
       </Link>
-      <Link to= "/login">
+      {setToken?null:<Link to= "/login">
         <MenuItem>Login</MenuItem>
-      </Link>
+      </Link>}
       <Link to= "/register">
         <MenuItem>Register</MenuItem>
       </Link>

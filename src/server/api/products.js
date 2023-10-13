@@ -4,7 +4,7 @@ const productsRouter = express.Router();
 const {
     getAllProducts, getProductById,updateProduct, createProduct, deleteProduct,
 } = require('../db');
-const { requireUser, requiredNotSent } = require('./utils');
+const { requireUser, requiredNotSent, requireAdmin } = require('./utils');
 
 productsRouter.get('/', async( req, res, next) => {
     try {
@@ -33,7 +33,7 @@ productsRouter.get('/:id', async( req, res, next) => {
 }); 
 
 
-productsRouter.post('/',requireUser,requiredNotSent({requiredParams: ['title', 'img','brand', 'price','quantity','color','size','description','categories_id']}), async (req, res, next) => {
+productsRouter.post('/',requireAdmin,requiredNotSent({requiredParams: ['title', 'img','brand', 'price','quantity','color','size','description','categories_id']}), async (req, res, next) => {
   try {
     const {title, img, brand, price, quantity,color,size,description,categories_id} = req.body;
     const existingProduct = await getAllProducts();
@@ -62,7 +62,7 @@ productsRouter.post('/',requireUser,requiredNotSent({requiredParams: ['title', '
 
 
 
-productsRouter.patch('/:id',requireUser,requiredNotSent({requiredParams: ['title', 'img','brand', 'price','quantity','color','size','description','categories_id']}), async (req, res, next) => {
+productsRouter.patch('/:id',requireAdmin,requiredNotSent({requiredParams: ['title', 'img','brand', 'price','quantity','color','size','description','categories_id']}), async (req, res, next) => {
     try {
       const {id} = req.params;
       const existingProduct = await getProductById(id);
@@ -89,7 +89,7 @@ productsRouter.patch('/:id',requireUser,requiredNotSent({requiredParams: ['title
     }
   });
   
-  productsRouter.delete('/:id', requireUser, async (req, res, next) => {
+  productsRouter.delete('/:id', requireAdmin, async (req, res, next) => {
     try {
       const {id} = req.params;
       const productToDelete = await getProductById(id);

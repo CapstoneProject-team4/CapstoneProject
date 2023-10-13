@@ -4,6 +4,11 @@ import styled from "styled-components";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 import { mobile } from "../responsive";
+import { Email } from "@mui/icons-material";
+import { useState } from "react";
+import {useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
+
 
 const Container = styled.div`
   display: flex;
@@ -75,10 +80,38 @@ const Button = styled.button`
 `;
 
 const Register = () => {
-  const handleSubmit = (e) => {
+  const[name,setName]=useState("");
+  const[password, setPassword]=useState("");
+  const[email, setEmail]= useState("")
+  const navigate = useNavigate();
+ async function handleSubmit(e){
     e.preventDefault();
-    console.log("Form submitted!");
-  };
+    try {
+      const repsonse = await fetch('http://localhost:3000/api/users/register', 
+      { 
+        method: "POST", 
+        headers: { 
+          "Content-Type": "application/json" 
+        }, 
+        body: JSON.stringify({
+          role:"Customer",
+          name:name, 
+          password: password, 
+          email:email,
+        }) 
+      })
+  
+      const result = await repsonse.json();
+      console.log(result,"result");
+      alert(result.message);
+      if(result.token){
+        navigate('/');
+      }
+
+  } catch (error) {
+    console.log(error,"eeror")
+  }
+};
 
   return (
     <Container>
@@ -86,17 +119,28 @@ const Register = () => {
       <Wrapper>
         <Title>CREATE AN ACCOUNT</Title>
         <Form onSubmit={handleSubmit}>
-        <Input placeholder="Name" />
-          <Input placeholder="Last Name" />
-          <Input placeholder="Username" />
-          <Input placeholder="Email" type="email" />
-          <Input placeholder="Password" type="password" />
-          <Input placeholder="Confirm Password" type="password" />
+          <Input placeholder="Username" 
+                 value={name}
+                 onChange={e=>setName(e.target.value)}
+                required
+          />
+          <Input placeholder="Email" type="email" 
+                 value={email}
+                 onChange={e=>setEmail(e.target.value)}
+                required
+                
+           />
+          <Input placeholder="Password" type="password" 
+                 value={password}
+                 onChange={e=>setPassword(e.target.value)}
+                required
+                 />
           <Agreement>
             By creating an account, I consent to the processing of my personal
             data in accordance with the <b>PRIVACY POLICY</b>
           </Agreement>
-          <Button type="submit">CREATE</Button>
+          <Button type="submit">Submit</Button>
+          <Link to="/login"> Already has an account? Log in now! </Link>
         </Form>
       </Wrapper>
       <Footer/>
