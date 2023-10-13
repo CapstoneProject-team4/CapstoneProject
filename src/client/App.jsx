@@ -13,7 +13,11 @@ import SingleProduct from "./Components/SingleProducts"
 function App() {
   return <>
    <div className="navigate">
+      <Link to= "/">Home</Link>
       <Link to= "/products">All Products</Link>
+      <Link to= "/login">Login</Link>
+      <Link to= "/register">Register</Link>
+      <Link to= "/cart">Cart</Link>
    </div>
 
 
