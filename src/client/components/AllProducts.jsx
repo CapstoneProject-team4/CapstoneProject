@@ -38,6 +38,7 @@ export default function AllProducts(){
  
      },[]
      )
+     
      return (
          <div>
             <Navbar /> {/* Render the Navbar component */}
