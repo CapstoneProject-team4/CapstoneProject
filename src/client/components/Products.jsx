@@ -1,58 +1,53 @@
-import styled from "styled-components"
+import React, { useEffect, useState } from 'react';
 
 
-const Container = styled.div`
-padding: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-`;
-export async function fetchAllProducts() {
-  try {
-    const response = await fetch(
-    'https://localhost:3000/api/products'
-    );
-    const result = await response.json();
-    console.log("what",result.products);
-    return result.products;
-    
+
+const Products = () => {
+  const [products, setProducts] = useState([]);
+
+  async function fetchAllProducts() {
+    try {
+      const response = await fetch(
+      'http://localhost:3000/api/products'
+      );
+      const result = await response.json();
+      console.log("what",result.products);
+      return result;
   
-  } catch (error) {
-    console.error(error);
-    return error;
+  
+    } catch (error) {
+      console.error(error);
+      return error;
+    }
   }
-}
-function products() {
-  return products.map((products) => {
-      return (
-          <div key={products.id} className="players">
-          <h2>{products.title}</h2>
-          <h4>{products.price}</h4>
-          <h4>{player.description}</h4>
-          <img src={products.img}/>
-          <button onClick = {() => navigate(`/players/${player.id}`)}>See Details</button>
-          
-      </div>
-      )
-  });
-}
 
-useEffect(()=>{
-  async function allProductsHandler(){
-      const result = await fetchAllProducts()
-      setPlayers(result)
-      console.log("2",result)
+  useEffect(() => {
+    async function fetchProducts() {
+      try {
+        const result = await fetchAllProducts();
+        setProducts(result);
+        console.log(result);
+      } catch (error) {
+        console.error(error);
+      }
+    }
 
-  }
-  allProductsHandler()
+    fetchProducts();
+  }, []);
 
-},[]
-)
-return (
-  <div>
-       {renderAllProducts()}
-  </div>
- 
-  )
+  return (
+    <div>
+      {products.map((product) => (
+        <div key={product.id} className="product">
+          <h2>{product.title}</h2>
+          <h4>{product.price}</h4>
+          <p>{product.description}</p>
+          <img src={product.img} alt={product.title} />
+          <button onClick={() => navigate(`/products/${product.id}`)}>See Details</button>
+        </div>
+      ))}
+    </div>
+  );
+};
 
-export default products
+export default Products;
