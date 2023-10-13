@@ -8,16 +8,21 @@ import Login from "./Pages/Login";
 import Cart from "./Pages/Cart";
 
 function App() {
-  return (
-      <Routes>
-        <Route path="/" element={<Home/>} />
-        <Route path="/product/:id" element={<Product/>} />
-        <Route path="/products" element={<ProductList/>} />
-        <Route path="/register" element={<Register/>} />
-        <Route path="/login" element={<Login/>} />
-        <Route path="/cart" element={<Cart/>} />
-      </Routes>
-  );
+  return <>
+   <div className="navigate">
+      <Link to= "/products">All Products</Link>
+   </div>
+
+
+   <div>
+  <Routes>
+  <Route path="/" element={<Home/>} />
+  <Route path="/products" element={<AllProducts/>} />
+  <Route path="/products/:id" element={<SingleProduct />} />
+  </Routes>
+  </div>
+  </>
 }
+
 
 export default App;

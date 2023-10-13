@@ -1,5 +1,4 @@
 const db = require('./client');
-const util = require('./util');
 const createCategory= async({ 
     brand
   }) => {
@@ -33,11 +32,11 @@ const createCategory= async({
   }
   async function getProductByCategoriesId(id){
     try {
-      const {rows:[product]}= await db.query(`
+      const product= await db.query(`
         SELECT * FROM products
         WHERE categories_id = $1;
       `,[id]);
-      return product;
+      return product.rows;
     
     } catch (error) {
       throw error;
