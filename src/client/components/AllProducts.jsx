@@ -10,6 +10,15 @@ import News from './News';
 export default function AllProducts(){
     const navigate = useNavigate()
      const[products,setProducts]=useState([])
+     const [cart, SetCart] = useState({}); // keep track of the cart items and quantities
+
+     const addToCart = (product) => {
+        SetCart((prevCart) => ({
+            ...prevCart,
+            [product.id]: (prevCart[product.id] || 0) + 1,
+        }));
+     };
+
      function renderAllProducts(){
         return products&&products.map((product)=>{
              return (
@@ -21,10 +30,22 @@ export default function AllProducts(){
                      <h4>{product.description}</h4>
                      <img className='img' src={product.img} alt="img"/>
                      <button className='detail' onClick ={()=> navigate("/products/"+product.id)}>See Details</button>
-                    
+                    <div>
+                        <input
+                            type="number"
+                            min="1"
+                            value={cart[product.id] || 0}
+                            onChange={(e) => {
+                                const quantity = parseInt(e.target.value, 10) || 0;
+                                SetCart((prevCart) => ({ ...prevCart, [product.id]: quantity }));
+                            }}
+                            />
+                            <button onClick={() =>addToCart(product)}>Add to Cart</button>
+                    </div>
                  </div >
              )
-                 
+             
+             
          })
      }
      useEffect(()=>{
