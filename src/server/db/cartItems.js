@@ -50,13 +50,13 @@ const createCartItems= async({
       throw error;
     }
   }
-  async function deletedCartItems(id) {
+  async function deletedCartItems(user_id, product_id) {
     try {
         const { rows: [cartItem] } = await db.query(`
         DELETE FROM cartItems
-        WHERE products_id = $1
+        WHERE users_id = $1 AND products_id =$2
         RETURNING *;
-        `, [id]);
+        `, [user_id,product_id]);
         return cartItem;
     } catch (error) {
       console.log(error);
@@ -64,6 +64,17 @@ const createCartItems= async({
     }
 }
 
+async function updateCartItem(userId, productId, quantity) {
+    try {
+        await db.query(`
+        UPDATE cartItems 
+        SET quantity = $1
+        WHERE users_id = $2 AND products_id = $3
+        `, [quantity, userId, productId]);
+    } catch (error) {
+        throw error;
+    }
+}
 
 
 
@@ -79,5 +90,6 @@ module.exports = {
     getAllCartItems,
     getCartItemsByUserId,
     deletedCartItems,
+    updateCartItem,
 
 };
