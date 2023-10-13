@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAllCartItems, getCartItemsByUserId, createCartItems, deletedCartItems ,updateCartItem} = require('../db');
+const { getAllCartItems, getCartItemsByUserId, createCartItems, deletedCartItems ,updateCartItem, createProduct} = require('../db');
 const cartItemsRouter = express.Router();
 const {requireUser, requiredNotSent} = require('./utils')
 
@@ -28,19 +28,22 @@ cartItemsRouter.get('/users/:id',requireUser,async( req, res, next) => {
     }
 }); 
 
-//  POST  /api/users/:users_id/products This api uses for adding products to cart
-cartItemsRouter.post('/users/:id',requireUser,requiredNotSent({requiredParams: ['users_id','products_id','quantity']}), async (req, res, next) => {
+//  POST  /api/users/:userId/products This api uses for adding products to cart
+cartItemsRouter.post('/users/:id',requireUser,requiredNotSent({requiredParams: ['products_id','quantity']}), async (req, res, next) => {
     try {
-      const {id} = req.params;
+      const usersId = req.params;  
       const {products_id, quantity} = req.body;
-      const existingProduct = await getCartItemsByUserId(id);
-      if(!existingProduct) {
+      const existingProduct = await getCartItemsByUserId(usersId.id);
+     
+      if(existingProduct) {
         next({
           name: 'Error',
           message: `An product already exists`
         });
       } else {
-        const createdProduct = await createCartItems({id,products_id,quantity});
+        const users_id = usersId.id
+        const createdProduct = await createCartItems({users_id,products_id,quantity});
+       
         if(createdProduct) {
           res.send(createdProduct);
         } else {
