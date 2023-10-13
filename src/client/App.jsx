@@ -6,6 +6,9 @@ import ProductList from "./Pages/ProductList";
 import Register from "./Pages/Register";
 import Login from "./Pages/Login";
 import Cart from "./Pages/Cart";
+import {Link} from "react-router-dom";
+import  AllProducts from "./Components/AllProducts"
+import SingleProduct from "./Components/SingleProducts"
 
 function App() {
   return <>
