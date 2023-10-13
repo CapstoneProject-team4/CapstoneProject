@@ -8,7 +8,6 @@ export async function fetchAllProducts() {
           Products_Api_Url
         );
         const result = await response.json();
-        console.log("what",result);
         return result;
         
       

@@ -5,18 +5,24 @@ import Categories from "../Components/Categories"
 import Products from "../components/Products"
 import News from "../Components/News"
 import Footer from "../Components/Footer"
+import AdminDashboard from "./AdminDashboard"
 
-const Home = () => {
+
+
+const Home = ({setToken,setRole}) => {
   return (
     <div>
-      <Navbar/> 
+      <Navbar setToken ={setToken} setRole={setRole}/> 
       <Slide/>
       <Categories/>
       <Products/>
+      <AdminDashboard />
       <News/>
       <Footer/>
     </div>
   )
 }
 
-export default Home;
+
+export default Home
+
