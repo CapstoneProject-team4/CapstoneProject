@@ -1,12 +1,10 @@
 import React from "react"
 import Navbar from "../Components/Navbar"
-
 import Slide from "../Components/Slider"
 import Categories from "../Components/Categories"
-import Products from "../Components/Products"
+import Products from "../components/Products"
 import News from "../Components/News"
 import Footer from "../Components/Footer"
-
 
 const Home = () => {
   return (
@@ -15,11 +13,10 @@ const Home = () => {
       <Slide/>
       <Categories/>
       <Products/>
-    
       <News/>
       <Footer/>
     </div>
   )
 }
 
-export default Home
+export default Home;

@@ -1,5 +1,6 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 import { mobile } from "../responsive";
+import { Link } from 'react-router-dom';
 
 const Container = styled.div`
   flex: 1;
@@ -40,6 +41,7 @@ const Info = styled.div`
 const Title = styled.h1`
   font-size: 1.5rem;
   margin-bottom: 10px;
+  color: #fff; /* Set text color to white */
 `;
 
 const Button = styled.button`
@@ -54,6 +56,11 @@ const Button = styled.button`
   &:hover {
     background-color: #f0f0f0;
   }
+
+  a {
+    color: #000; /* Set text color to black */
+    text-decoration: none;
+  }
 `;
 
 const CategoryItems = ({ item }) => {
@@ -62,11 +69,12 @@ const CategoryItems = ({ item }) => {
       <Image src={item.img} />
       <Info>
         <Title>{item.title}</Title>
-        <Button>SHOP NOW</Button>
+        <Button>
+          <Link to="/products">SHOP NOW</Link>
+        </Button>
       </Info>
     </Container>
   )
 }
 
 export default CategoryItems;
-

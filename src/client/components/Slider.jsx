@@ -3,7 +3,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { sliderItems } from "../data";
 import { mobile } from "../responsive";
-
+import { Link } from 'react-router-dom'; // Import Link
 
 const Container = styled.div`
   width: 100%;
@@ -11,13 +11,13 @@ const Container = styled.div`
   display: flex;
   position: relative;
   overflow: hidden;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Added shadow */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   ${mobile({ display: "flex" })}
 `;
 
 const Arrow = styled.div`
   width: 50px;
-  height: 50px;sx
+  height: 50px;
   background-color: #fff7f7;
   border-radius: 50%;
   display: flex;
@@ -30,11 +30,11 @@ const Arrow = styled.div`
   cursor: pointer;
   opacity: 0.5;
   z-index: 2;
-  transition: opacity 0.3s ease; /* Added hover effect */
+  transition: opacity 0.3s ease;
 
   &:hover {
     opacity: 0.8;
-    background-color: #ccc; /* Added hover effect */
+    background-color: #ccc;
   }
 `;
 
@@ -61,7 +61,7 @@ const Slide = styled.div`
     }
   }
 
-  transition: background-color 0.5s ease; /* Added background transition */
+  transition: background-color 0.5s ease;
 `;
 
 const ImgContainer = styled.div`
@@ -70,9 +70,9 @@ const ImgContainer = styled.div`
 `;
 
 const Image = styled.img`
-  height: 80%; /* Adjusted height for a larger image */
+  height: 80%;
   object-fit: cover;
-  border-radius: 5px; /* Added border-radius to make it round */
+  border-radius: 5px;
 `;
 
 const InfoContainer = styled.div`
@@ -84,7 +84,7 @@ const InfoContainer = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: 2.5rem; /* Adjusted font size */
+  font-size: 2.5rem;
   margin-bottom: 20px;
 `;
 
@@ -96,20 +96,19 @@ const Desc = styled.p`
 `;
 
 const Button = styled.button`
-  padding: 12px 24px; /* Adjusted padding for a larger button */
+  padding: 12px 24px;
   font-size: 1.2rem;
   background-color: #333;
-  color: #fff;
+  color: #fff !important; /* Set text color to white */
   border: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  border-radius: 25px; /* Made the button round */
+  border-radius: 25px;
 
   &:hover {
     background-color: #555;
   }
 `;
-
 const Slider = () => {
   const [slideIndex, setSlideIndex] = useState(0);
 
@@ -135,7 +134,9 @@ const Slider = () => {
             <InfoContainer>
               <Title>{item.title}</Title>
               <Desc>{item.desc}</Desc>
-              <Button>Shop now</Button>
+              <Button>
+  <Link to="/products" style={{ color: "#fff" }}>Shop now</Link>
+</Button>
             </InfoContainer>
           </Slide>
         ))}
