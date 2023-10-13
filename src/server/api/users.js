@@ -9,9 +9,10 @@ const {
     getUserById,
 } = require('../db');
 
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const { requireAdmin } = require('./utils');
 
-usersRouter.get('/', async( req, res, next) => {
+usersRouter.get('/',requireAdmin, async( req, res, next) => {
     try {
         const users = await getAllUser();
 
@@ -23,7 +24,7 @@ usersRouter.get('/', async( req, res, next) => {
         next(error)
     }
 });
-usersRouter.get('/:id', async( req, res, next) => {
+usersRouter.get('/:id', requireAdmin, async( req, res, next) => {
     try {
        
         const {id} = req.params;
@@ -70,7 +71,7 @@ usersRouter.post('/login', async(req, res, next) => {
 });
 
 usersRouter.post('/register', async(req, res, next) => {
-    const { name, email, password } = req.body;
+    const { role,name, email, password } = req.body;
 
     try {
         const _user = await getUserByEmail(email);
@@ -83,6 +84,7 @@ usersRouter.post('/register', async(req, res, next) => {
         }
 
         const user = await createUser({
+            role,
             name,
             email,
             password

@@ -1,8 +1,10 @@
 import styled from "styled-components";
-
+import React, { useState } from 'react';
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 import {mobile} from "../responsive";
+import {useNavigate} from "react-router-dom"
+import {Link} from "react-router-dom"
 
 const Container = styled.div`
   display: flex;
@@ -69,34 +71,92 @@ const Button = styled.button`
   }
 `;
 
-const Link = styled.a`
+ /* const Link = styled.a`
   margin: 5px 0;
   font-size: 14px;
   text-decoration: underline;
   cursor: pointer;
   color: #555;
+  
 `;
+*/
 
 const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
+  const navigate = useNavigate();
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const login = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/api/users/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email,
+          password
+        })
+      });
+      const result = await response.json();
+      setMessage(result.message);
+      console.log(result,"11")
+      if (!response.ok) {
+        throw result;
+      }
+      setEmail('');
+      setPassword('');
+      if(result.token){
+        navigate('/');
+      }
+    } catch (err) {
+      console.error();
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    login();
+  };
+
   return (
     <Container>
-    
-   <Navbar/>
+      <Navbar />
       <Wrapper>
         <Title>SIGN IN</Title>
-        <Form>
-          <Input placeholder="Username" type="text" />
-          <Input placeholder="Password" type="password" />
-          <Button>LOGIN</Button>
-          <Link>Forgot your password?</Link>
-          <Link>Create a new account</Link>
+        <Form onSubmit={handleSubmit}>
+          <Input
+            placeholder="Email"
+            type="email"
+            value={email}
+            onChange={handleEmailChange}
+            required
+          />
+          <Input
+            placeholder="Password"
+            type="password"
+            value={password}
+            onChange={handlePasswordChange}
+            required
+          />
+          <Button type="submit">LOGIN</Button>
+          <Link to="/register">Create a new account</Link>
         </Form>
-      
       </Wrapper>
-     <Footer/>
+      <Footer />
     </Container>
   );
 };
 
 export default Login;
+
 
