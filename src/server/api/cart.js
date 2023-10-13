@@ -35,7 +35,6 @@ cartRouter.delete('/', async( req, res, next) => {
         res.clearCookie(currentcookie);
         res.send(currentcookie);
       }
-      // res.send("Cookies are cleared!");
   } catch (error) {
      console.log(error);
       next(error)

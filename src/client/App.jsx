@@ -1,18 +1,28 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import Login from './components/Login';
+import React from "react";
+import { Routes, Route} from "react-router-dom";
+import Home from "./Pages/Home";
+import Product from "./Pages/Product";
+import ProductList from "./Pages/ProductList";
+import Register from "./Pages/Register";
+import Login from "./Pages/Login";
+import Cart from "./Pages/Cart";
 
 function App() {
-  const [count, setCount] = useState(0);
+  return <>
+   <div className="navigate">
+      <Link to= "/products">All Products</Link>
+   </div>
 
-  return (
-    <div className='App'>
-        <h1>Boilerplate</h1>
-        <img id='comp-img' src='./computer.png'></img>
-        <p>Replace the starter code in this template with something cool</p>
-        <Login />
-    </div>
-  );
+
+   <div>
+  <Routes>
+  <Route path="/" element={<Home/>} />
+  <Route path="/products" element={<AllProducts/>} />
+  <Route path="/products/:id" element={<SingleProduct />} />
+  </Routes>
+  </div>
+  </>
 }
+
 
 export default App;

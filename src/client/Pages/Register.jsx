@@ -3,6 +3,7 @@
 import styled from "styled-components";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
+import { mobile } from "../responsive";
 
 const Container = styled.div`
   display: flex;
@@ -23,7 +24,7 @@ const Wrapper = styled.div`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin-top: 130px;
   margin-bottom: 60px;
- 
+  ${mobile({ width: "75%" })}
 `;
 
 const Title = styled.h1`

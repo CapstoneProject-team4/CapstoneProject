@@ -4,22 +4,36 @@ const usersRouter = express.Router();
 const {
     createUser,
     getUser,
-    getUserByEmail
+    getUserByEmail,
+    getAllUser,
+    getUserById,
 } = require('../db');
 
 const jwt = require('jsonwebtoken')
 
 usersRouter.get('/', async( req, res, next) => {
     try {
-        const users = await getAllUsers();
+        const users = await getAllUser();
 
         res.send({
             users
         });
-    } catch ({name, message}) {
-        next({name, message})
+    } catch (error) {
+        console.log(error)
+        next(error)
     }
 });
+usersRouter.get('/:id', async( req, res, next) => {
+    try {
+       
+        const {id} = req.params;
+        const user = await getUserById(id);
+        res.send(user);
+    } catch (error) {
+      console.log(error);
+        next(error)
+    }
+}); 
 
 usersRouter.post('/login', async(req, res, next) => {
     const { email, password } = req.body;
@@ -89,5 +103,7 @@ usersRouter.post('/register', async(req, res, next) => {
         next({name, message})
     }
 })
+
+
 
 module.exports = usersRouter;

@@ -2,6 +2,8 @@ import { ArrowLeftOutlined, ArrowRightOutlined } from "@mui/icons-material";
 import { useState } from "react";
 import styled from "styled-components";
 import { sliderItems } from "../data";
+import { mobile } from "../responsive";
+
 
 const Container = styled.div`
   width: 100%;
@@ -10,11 +12,12 @@ const Container = styled.div`
   position: relative;
   overflow: hidden;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Added shadow */
+  ${mobile({ display: "flex" })}
 `;
 
 const Arrow = styled.div`
   width: 50px;
-  height: 50px;
+  height: 50px;sx
   background-color: #fff7f7;
   border-radius: 50%;
   display: flex;
@@ -132,7 +135,7 @@ const Slider = () => {
             <InfoContainer>
               <Title>{item.title}</Title>
               <Desc>{item.desc}</Desc>
-              <Button>SHOP NOW</Button>
+              <Button>Shop now</Button>
             </InfoContainer>
           </Slide>
         ))}
