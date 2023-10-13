@@ -6,22 +6,12 @@ import ProductList from "./Pages/ProductList";
 import Register from "./Pages/Register";
 import Login from "./Pages/Login";
 import Cart from "./Pages/Cart";
-import {Link} from "react-router-dom";
 import  AllProducts from "./Components/AllProducts"
 import SingleProduct from "./Components/SingleProducts"
 
 function App() {
   return <>
-   <div className="navigate">
-      <Link to= "/">Home</Link>
-      <Link to= "/products">All Products</Link>
-      <Link to= "/login">Login</Link>
-      <Link to= "/register">Register</Link>
-      <Link to= "/cart">Cart</Link>
-   </div>
-
-
-   <div>
+   <div className="routes">
   <Routes>
   <Route path="/" element={<Home/>} />
   <Route path="/products" element={<AllProducts/>} />
