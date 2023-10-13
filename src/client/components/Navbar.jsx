@@ -3,6 +3,7 @@ import {ShoppingCartOutlined} from "@mui/icons-material"
 import React from 'react'
 import styled from 'styled-components'
 import { mobile } from "../responsive";
+import {Link} from "react-router-dom";
 
 
 
@@ -68,15 +69,25 @@ const Navbar = () => {
     </Left>
     <Center><Logo>HeadPhones</Logo></Center>
     <Right>
-          <MenuItem>Home</MenuItem>
-          <MenuItem>Register</MenuItem>
-          <MenuItem>Log In</MenuItem>
-        <MenuItem>
-        
-        <Badge badgeContent={4} color="primary">
-        <ShoppingCartOutlined/>
-      </Badge>
+      <Link to= "/"> 
+        <MenuItem>Home</MenuItem>
+      </Link>
+      <Link to= "/products">
+        <MenuItem>Products</MenuItem>
+      </Link>
+      <Link to= "/login">
+        <MenuItem>Login</MenuItem>
+      </Link>
+      <Link to= "/register">
+        <MenuItem>Register</MenuItem>
+      </Link>
+      <Link to= "/cart">
+         <MenuItem>
+          <Badge badgeContent={4} color="primary">
+          <ShoppingCartOutlined/>
+          </Badge>
         </MenuItem>
+        </Link>
     </Right>
     </Wrapper>
     </Container>
