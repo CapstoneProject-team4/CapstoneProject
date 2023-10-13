@@ -17,7 +17,7 @@ export const sliderItems = [
       id: 3,
       img: "https://img.freepik.com/premium-photo/pink-headphones-used-for-casual-listener_487986-1937.jpg?w=2000",
       title: "Package deals ",
-      desc: "Who dosent love a new package deal",
+      desc: "Who doesn't love a new package deal",
       bg: "fbf0f4",
     },
   ];

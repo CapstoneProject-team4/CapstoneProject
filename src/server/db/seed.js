@@ -387,6 +387,7 @@ const insertUsers = async () => {
     console.error('Error inserting seed data:', error);
   }
 };
+
 const insertProducts = async () => {
   try {
     for (const product of products) {
