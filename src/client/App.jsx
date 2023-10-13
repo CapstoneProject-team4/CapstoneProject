@@ -18,6 +18,7 @@ function App() {
   return <>
    <div className="routes">
   <Routes>
+
   <Route path="/" element={<Home token ={token} setToken={setToken} role ={role} setRole={setRole}/>} />
   <Route path="/products" element={<AllProducts token ={token} setToken={setToken}/>} />
   <Route path="/products/:id" element={<SingleProduct token ={token} setToken={setToken}/>} />
@@ -25,6 +26,7 @@ function App() {
   <Route path="/admin" element={<AdminDashboard token ={token} setToken={setToken} role ={role} setRole={setRole}/>} />
   <Route path="/register" element={<Register />} />
   <Route path="/cart" element={<Cart token ={token} setToken={setToken}/>} />
+
   </Routes>
   </div>
   </>
