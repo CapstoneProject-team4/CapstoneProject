@@ -81,10 +81,9 @@ const Button = styled.button`
 `;
 */
 
-const Login = () => {
+const Login = ({setToken,setRole}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
   const handleEmailChange = (e) => {
@@ -108,18 +107,17 @@ const Login = () => {
         })
       });
       const result = await response.json();
-      setMessage(result.message);
-      console.log(result,"11")
+      alert(result.message);
       if (!response.ok) {
         throw result;
       }
-      setEmail('');
-      setPassword('');
+      setToken(result.token);
+      setRole(result.user.role);
       if(result.token){
-        navigate('/');
+      navigate('/');
       }
     } catch (err) {
-      console.error();
+      console.error(err);
     }
   };
 

@@ -51,8 +51,7 @@ export default function AllProducts(){
      useEffect(()=>{
          async function allProductsHandler(){
              const result = await fetchAllProducts()
-             setProducts(result)
-             console.log("1",result)
+             setProducts(result);
  
          }
          allProductsHandler()
