@@ -3,6 +3,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { sliderItems } from "../data";
 
+
 const Container = styled.div`
   width: 100%;
   height: 100vh;
@@ -14,7 +15,7 @@ const Container = styled.div`
 
 const Arrow = styled.div`
   width: 50px;
-  height: 50px;
+  height: 50px;sx
   background-color: #fff7f7;
   border-radius: 50%;
   display: flex;
@@ -132,7 +133,7 @@ const Slider = () => {
             <InfoContainer>
               <Title>{item.title}</Title>
               <Desc>{item.desc}</Desc>
-              <Button>SHOP NOW</Button>
+              <Button>Shop now</Button>
             </InfoContainer>
           </Slide>
         ))}

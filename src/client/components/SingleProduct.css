@@ -1,0 +1,43 @@
+.Container {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    background-color: #ffe0e0;
+    justify-content: center;
+    max-width: 90%; /* Set the max width to 90% */
+    margin: auto;
+}
+
+.ProductWrapper {
+    border: 1px solid #ffb6c1;
+    padding: 30px;
+    width: 100%; /* Set the width to 100% */
+    text-align: center;
+    transition: transform 0.3s;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    box-sizing: border-box;
+}
+
+.ProductWrapper img {
+    max-width: 100%;
+    display: block;
+    margin: 0 auto 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h4 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #ff1493;
+}
+
+p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #ff69b4;
+}

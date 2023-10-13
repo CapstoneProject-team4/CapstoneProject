@@ -2,6 +2,10 @@ import { useState } from 'react'
 import { fetchAllProducts } from "../api/ajaxhelper"
 import { useEffect } from 'react'
 import {useNavigate} from 'react-router-dom'
+import './AllProducts.css';
+import Navbar from './Navbar';
+import Footer from './Footer';
+import News from './News';
 
 export default function AllProducts(){
     const navigate = useNavigate()
@@ -9,7 +13,7 @@ export default function AllProducts(){
      function renderAllProducts(){
         return products&&products.map((product)=>{
              return (
-                
+               
                  <div className='allProducts' key={product.id}>
                      <h4 className='h4'>{product.title}</h4>
                      <h4>{product.brand}</h4>
@@ -36,7 +40,10 @@ export default function AllProducts(){
      )
      return (
          <div>
+            <Navbar /> {/* Render the Navbar component */}
               {renderAllProducts()}
+             <News/>
+             <Footer/>
          </div>
         
          )
