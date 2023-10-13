@@ -4,11 +4,15 @@ import App from './App';
 import './App.css';
 import Head from './Head';
 import {BrowserRouter} from 'react-router-dom'
+import Head from './Head';
+import { BrowserRouter } from 'react-router-dom'
+
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
-    <App />
-    <Head/>
+      <App />
+      <Head/>
     </BrowserRouter>
   </React.StrictMode>
 );
