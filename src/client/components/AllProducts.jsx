@@ -38,6 +38,9 @@ export default function AllProducts(){
                      <h4>{product.description}</h4>
                      <img className='img' src={product.img} alt="img"/>
                      <button className='detail' onClick ={()=> navigate("/products/"+product.id)}>See Details</button>
+                     <button className= 'edit' onClick={()=> navigate("/products/"+product.id+"edit")}>Edit Product</button>
+                     <button className= 'delete'>Delete</button>
+                     <button className= 'AddProduct'>Add Product</button>
                     <div>
                         {/* <input
                             type="number"
