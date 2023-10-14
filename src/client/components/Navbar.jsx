@@ -63,7 +63,7 @@ const MenuItem = styled.div`
 `;
 
 
-const Navbar = ({setToken,setRole}) => {
+const Navbar = ({token,role}) => {
     return(
     <Container>
     <Wrapper>
@@ -82,7 +82,7 @@ const Navbar = ({setToken,setRole}) => {
       <Link to= "/products">
         <MenuItem>Products</MenuItem>
       </Link>
-      {setToken?null:<Link to= "/login">
+     {token?null:<Link to= "/login">
         <MenuItem>Login</MenuItem>
       </Link>}
       <Link to= "/register">

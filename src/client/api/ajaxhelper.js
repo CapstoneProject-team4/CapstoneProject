@@ -1,6 +1,7 @@
 
 
 const Products_Api_Url= 'http://localhost:3000/api/products'
+const Users_Api_Url = 'http://localhost:3000/api/users'
 
 export async function fetchAllProducts() {
       try {
@@ -31,20 +32,8 @@ export async function fetchAllProducts() {
       }
   };
   
-  /* export async function fetchSingleProduct(id) {  
-    try {
-      const product = await fetchAllProducts();
-      const SingleProduct = product.filter(product => { 
-       
-        return product._id === id;
-  
-      })
-      return SingleProduct[0];
-    } catch (err) {
-        console.error( err);
-    }
-  };
-  */
+
+
 
 
 

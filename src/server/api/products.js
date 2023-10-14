@@ -2,7 +2,7 @@ const express = require('express')
 const productsRouter = express.Router();
 
 const {
-    getAllProducts, getProductById,updateProduct, createProduct, deleteProduct,
+    getAllProducts, getProductById,updateProduct, createProduct, deleteProduct, getProductByTitle,
 } = require('../db');
 const { requireUser, requiredNotSent, requireAdmin } = require('./utils');
 
@@ -36,8 +36,8 @@ productsRouter.get('/:id', async( req, res, next) => {
 productsRouter.post('/',requireAdmin,requiredNotSent({requiredParams: ['title', 'img','brand', 'price','quantity','color','size','description','categories_id']}), async (req, res, next) => {
   try {
     const {title, img, brand, price, quantity,color,size,description,categories_id} = req.body;
-    const existingProduct = await getAllProducts();
-    if(!existingProduct) {
+    const existingProduct = await getProductByTitle(title);
+    if(existingProduct) {
       next({
         name: 'NotFound',
         message: `An product with title ${title} already exists`
