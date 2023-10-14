@@ -9,10 +9,10 @@ import AdminDashboard from "./AdminDashboard"
 
 
 
-const Home = ({setToken,setRole}) => {
+const Home = ({token,role}) => {
   return (
     <div>
-      <Navbar setToken ={setToken} setRole={setRole}/> 
+      <Navbar token ={token} role={role}/> 
       <Slide/>
       <Categories/>
       <Products/>
