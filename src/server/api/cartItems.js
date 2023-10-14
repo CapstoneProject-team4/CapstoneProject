@@ -60,7 +60,7 @@ cartItemsRouter.post('/users/:id',requireUser,requiredNotSent({requiredParams: [
     }
   });
 
-cartItemsRouter.patch('/users/:id/products', requireUser, async (req, res, next) => {
+cartItemsRouter.patch('/users/:id', requireUser, async (req, res, next) => {
     try {
         const usersId = req.params;
         const users_id = usersId.id;

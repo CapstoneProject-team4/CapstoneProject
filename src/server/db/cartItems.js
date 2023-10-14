@@ -76,17 +76,26 @@ const createCartItems= async({users_id,products_id,quantityincart}) => {
 }
 
 
-async function updateCartItem(users_id, products_id, quantityincart) {
-    try {
-        await db.query(`
-        UPDATE cartItems 
-        SET quantityincart = $1
-        WHERE users_id = $2 AND products_id = $3
-        RETURNING *;
-        `, [users_id, products_id,quantityincart]);
-    } catch (error) {
-        throw error;
+async function updateCartItem({id,products_id, ...fields}) {
+  try {
+    const toUpdate = {}
+    for(let column in fields) {
+      if(fields[column] !== undefined) toUpdate[column] = fields[column];
     }
+    let product;
+    if (util.dbFields(fields).insert.length > 0) {
+      const {rows} = await db.query(`
+          UPDATE cartItems 
+          SET ${ util.dbFields(toUpdate).insert }
+          WHERE id=${ id } AND products_id = ${products_id}
+          RETURNING *;
+      `, Object.values(toUpdate));
+      product = rows[0];
+      return product;
+    }
+  } catch (error) {
+    throw error;
+  }
 }
 
 
