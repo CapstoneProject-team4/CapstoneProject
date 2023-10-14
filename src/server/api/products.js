@@ -7,29 +7,29 @@ const {
 const { requireUser, requiredNotSent, requireAdmin } = require('./utils');
 
 productsRouter.get('/', async( req, res, next) => {
-    try {
-       
-        const products = await getAllProducts();
-        res.send(products);
-    } catch (error) {
-       console.log(error);
-        next(error)
-    }
+  try {
+     
+      const products = await getAllProducts();
+      res.send(products);
+  } catch (error) {
+     console.log(error);
+      next(error)
+  }
 });
 
 
 productsRouter.get('/:id', async( req, res, next) => {
-  console.log(req.params)
-    try {
-       
-        const {id} = req.params;
-        console.log('ID:', id, typeof id);
-        const products = await getProductById(id);
-        res.send(products);
-    } catch (error) {
-      console.log(error);
-        next(error)
-    }
+console.log(req.params)
+  try {
+     
+      const {id} = req.params;
+      console.log('ID:', id, typeof id);
+      const products = await getProductById(id);
+      res.send(products);
+  } catch (error) {
+    console.log(error);
+      next(error)
+  }
 }); 
 
 

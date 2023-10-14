@@ -52,7 +52,25 @@ export default function EditPost({token,role}){
             <label>
                 ImgUrl:{" "}
                 <input 
-                value={img} onChange={e=>setTitle(e.target.value)}
+                value={img} onChange={e=>setImg(e.target.value)}
+                />
+            </label><br/>
+            <label>
+                Brand:{" "}
+                <input 
+                value={brand} onChange={e=>setBrand(e.target.value)}
+                />
+            </label><br/>
+            <label>
+                Quantity:{" "}
+                <input 
+                value={quantity} onChange={e=>setQuantity(e.target.value)}
+                />
+            </label><br/>
+            <label>
+                Color:{" "}
+                <input 
+                value={color} onChange={e=>setColor(e.target.value)}
                 />
             </label><br/>
             <label>

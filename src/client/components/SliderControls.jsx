@@ -11,12 +11,11 @@ const ControlsContainer = styled.div`
 `;
 
 const ControlIcon = styled.div`
-  font-size: 10 rem;
+  font-size: 1rem; /* Adjusted font size */
   color: #FFC0CB;
   cursor: pointer;
   transition: color 0.3s;
   padding: 10px;
-  
   border-radius: 50%;
 `;
 
@@ -30,9 +29,20 @@ const RightArrow = styled(ControlIcon)`
   right: 0;
 `;
 
+const SlideTextContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 const SlideText = styled.span`
   font-size: 1.2rem;
   color: black;
+  margin-right: 10px;
+`;
+
+const NewArrivalsText = styled.span`
+  font-size: 1.2rem;
+  color: #FFC0CB;
 `;
 
 const SliderControls = ({ onNext, onPrev, currentSlide, totalSlides }) => {
@@ -41,7 +51,10 @@ const SliderControls = ({ onNext, onPrev, currentSlide, totalSlides }) => {
       <LeftArrow onClick={onPrev}>
         <KeyboardArrowLeft />
       </LeftArrow>
-      <SlideText>Slide {currentSlide + 1} of {totalSlides}</SlideText>
+      <SlideTextContainer>
+        <SlideText>Slide {currentSlide + 1} of {totalSlides}</SlideText>
+        <NewArrivalsText>All New Arrivals</NewArrivalsText>
+      </SlideTextContainer>
       <RightArrow onClick={onNext}>
         <KeyboardArrowRight />
       </RightArrow>
@@ -50,4 +63,3 @@ const SliderControls = ({ onNext, onPrev, currentSlide, totalSlides }) => {
 }
 
 export default SliderControls;
-

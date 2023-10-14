@@ -1,14 +1,11 @@
-
-
 import styled from "styled-components";
 import Navbar from "../Components/Navbar";
-import Footer from "../Components/Footer";
+
 import { mobile } from "../responsive";
 import { Email } from "@mui/icons-material";
 import { useState } from "react";
-import {useNavigate} from "react-router-dom";
-import {Link} from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -25,7 +22,7 @@ const Wrapper = styled.div`
   width: 40%;
   padding: 20px;
   background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 10px;
+  border-radius: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin-top: 130px;
   margin-bottom: 60px;
@@ -79,71 +76,83 @@ const Button = styled.button`
   }
 `;
 
+const AlreadyHaveAccount = styled.div`
+  margin-top: 10px;
+  text-align: center;
+  font-size: 14px;
+  width: 100%;
+`;
+
 const Register = () => {
-  const[name,setName]=useState("");
-  const[password, setPassword]=useState("");
-  const[email, setEmail]= useState("")
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
   const navigate = useNavigate();
- async function handleSubmit(e){
+
+  async function handleSubmit(e) {
     e.preventDefault();
     try {
-      const repsonse = await fetch('http://localhost:3000/api/users/register', 
-      { 
-        method: "POST", 
-        headers: { 
-          "Content-Type": "application/json" 
-        }, 
+      const response = await fetch("http://localhost:3000/api/users/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
-          role:"Customer",
-          name:name, 
-          password: password, 
-          email:email,
-        }) 
-      })
-  
-      const result = await repsonse.json();
-      console.log(result,"result");
-      alert(result.message);
-      if(result.token){
-        navigate('/');
-      }
+          role: "Customer",
+          name: name,
+          password: password,
+          email: email,
+        }),
+      });
 
-  } catch (error) {
-    console.log(error,"eeror")
+      const result = await response.json();
+      console.log(result, "result");
+      alert(result.message);
+      if (result.token) {
+        navigate("/");
+      }
+    } catch (error) {
+      console.log(error, "error");
+    }
   }
-};
 
   return (
     <Container>
-      <Navbar/>
+      <Navbar />
       <Wrapper>
         <Title>CREATE AN ACCOUNT</Title>
         <Form onSubmit={handleSubmit}>
-          <Input placeholder="Username" 
-                 value={name}
-                 onChange={e=>setName(e.target.value)}
-                required
+          <Input
+            placeholder="Username"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
           />
-          <Input placeholder="Email" type="email" 
-                 value={email}
-                 onChange={e=>setEmail(e.target.value)}
-                required
-                
-           />
-          <Input placeholder="Password" type="password" 
-                 value={password}
-                 onChange={e=>setPassword(e.target.value)}
-                required
-                 />
+          <Input
+            placeholder="Email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <Input
+            placeholder="Password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
           <Agreement>
             By creating an account, I consent to the processing of my personal
             data in accordance with the <b>PRIVACY POLICY</b>
           </Agreement>
           <Button type="submit">Submit</Button>
-          <Link to="/login"> Already has an account? Log in now! </Link>
         </Form>
+        <AlreadyHaveAccount>
+          <Link to="/login"> Already has an account? Log in now! </Link>
+        </AlreadyHaveAccount>
       </Wrapper>
-      <Footer/>
+      
     </Container>
   );
 };

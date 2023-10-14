@@ -5,7 +5,7 @@ import Register from "./Pages/Register";
 import Login from "./Pages/Login";
 import Cart from "./Pages/Cart";
 import  AllProducts from "./Components/AllProducts"
-import SingleProduct from "./Components/SingleProducts"
+import SingleProduct from "./components/SingleProducts"
 import { useState } from "react";
 import AdminDashboard from "./Pages/AdminDashboard";
 import Users from "./Pages/users";

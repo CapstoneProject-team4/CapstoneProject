@@ -36,7 +36,7 @@ const createProduct= async({
       throw error;
     }
   }
-
+  
   async function getProductById(id){
     try {
       const {rows:[product]}= await db.query(`

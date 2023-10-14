@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import React, { useState } from 'react';
 import Navbar from "../Components/Navbar";
-import Footer from "../Components/Footer";
+
 import {mobile} from "../responsive";
 import {useNavigate} from "react-router-dom"
 import {Link} from "react-router-dom"
@@ -150,7 +150,7 @@ const Login = ({setToken,setRole}) => {
           <Link to="/register">Create a new account</Link>
         </Form>
       </Wrapper>
-      <Footer />
+     
     </Container>
   );
 };
