@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Navbar from "../Components/Navbar";
+import Navbar from "../components/Navbar";
 
 import { mobile } from "../responsive";
 import { Email } from "@mui/icons-material";

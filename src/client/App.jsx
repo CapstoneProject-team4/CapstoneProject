@@ -4,7 +4,7 @@ import Home from "./Pages/Home";
 import Register from "./Pages/Register";
 import Login from "./Pages/Login";
 import Cart from "./Pages/Cart";
-import  AllProducts from "./Components/AllProducts"
+import  AllProducts from "./components/AllProducts"
 import SingleProduct from "./components/SingleProducts"
 import { useState } from "react";
 import AdminDashboard from "./Pages/AdminDashboard";
@@ -16,6 +16,7 @@ import Users from "./Pages/users";
 function App() {
   const [token,setToken] = useState()
   const [role, setRole] = useState()
+
   console.log(role,"rolesss")
   return <>
    <div className="routes">

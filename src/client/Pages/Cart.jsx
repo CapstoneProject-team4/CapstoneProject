@@ -1,11 +1,13 @@
 import { Add, Remove } from "@mui/icons-material";
 import styled from "styled-components";
-import React, { useState } from "react"; 
+import React, { useState, useEffect } from "react"; 
 import {useNavigate} from 'react-router-dom'
-import Footer from "../Components/Footer";
-import Navbar from "../Components/Navbar";
+import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
 import { mobile } from "../responsive";
-
+import { updateCart } from '../api/CartsAjaxHelper';
+import { postCart } from '../api/CartsAjaxHelper';
+import { fetchCartByUserId, deleteCart } from '../api/CartsAjaxHelper';
 
 const Container = styled.div``;
 
@@ -158,132 +160,219 @@ const Button = styled.button`
   }
 `;
 
-const Cart = () => {
-  const navigate = useNavigate();
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      name: "Headphones",
-      price: 30,
-      quantity: 2,
-      color: "black",
-      img:"https://i.pinimg.com/736x/d9/c6/97/d9c697e5d3fc891bd3e01cb6d1be5821.jpg"
-    },
-    {
-      id: 2,
-      name: "Headphones",
-      price: 20,
-      quantity: 1,
-      color: "gray",
-      img:" https://i.pinimg.com/736x/d9/c6/97/d9c697e5d3fc891bd3e01cb6d1be5821.jpg"
-    },
-  ]);
+function Cart({ cart, setCart, token, handleAmountChange, userId }) {
+  const [price, setPrice] = useState(0);
 
-  // Define function to update quantity
-  const updateQuantity = (id, newQuantity) => {
-    setCartItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === id ? { ...item, quantity: newQuantity } : item
-      )
-    );
+  const navigate = useNavigate()
+
+  const handleRemove = async (id) => {
+      const arr = cart.products.filter((item) => item.id !== id);
+      const cartObj = {
+          id: cart.id,
+          products: arr,
+          userId: cart.userId
+      }
+      setCart(cartObj);
+
+      await updateCart(token, cartObj);
+
+      handlePrice();
   };
 
-  // Define function to remove item
-  const removeFromCart = (id) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
+  const handlePrice = () => {
+      if (cart && cart.products) {
+          let ans = 0;
+          cart.products.map((item) => (ans += item.amount * item.price));
+          setPrice(ans);
+      }
+
   };
 
-  // Calculate total price
-  const total = cartItems.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0
-  );
-
-  // Confirm purchase
-  const confirmation = () => {
-    if (confirm("Are you sure you wish to complete your purchase?")) {
-      alert("Purchase completed!");
-      navigate("/");
-    } else {
-      
+  const getCart = async (token, userId) => {
+      const _cart = await postCart({products: [], userId: userId}, token);
+      setCart(_cart);
     }
+
+  const handleCheckout = async () => {
+      deleteCart(token, cart.id);
+      await getCart(token, userId);
+      navigate("/checkout");
   }
 
-  return (
-    <Container>
-      <Navbar />
-      <Wrapper>
-        <Title>YOUR BAG</Title>
-        <Top>
-          <TopButton>CONTINUE SHOPPING</TopButton>
-          <TopButton onClick={() => confirmation()} type="filled">CHECKOUT NOW</TopButton>
-        </Top>
-        <Bottom>
-          <Info>
-            {cartItems.map((item) => (
-              <Product key={item.id}>
-                <ProductDetail>
-                  <Image src={item.img} />
-                  <Details>
-                    <ProductName>
-                      <b>Product:</b> {item.name}
-                    </ProductName>
-                    <ProductId>
-                      <b>ID:</b> {item.id}
-                    </ProductId>
-                    <ProductColor color={item.color} />
-                  </Details>
-                </ProductDetail>
-                <PriceDetail>
-                  <ProductAmountContainer>
-                    <Remove
-                      onClick={() =>
-                        updateQuantity(item.id, item.quantity - 1)
-                      }
-                    />
-                    <ProductAmount>{item.quantity}</ProductAmount>
-                    <Add
-                      onClick={() =>
-                        updateQuantity(item.id, item.quantity + 1)
+  useEffect(() => {
+      handlePrice();
+  });
 
-                      }
-                    />
-                  </ProductAmountContainer>
-                  <ProductPrice>
-                    $ {item.price * item.quantity}
-                  </ProductPrice>
-                  <Remove onClick={() => removeFromCart(item.id)} />
-                </PriceDetail>
-              </Product>
-            ))}
-            <Hr />
-            <Summary>
-              <SummaryTitle>ORDER SUMMARY</SummaryTitle>
-              <SummaryItem>
-                <SummaryItemText>Subtotal</SummaryItemText>
-                <SummaryItemPrice>$ 80</SummaryItemPrice>
-              </SummaryItem>
-              <SummaryItem>
-              <SummaryItemText>Estimated Shipping</SummaryItemText>
-              <SummaryItemPrice>$ 5.90</SummaryItemPrice>
-            </SummaryItem>
-            <SummaryItem>
-              <SummaryItemText>Shipping Discount</SummaryItemText>
-              <SummaryItemPrice>$ -5.90</SummaryItemPrice>
-            </SummaryItem>
-              <SummaryItem type="total">
-                <SummaryItemText>Total</SummaryItemText>
-                <SummaryItemPrice>$ {total}</SummaryItemPrice>
-              </SummaryItem>
-              <Button onClick ={()=> confirmation()} >CHECKOUT NOW</Button>
-            </Summary>
-          </Info>
-        </Bottom>
-      </Wrapper>
-      <Footer />
-    </Container>
+  return (
+      <div className="cart">
+          {cart && cart.products ? cart.products.map((item) => (
+              <div className="cart_box" key={item.id}>
+                  <div className="cart_img">
+                      <img className="cart-img" height="300px" src={item.imgUrl} alt="" />
+                      <p>{item.title}</p>
+                  </div>
+
+                  <div className="cart-btns">
+                      <button onClick={() => handleAmountChange(item, 1)}>+</button>
+                      <button>{item.amount}</button>
+                      <button onClick={() => handleAmountChange(item, -1)}>-</button>
+
+                      <br></br>
+                      <span>Item Price: ${item.price}</span>
+                      <br></br>
+                     
+                      <button onClick={() => handleRemove(item.id)}>Remove</button>
+                  </div>
+              </div>
+          )) : null}
+          <div className="total">
+              <span>Total Price of your Cart </span>
+              <span>${price.toFixed(2)}</span>
+          </div>
+          <br></br>
+          <div className="cart-buttons">
+              <button
+                  className="cart-shopping-button"
+                  onClick={() => { navigate("/products") }}>Continue Shopping</button>
+              <button
+                  className="cart-checkout-button"
+                  onClick={handleCheckout}>Checkout</button>
+          </div>
+      </div>
   );
 };
 
 export default Cart;
+
+
+// const Cart = () => {
+//   const navigate = useNavigate();
+
+//   const [cartItems, setCartItems] = useState([
+//     {
+//       id: 1,
+//       name: "Headphones",
+//       price: 30,
+//       quantity: 2,
+//       color: "black",
+//       img:"https://i.pinimg.com/736x/d9/c6/97/d9c697e5d3fc891bd3e01cb6d1be5821.jpg"
+//     },
+//     {
+//       id: 2,
+//       name: "Headphones",
+//       price: 20,
+//       quantity: 1,
+//       color: "gray",
+//       img:" https://i.pinimg.com/736x/d9/c6/97/d9c697e5d3fc891bd3e01cb6d1be5821.jpg"
+//     },
+//   ]);
+
+//   // Define function to update quantity
+//   const updateQuantity = (id, newQuantity) => {
+//     setCartItems((prevItems) =>
+//       prevItems.map((item) =>
+//         item.id === id ? { ...item, quantity: newQuantity } : item
+//       )
+//     );
+//   };
+
+//   // Define function to remove item
+//   const removeFromCart = (id) => {
+//     setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
+//   };
+
+//   // Calculate total price
+//   const total = cartItems.reduce(
+//     (acc, item) => acc + item.price * item.quantity,
+//     0
+//   );
+
+//   // Confirm purchase
+//   const confirmation = () => {
+//     if (confirm("Are you sure you wish to complete your purchase?")) {
+//       alert("Purchase completed!");
+//       navigate("/");
+//     } else {
+      
+//     }
+//   }
+
+//   return (
+//     <Container>
+//       <Navbar />
+//       <Wrapper>
+//         <Title>YOUR BAG</Title>
+//         <Top>
+//           <TopButton>CONTINUE SHOPPING</TopButton>
+//           <TopButton onClick={() => confirmation()} type="filled">CHECKOUT NOW</TopButton>
+//         </Top>
+//         <Bottom>
+//           <Info>
+//             {/* {cartItems.map((item) => ( */}
+//             {cartItems.map((item) => (
+//                 <Product key={item.id}>
+//                 <ProductDetail>
+//                   <Image src={item.img} />
+//                   <Details>
+//                     <ProductName>
+//                       <b>Product:</b> {item.name}
+//                     </ProductName>
+//                     <ProductId>
+//                       <b>ID:</b> {item.id}
+//                     </ProductId>
+//                     <ProductColor color={item.color} />
+//                   </Details>
+//                 </ProductDetail>
+//                 <PriceDetail>
+//                   <ProductAmountContainer>
+//                     <Remove
+//                       onClick={() =>
+//                         updateQuantity(item.id, item.quantity - 1)
+//                       }
+//                     />
+//                     <ProductAmount>{item.quantity}</ProductAmount>
+//                     <Add
+//                       onClick={() =>
+//                         updateQuantity(item.id, item.quantity + 1)
+
+//                       }
+//                     />
+//                   </ProductAmountContainer>
+//                   <ProductPrice>
+//                     $ {item.price * item.quantity}
+//                   </ProductPrice>
+//                   <Remove onClick={() => removeFromCart(item.id)} />
+//                 </PriceDetail>
+//               </Product>
+//             ))}
+//             <Hr />
+//             <Summary>
+//               <SummaryTitle>ORDER SUMMARY</SummaryTitle>
+//               <SummaryItem>
+//                 <SummaryItemText>Subtotal</SummaryItemText>
+//                 <SummaryItemPrice>$ 80</SummaryItemPrice>
+//               </SummaryItem>
+//               <SummaryItem>
+//               <SummaryItemText>Estimated Shipping</SummaryItemText>
+//               <SummaryItemPrice>$ 5.90</SummaryItemPrice>
+//             </SummaryItem>
+//             <SummaryItem>
+//               <SummaryItemText>Shipping Discount</SummaryItemText>
+//               <SummaryItemPrice>$ -5.90</SummaryItemPrice>
+//             </SummaryItem>
+//               <SummaryItem type="total">
+//                 <SummaryItemText>Total</SummaryItemText>
+//                 <SummaryItemPrice>$ {total}</SummaryItemPrice>
+//               </SummaryItem>
+//               <Button onClick ={()=> confirmation()} >CHECKOUT NOW</Button>
+//             </Summary>
+//           </Info>
+//         </Bottom>
+//       </Wrapper>
+//       <Footer />
+//     </Container>
+//   );
+// };
+
+// export default Cart;
 

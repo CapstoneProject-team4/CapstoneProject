@@ -8,6 +8,7 @@ import Footer from './Footer';
 import News from './News';
 
 
+
 export default function AllProducts(){
     const navigate = useNavigate()
      const[products,setProducts]=useState([])
@@ -16,16 +17,20 @@ export default function AllProducts(){
      const addToCart = (product) => {
         SetCart((prevCart) => ({
             ...prevCart,
-            [product.id]: (prevCart[product.id] || 0) + 1,
+            [product.id]: (prevCart[product.id] || 0),
         }));
      };
 
-    //  Test for cookies
-    // function addToCart(name,value) {
-    //     var value = document.getElementById("quantity").value;
-    //     document.cookie = name+"= +`${value}`+; path=/";
-    // }
-
+     const cartToUser = async () => {
+        const response = await fetch(`http://localhost:3000/`,{
+            method: "POST",
+            body: JSON.stringify({
+                product_id: product.id,
+                user_id: user.id,
+            }),
+        });
+        const data = await response.json();
+    };
 
      function renderAllProducts(){
         return products&&products.map((product)=>{
@@ -39,18 +44,6 @@ export default function AllProducts(){
                      <img className='img' src={product.img} alt="img"/>
                      <button className='detail' onClick ={()=> navigate("/products/"+product.id)}>See Details</button>
                     <div>
-                        {/* <input
-                            type="number"
-                            min="1"
-                            id="quantity"
-                            value={cart[product.id] || 0}
-                            onChange={(e) => {
-                                const quantity = parseInt(e.target.value, 10) || 0;
-                                SetCart((prevCart) => ({ ...prevCart, [product.id]: quantity }));
-                            }}
-                            />
-                        <button onClick={() =>addToCart([product.id], input)}>Add to Cart</button> */}
-
                         <input
                             type="number"
                             min="1"
@@ -60,7 +53,12 @@ export default function AllProducts(){
                                 SetCart((prevCart) => ({ ...prevCart, [product.id]: quantity }));
                             }}
                             />
-                            <button onClick={() =>addToCart(product)}>Add to Cart</button>
+                        <button onClick={() => addToCart(product, product.id)}>Add to Cart</button>
+                        {/* <button onClick={() => navigate('/cart', { state: { cart } })}>
+                            Go to Checkout
+                        </button> */}
+
+
                     </div>
                  </div >
              )
