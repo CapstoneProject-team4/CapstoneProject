@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React, { useState } from 'react';
-import Navbar from "../Components/Navbar";
+import Navbar from "../components/Navbar";
 
 import {mobile} from "../responsive";
 import {useNavigate} from "react-router-dom"
