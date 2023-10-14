@@ -131,10 +131,9 @@ const Button = styled.button`
 `;
 
 
-const Cart = ({token,role}) => {
-
+const Cart = ({ token, role }) => {
   const navigate = useNavigate();
-  const { cart, setCart } = useCart();
+  const { cart, dispatch } = useCart();
 
   //  const [cartItems, setCartItems] = useState([
 //     {
@@ -156,31 +155,18 @@ const Cart = ({token,role}) => {
 //   ]);
 
   // Function to update the cart, remove items, etc.
-  const updateCart = (updatedCart) => {
-    setCart(updatedCart);
-  };
-
-  // Define function to update quantity
+  // Function to update the cart, remove items, etc.
   const updateQuantity = (id, newQuantity) => {
-    const updatedCart = cart.map((item) => {
-      if (item.id === id) {
-        return { ...item, quantity: newQuantity };
-      }
-      return item;
-    });
-    updateCart(updatedCart);
+    dispatch({ type: 'UPDATE_QUANTITY', id, quantity: newQuantity });
   };
 
-  // Define function to remove item
   const removeFromCart = (id) => {
-    const updatedCart = cart.filter((item) => item.id !== id);
-    updateCart(updatedCart);
+    dispatch({ type: 'REMOVE_FROM_CART', id });
   };
 
   // Calculate total price
   const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
-  // Confirm purchase
   const confirmation = () => {
     if (confirm("Are you sure you wish to complete your purchase?")) {
       alert("Purchase completed!");
