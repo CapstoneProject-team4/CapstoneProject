@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { fetchAllProducts } from "../api/ajaxhelper"
+import { deleteProduct, fetchAllProducts } from "../api/ajaxhelper"
 import { useEffect } from 'react'
 import {useNavigate} from 'react-router-dom'
 import './AllProducts.css';
@@ -8,7 +8,7 @@ import Footer from './Footer';
 import News from './News';
 
 
-export default function AllProducts(){
+export default function AllProducts({token}){
     const navigate = useNavigate()
      const[products,setProducts]=useState([])
      const [cart, SetCart] = useState({}); // keep track of the cart items and quantities
@@ -28,6 +28,7 @@ export default function AllProducts(){
 
 
      function renderAllProducts(){
+        console.log(products,"what")
         return products&&products.map((product)=>{
              return (
                
@@ -39,8 +40,8 @@ export default function AllProducts(){
                      <img className='img' src={product.img} alt="img"/>
                      <button className='detail' onClick ={()=> navigate("/products/"+product.id)}>See Details</button>
                      <button className= 'edit' onClick={()=> navigate("/products/"+product.id+"/edit")}>Edit Product</button>
-                     <button className= 'delete'>Delete</button>
-                     <button className= 'AddProduct'>Add Product</button>
+                     <button className= 'delete' onClick={()=>deleteProduct({token},product.id)&&navigate("/")}>Delete</button>
+                     <button className= 'AddProduct' onClick={()=>navigate("/products/addProduct")}>Add Product</button>
                     <div>
                         {/* <input
                             type="number"
@@ -84,7 +85,7 @@ export default function AllProducts(){
      
      return (
          <div>
-            <Navbar /> {/* Render the Navbar component */}
+            <Navbar token={token}/> {/* Render the Navbar component */}
               {renderAllProducts()}
              <News/>
              <Footer/>

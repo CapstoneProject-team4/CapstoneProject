@@ -86,7 +86,9 @@ const Navbar = ({token,role}) => {
       <Link to= "/products">
         <MenuItem>Products</MenuItem>
       </Link>
-     {token?null:<Link to= "/login">
+     {token?<Link to= "/logout">
+        <MenuItem>LogOut</MenuItem>
+      </Link>:<Link to= "/login">
         <MenuItem>Login</MenuItem>
       </Link>}
       <Link to= "/register">

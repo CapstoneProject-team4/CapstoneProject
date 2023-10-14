@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "./Navbar";
 
+
 export default function EditPost({ token, role }) {
   const { id } = useParams();
   const [title, setTitle] = useState("");

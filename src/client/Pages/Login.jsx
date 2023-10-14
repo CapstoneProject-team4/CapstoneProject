@@ -5,6 +5,8 @@ import Navbar from "../components/Navbar";
 import {mobile} from "../responsive";
 import {useNavigate} from "react-router-dom"
 import {Link} from "react-router-dom"
+import { useEffect } from "react";
+
 
 const Container = styled.div`
   display: flex;
@@ -77,6 +79,12 @@ const Login = ({setToken,setRole}) => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
+/*  useEffect(()=>{
+    localStorage.setItem('setToken', setToken);
+    localStorage.setItem('setRole', setRole);
+
+  },[])
+  */
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
@@ -104,6 +112,7 @@ const Login = ({setToken,setRole}) => {
       }
       setToken(result.token);
       setRole(result.user.role);
+    
       if(result.token){
       navigate('/');
       }

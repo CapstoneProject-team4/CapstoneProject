@@ -5,6 +5,7 @@ import {useNavigate} from 'react-router-dom'
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { mobile } from "../responsive";
+import { useEffect } from "react";
 
 
 const Container = styled.div``;
@@ -158,7 +159,7 @@ const Button = styled.button`
   }
 `;
 
-const Cart = () => {
+const Cart = ({token}) => {
   const navigate = useNavigate();
   const [cartItems, setCartItems] = useState([
     {
@@ -211,7 +212,7 @@ const Cart = () => {
 
   return (
     <Container>
-      <Navbar />
+      <Navbar token={token}/>
       <Wrapper>
         <Title>YOUR BAG</Title>
         <Top>
@@ -285,4 +286,8 @@ const Cart = () => {
   );
 };
 
+
 export default Cart;
+
+
+
