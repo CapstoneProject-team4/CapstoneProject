@@ -66,43 +66,41 @@ const MenuItem = styled.div`
   ${mobile({ fontSize: "12px", marginLeft: "10px" })}
 `;
 
-const Navbar = ({ setToken, setRole }) => {
-  return (
+
+const Navbar = ({token,role}) => {
+    return(
     <Container>
-      <Wrapper>
-        <Left>
-          <Language>EN</Language>
-        </Left>
-        <Center>
-          <Logo>HeadPhones</Logo>
-        </Center>
-        <Right>
-          <Link to="/">
-            <MenuItem>Home</MenuItem>
-          </Link>
-          <Link to="/admin">
-            <MenuItem>AdminDashBoard</MenuItem>
-          </Link>
-          <Link to="/products">
-            <MenuItem>Products</MenuItem>
-          </Link>
-          {setToken ? null : (
-            <Link to="/login">
-              <MenuItem>Login</MenuItem>
-            </Link>
-          )}
-          <Link to="/register">
-            <MenuItem>Register</MenuItem>
-          </Link>
-          <Link to="/cart">
-            <MenuItem>
-              <Badge badgeContent={4} color="primary">
-                <ShoppingCartOutlined />
-              </Badge>
-            </MenuItem>
-          </Link>
-        </Right>
-      </Wrapper>
+    <Wrapper>
+    <Left>
+        <Language>EN</Language>
+       
+    </Left>
+    <Center><Logo>HeadPhones</Logo></Center>
+    <Right>
+      <Link to= "/"> 
+        <MenuItem>Home</MenuItem>
+      </Link>
+      <Link to= "/admin"> 
+        <MenuItem>AdminDashBoard</MenuItem>
+      </Link>
+      <Link to= "/products">
+        <MenuItem>Products</MenuItem>
+      </Link>
+     {token?null:<Link to= "/login">
+        <MenuItem>Login</MenuItem>
+      </Link>}
+      <Link to= "/register">
+        <MenuItem>Register</MenuItem>
+      </Link>
+      <Link to= "/cart">
+         <MenuItem>
+          <Badge badgeContent={4} color="primary">
+          <ShoppingCartOutlined/>
+          </Badge>
+        </MenuItem>
+        </Link>
+    </Right>
+    </Wrapper>
     </Container>
   );
 };

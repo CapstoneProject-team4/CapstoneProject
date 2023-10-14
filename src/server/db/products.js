@@ -50,6 +50,19 @@ const createProduct= async({
     }
   }
 
+  async function getProductByTitle(title){
+    try {
+      const {rows:[product]}= await db.query(`
+        SELECT * FROM products
+        WHERE title = $1;
+      `,[title]);
+      return product;
+    
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async function updateProduct({id, ...fields}) {
     try {
       const toUpdate = {}
@@ -86,12 +99,14 @@ const createProduct= async({
     }
 }
 
+
   module.exports = {
     createProduct,
     getAllProducts,
     getProductById,
     updateProduct,
     deleteProduct,
+    getProductByTitle,
    
     
 };
