@@ -65,7 +65,7 @@ const ProductDescription = styled.p`
     color: #333; /* Dark gray text color */
 `;
 
-export default function SingleProduct({token}) {
+export default function SingleProduct({token,role}) {
     const [product, setProduct] = useState({});
     const { id } = useParams();
 
@@ -79,7 +79,7 @@ export default function SingleProduct({token}) {
 
     return (
         <div>
-            <Navbar token={token}/>
+            <Navbar token={token} role={role}/>
             <Container>
                 <ProductWrapper>
                     <ProductImage src={product.img} alt="img" />

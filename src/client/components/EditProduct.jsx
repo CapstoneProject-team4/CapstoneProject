@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "./Navbar";
-
+import { Category } from "@mui/icons-material";
 
 export default function EditPost({ token, role }) {
   const { id } = useParams();
@@ -13,11 +13,7 @@ export default function EditPost({ token, role }) {
   const [quantity, setQuantity] = useState("");
   const [color, setColor] = useState("");
   const [size, setSize] = useState("");
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Your form submission logic here
-  };
+  const [category,setCategory] = useState("")
 
   const editPostStyle = {
     display: "flex",
@@ -72,6 +68,36 @@ export default function EditPost({ token, role }) {
     backgroundColor: "#e73d8d", /* Darker pink on hover */
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Your form submission logic here
+  ;
+fetch(`http://localhost:3000/api/products/${id}`, 
+          { 
+            method: 'PATCH', 
+            headers: { 
+              "Content-Type": "application/json" ,
+              'Authorization': `Bearer ${token}`
+            }, 
+            body: JSON.stringify({
+                
+                title: title,
+                img: img,
+                brand:brand,
+                quantity:quantity,
+                color:color,
+                size:size,
+                description: description,
+                price:price,
+                categories_id :category,
+            }
+            )
+          })
+          .then((resp)=>resp.json())
+          .then((question)=>console.log(question))
+          alert(resp.message)  
+  
+  }
   return (
     <>
       <Navbar token={token} role={role} />
@@ -142,6 +168,15 @@ export default function EditPost({ token, role }) {
               style={inputStyle}
             />
           </label>
+          <label style={labelStyle}>
+            Category ID:
+            <input
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              style={inputStyle}
+            />
+          </label>
+          
           <button style={buttonStyle}>Submit</button>
         </form>
       </div>

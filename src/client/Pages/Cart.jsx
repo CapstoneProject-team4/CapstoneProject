@@ -130,7 +130,9 @@ const Button = styled.button`
   }
 `;
 
-const Cart = ({ token }) => {
+
+const Cart = ({token,role}) => {
+
   const navigate = useNavigate();
   const { cart, setCart } = useCart();
 
@@ -188,7 +190,9 @@ const Cart = ({ token }) => {
 
   return (
     <Container>
-      <Navbar token={token} />
+
+      <Navbar token={token} role={role}/>
+
       <Wrapper>
         <Title>YOUR BAG</Title>
         <Top>
@@ -253,8 +257,6 @@ const Cart = ({ token }) => {
   );
 };
 
-
 export default Cart;
-
 
 

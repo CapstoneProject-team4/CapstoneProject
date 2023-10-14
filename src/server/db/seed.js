@@ -266,40 +266,40 @@ const categories = [
 ]
 
 const cartItems = [
-  {
+{
     users_id : 5,
     products_id:1,
-    quantity : 3,
+    quantityincart : 3,
 },
 {
   users_id : 5,
   products_id:2,
-  quantity : 3,
+  quantityincart : 3,
 },
 {
   users_id : 5,
   products_id:3,
-  quantity : 3,
+  quantityincart: 3,
 },
 {
   users_id : 5,
   products_id:4,
-  quantity : 3,
+  quantityincart : 3,
 },
 {
   users_id : 2,
   products_id:7,
-  quantity : 3,
+  quantityincart : 3,
 },
 {
   users_id : 2,
   products_id:10,
-  quantity : 3,
+  quantityincart: 3,
 },
 {
   users_id : 2,
   products_id:11,
-  quantity : 3,
+  quantityincart : 3,
 },
 ]
 
@@ -355,9 +355,9 @@ const createTables = async () => {
      await db.query(`
        CREATE TABLE cartItems(
            id SERIAL PRIMARY KEY,
+           quantityincart INTEGER,
            users_id INTEGER NOT NULL REFERENCES users(id),
-           products_id INTEGER NOT NULL REFERENCES products(id),
-           quantity INTEGER
+           products_id INTEGER NOT NULL REFERENCES products(id)
        )
       `)
     }
@@ -407,7 +407,7 @@ const insertProducts = async () => {
 const insertCartItems = async () => {
   try {
     for (const cartItem of cartItems) {
-      await createCartItems({users_id:cartItem.users_id, products_id:cartItem.products_id, quantity:cartItem.quantity});
+      await createCartItems({users_id:cartItem.users_id, products_id:cartItem.products_id, quantityincart:cartItem.quantityincart});
     }
     console.log('Seed data inserted successfully.');
   } catch (error) {

@@ -11,7 +11,6 @@ export default function AllProducts({ token }) {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
  const {setCart} = useCart(); //get the setCart function from the CartContext
-
   const addToCart = (product) => {
     setCart((prevCart) => ({
       ...prevCart,
@@ -33,28 +32,17 @@ export default function AllProducts({ token }) {
         <button onClick={() => addToCart(product)}>Add to Cart</button>
 
         {/* Other product actions */}
-        <button className="detail" onClick={() => navigate(`/products/${product.id}`)}>
-          See Details
-        </button>
-        <button className="edit" onClick={() => navigate(`/products/${product.id}/edit`)}>
-          Edit Product
-        </button>
-        <button
-          className="delete"
-          onClick={async () => {
-            try {
-              await deleteProduct({ token }, product.id);
-              navigate('/');
-            } catch (error) {
-              console.error('Error deleting product:', error);
-            }
-          }}
-        >
-          Delete
-        </button>
-      </div>
+       <button className='detail' onClick ={()=> navigate("/products/"+product.id)}>See Details</button>
+        {token && role == "Admin"?
+          <div>
+          <button className= 'edit' onClick={()=> navigate("/products/"+product.id+"/edit")}>Edit Product</button>
+          <button className= 'delete' onClick={()=>deleteProduct({token},product.id)&&navigate("/")}>Delete</button>
+          <button className= 'AddProduct' onClick={()=>navigate("/products/addProduct")}>Add Product</button>
+          </div>:null }
+          <div>
     ));
   }
+
 
   useEffect(() => {
     async function allProductsHandler() {
@@ -73,3 +61,4 @@ export default function AllProducts({ token }) {
     </div>
   );
 }
+

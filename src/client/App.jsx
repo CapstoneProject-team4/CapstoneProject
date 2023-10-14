@@ -15,7 +15,6 @@ import { CartProvider } from "./components/CartContext";
 
 
 
-
 function App() {
   const [token,setToken] = useState();
   const [role, setRole] = useState();
@@ -30,13 +29,13 @@ function App() {
       <CartProvider>
   <Routes>
   <Route path="/" element={<Home token ={token} setToken={setToken} role ={role} setRole={setRole}/>} />
-  <Route path="/products" element={<AllProducts token ={token} setToken={setToken}/>} />
-  <Route path="/products/:id" element={<SingleProduct token ={token} setToken={setToken}/>} />
+  <Route path="/products" element={<AllProducts token ={token} setToken={setToken} role ={role} setRole={setRole}/>} />
+  <Route path="/products/:id" element={<SingleProduct token ={token} setToken={setToken} role ={role} setRole={setRole}/>} />
   <Route path="/login" element={<Login token ={token} setToken={setToken} role ={role} setRole={setRole}/>} />
   <Route path="/logout" element={<Logout token={token} setToken={setToken} />} />
   <Route path="/admin" element={<AdminDashboard token ={token} setToken={setToken} role ={role} setRole={setRole}/>} />
-  <Route path="/register" element={<Register token={token}/>} />
-  <Route path="/cart" element={<Cart token ={token} setToken={setToken}/>} />
+  <Route path="/register" element={<Register token={token} role ={role} setRole={setRole}/>} />
+  <Route path="/cart" element={<Cart token ={token} setToken={setToken} role ={role} setRole={setRole}/>} />
   <Route path="/users" element={<Users token ={token} setToken={setToken} role ={role} setRole={setRole}/>} />
   <Route path="/products/:id/edit" element={<EditProduct token ={token} setToken={setToken} role ={role} setRole={setRole}/>} />
   <Route path="/products/addProduct" element={<AddProducts token ={token} setToken={setToken} role ={role} setRole={setRole}/>} />

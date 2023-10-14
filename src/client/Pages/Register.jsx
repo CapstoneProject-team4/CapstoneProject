@@ -83,7 +83,7 @@ const AlreadyHaveAccount = styled.div`
   width: 100%;
 `;
 
-const Register = ({token}) => {
+const Register = ({token,role}) => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -118,7 +118,7 @@ const Register = ({token}) => {
 
   return (
     <Container>
-      <Navbar token={token}/>
+      <Navbar token={token} role={role}/>
       <Wrapper>
         <Title>CREATE AN ACCOUNT</Title>
         <Form onSubmit={handleSubmit}>
