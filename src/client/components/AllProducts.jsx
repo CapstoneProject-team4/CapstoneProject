@@ -7,7 +7,7 @@ import Footer from './Footer';
 import News from './News';
 import {useCart} from "./CartContext";
 
-export default function AllProducts({ token }) {
+export default function AllProducts({ token,role }) {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
  const {setCart} = useCart(); //get the setCart function from the CartContext
@@ -39,7 +39,7 @@ export default function AllProducts({ token }) {
           <button className= 'delete' onClick={()=>deleteProduct({token},product.id)&&navigate("/")}>Delete</button>
           <button className= 'AddProduct' onClick={()=>navigate("/products/addProduct")}>Add Product</button>
           </div>:null }
-          <div>
+        </div>
     ));
   }
 
@@ -54,7 +54,7 @@ export default function AllProducts({ token }) {
 
   return (
     <div>
-      <Navbar token={token} />
+      <Navbar token={token} role={role}/>
       {renderAllProducts()}
       <News />
       <Footer />
