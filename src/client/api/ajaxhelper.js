@@ -172,8 +172,33 @@ export async function fetchSingleProduct (id){
 //     return result;
     
   
+<<<<<<< HEAD
 //   } catch (error) {
 //     console.error(error);
 //     return error;
 //   }
 // }
+=======
+
+  export async function deleteProduct({token},id)
+  {
+    try {
+      const response = await fetch(`${Products_Api_Url}/${id}`, {
+        method: "DELETE",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      const result = await response.json();
+      console.log(result);
+      if(result){
+        alert("Delete Successfully!")
+      }
+      return result
+    } catch (err) {
+      console.error();
+    }
+  }  
+  
+>>>>>>> 5c19a91def886b29788f06cec82c7f65456ba55e

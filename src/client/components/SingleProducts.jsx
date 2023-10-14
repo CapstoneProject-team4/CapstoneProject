@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchSingleProduct } from "../api/ajaxhelper";
 import { useParams } from "react-router-dom";
-import Navbar from "./Navbar";
+import Navbar from "../Components/Navbar";
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -65,7 +65,7 @@ const ProductDescription = styled.p`
     color: #333; /* Dark gray text color */
 `;
 
-export default function SingleProduct() {
+export default function SingleProduct({token,role}) {
     const [product, setProduct] = useState({});
     const { id } = useParams();
 
@@ -79,7 +79,7 @@ export default function SingleProduct() {
 
     return (
         <div>
-            <Navbar />
+            <Navbar token={token} role={role}/>
             <Container>
                 <ProductWrapper>
                     <ProductImage src={product.img} alt="img" />

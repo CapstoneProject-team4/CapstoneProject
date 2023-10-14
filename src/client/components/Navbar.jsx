@@ -68,6 +68,7 @@ const MenuItem = styled.div`
 
 
 const Navbar = ({token,role}) => {
+  console.log(role,"role")
     return(
     <Container>
     <Wrapper>
@@ -80,13 +81,15 @@ const Navbar = ({token,role}) => {
       <Link to= "/"> 
         <MenuItem>Home</MenuItem>
       </Link>
-      <Link to= "/admin"> 
+     {token && role == "Admin"?<Link to= "/admin"> 
         <MenuItem>AdminDashBoard</MenuItem>
-      </Link>
+      </Link>:null}
       <Link to= "/products">
         <MenuItem>Products</MenuItem>
       </Link>
-     {token?null:<Link to= "/login">
+     {token?<Link to= "/logout">
+        <MenuItem>LogOut</MenuItem>
+      </Link>:<Link to= "/login">
         <MenuItem>Login</MenuItem>
       </Link>}
       <Link to= "/register">

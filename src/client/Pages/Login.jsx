@@ -5,6 +5,8 @@ import Navbar from "../components/Navbar";
 import {mobile} from "../responsive";
 import {useNavigate} from "react-router-dom"
 import {Link} from "react-router-dom"
+import { useEffect } from "react";
+
 
 const Container = styled.div`
   display: flex;
@@ -71,21 +73,18 @@ const Button = styled.button`
   }
 `;
 
- /* const Link = styled.a`
-  margin: 5px 0;
-  font-size: 14px;
-  text-decoration: underline;
-  cursor: pointer;
-  color: #555;
-  
-`;
-*/
 
 const Login = ({setToken,setRole}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
+/*  useEffect(()=>{
+    localStorage.setItem('setToken', setToken);
+    localStorage.setItem('setRole', setRole);
+
+  },[])
+  */
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
@@ -113,6 +112,7 @@ const Login = ({setToken,setRole}) => {
       }
       setToken(result.token); //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ4dWFuMDBAZ21haWwuY29tIiwiaWF0IjoxNjk3MjQyNTgyLCJleHAiOjE2OTc4NDczODJ9.HnLdzNqwLNzvbqYijOdcJPB-7nx4uoisYaoCxZoPKmA
       setRole(result.user.role);
+    
       if(result.token){
       navigate('/');
       }
