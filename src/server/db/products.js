@@ -92,7 +92,7 @@ const createProduct= async({
       WHERE "products_id"=$1
       RETURNING *;
       `,[id]);
-        const { rows: [product] } = await db.query(`
+      const { rows: [product] } = await db.query(`
         DELETE FROM products
         WHERE id = $1
         RETURNING *;

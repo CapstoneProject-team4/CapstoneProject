@@ -50,7 +50,7 @@ export async function fetchAllProducts() {
       }
       return result
     } catch (err) {
-      console.error(err);
+      console.error();
     }
   }  
   

@@ -1,17 +1,13 @@
 const db = require('./client');
+const util = require('./util');
 
-
-const createCartItems= async({ 
-   users_id,
-   products_id,
-   quantity,
-  }) => {
+const createCartItems= async({users_id,products_id,quantityincart}) => {
     try {
         const { rows: [ cartItem ] } = await db.query(`
-        INSERT INTO cartItems("users_id", "products_id", "quantity") 
+        INSERT INTO cartItems ("users_id", "products_id","quantityincart") 
         VALUES($1, $2, $3)
         RETURNING *
-      `, [ users_id, products_id, quantity,]);
+      `, [users_id,products_id,quantityincart]);
   
       return cartItem;
     } catch (error) {
@@ -22,7 +18,7 @@ const createCartItems= async({
   async function getAllCartItems() {
     try {
       const cartItem = await db.query(`
-      SELECT products.*, cartItems.users_id AS cartItems_users_id, cartItems.products_id AS cartItems_products_id
+      SELECT products.*, cartItems.users_id AS cartItems_users_id,cartItems.quantityincart AS cartItems_quantityincart, cartItems.products_id AS cartItems_products_id
       FROM products
       JOIN cartItems ON products.id = cartItems.products_id
       JOIN users ON cartItems.users_id = users.id
@@ -35,10 +31,25 @@ const createCartItems= async({
       throw error;
     }
   }
+  async function getCartItemsByTwoId(id,product_id){
+    try {
+      const {rows:[product]}= await db.query(`
+      SELECT products.*,cartItems.quantityincart AS cartItems_quantityincart,cartItems.users_id AS cartItems_users_id, cartItems.products_id AS cartItems_products_id
+      FROM products
+      JOIN cartItems ON products.id = cartItems.products_id
+      JOIN users ON cartItems.users_id = users.id
+      WHERE users.id = $1 AND products_id = $2
+      `,[id,product_id]);
+      return product;
+    
+    } catch (error) {
+      throw error;
+    }
+  }
   async function getCartItemsByUserId(id){
     try {
       const cartItem = await db.query(`
-      SELECT products.*, cartItems.users_id AS cartItems_users_id, cartItems.products_id AS cartItems_products_id
+      SELECT products.*,cartItems.quantityincart AS cartItems_quantityincart,cartItems.users_id AS cartItems_users_id, cartItems.products_id AS cartItems_products_id
       FROM products
       JOIN cartItems ON products.id = cartItems.products_id
       JOIN users ON cartItems.users_id = users.id
@@ -64,13 +75,15 @@ const createCartItems= async({
     }
 }
 
-async function updateCartItem(userId, productId, quantity) {
+
+async function updateCartItem(users_id, products_id, quantityincart) {
     try {
         await db.query(`
         UPDATE cartItems 
-        SET quantity = $1
+        SET quantityincart = $1
         WHERE users_id = $2 AND products_id = $3
-        `, [quantity, userId, productId]);
+        RETURNING *;
+        `, [users_id, products_id,quantityincart]);
     } catch (error) {
         throw error;
     }
@@ -91,5 +104,6 @@ module.exports = {
     getCartItemsByUserId,
     deletedCartItems,
     updateCartItem,
+    getCartItemsByTwoId
 
 };

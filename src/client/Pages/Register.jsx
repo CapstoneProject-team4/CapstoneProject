@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import Navbar from "../Components/Navbar";
+import Navbar from "../components/Navbar";
 
 import { mobile } from "../responsive";
 import { Email } from "@mui/icons-material";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+
 
 const Container = styled.div`
   display: flex;
@@ -83,7 +83,7 @@ const AlreadyHaveAccount = styled.div`
   width: 100%;
 `;
 
-const Register = ({token}) => {
+const Register = ({token,role}) => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -118,7 +118,7 @@ const Register = ({token}) => {
 
   return (
     <Container>
-      <Navbar token={token}/>
+      <Navbar token={token} role={role}/>
       <Wrapper>
         <Title>CREATE AN ACCOUNT</Title>
         <Form onSubmit={handleSubmit}>

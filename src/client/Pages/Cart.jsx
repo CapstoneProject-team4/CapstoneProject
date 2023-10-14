@@ -2,8 +2,8 @@ import { Add, Remove } from "@mui/icons-material";
 import styled from "styled-components";
 import React, { useState } from "react"; 
 import {useNavigate} from 'react-router-dom'
-import Footer from "../Components/Footer";
-import Navbar from "../Components/Navbar";
+import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
 import { mobile } from "../responsive";
 import { useEffect } from "react";
 
@@ -159,7 +159,7 @@ const Button = styled.button`
   }
 `;
 
-const Cart = ({token}) => {
+const Cart = ({token,role}) => {
   const navigate = useNavigate();
   const [cartItems, setCartItems] = useState([
     {
@@ -212,7 +212,7 @@ const Cart = ({token}) => {
 
   return (
     <Container>
-      <Navbar token={token}/>
+      <Navbar token={token} role={role}/>
       <Wrapper>
         <Title>YOUR BAG</Title>
         <Top>
