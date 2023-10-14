@@ -85,6 +85,12 @@ export default function EditPost({token,role}){
                 value={price} onChange={e=>setPrice(e.target.value)}
                 />
             </label><br/>
+            <label>
+                Size:{" "}
+                <input 
+                value={size} onChange={e=>setSize(e.target.value)}
+                />
+            </label><br/>
             <button className="button" >Submit</button>
         </form>
         </div>
