@@ -1,10 +1,10 @@
 import React from "react"
-import Navbar from "../Components/Navbar"
+import Navbar from "../components/Navbar"
 import Slide from "../Components/Slider"
 import Categories from "../Components/Categories"
 import Products from "../components/Products"
-import News from "../Components/News"
-import Footer from "../Components/Footer"
+import News from "../components/News"
+import Footer from "../components/Footer"
 import AdminDashboard from "./AdminDashboard"
 
 
