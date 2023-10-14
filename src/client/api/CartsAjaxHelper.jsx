@@ -88,21 +88,21 @@ export const updateCart = async (token, cartObj) => {
     } catch (err) {
       console.error(err);
     }
-  }
+}
 
-  export const deleteCart = async (token, id) => {
-    try {
-      const response = await fetch(`${BASE_URL}/cart/${id}`, {
-        method: "DELETE",
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        }
-      });
-      const result = await response.json();
-      console.log(result);
-      return result;
-    } catch (err) {
-      console.error(err);
-    }
+export const deleteCart = async (token, id) => {
+  try {
+    const response = await fetch(`${BASE_URL}/cart/${id}`, {
+      method: "DELETE",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    const result = await response.json();
+    console.log(result);
+    return result;
+  } catch (err) {
+    console.error(err);
   }
+}

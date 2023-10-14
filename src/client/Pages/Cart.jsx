@@ -160,10 +160,74 @@ const Button = styled.button`
   }
 `;
 
+// function productMatch(product, quantity) {
+//   // return true if any of the fields you want to check against include the text
+//   // strings have an .includes() method
+//   if (product.id != null) {
+//     return true;
+//   } 
+//   return false;
+// }
+
+// const filteredProducts = products.filter((product) => productMatch(product, quantity));
+// const productsToDisplay = searchTerm.length ? filteredProducts : products;
+// const[products,setProducts]=useState([])
+
+
+
 function Cart({ cart, setCart, token, handleAmountChange, userId }) {
   const [price, setPrice] = useState(0);
 
   const navigate = useNavigate()
+
+  function addToCart(product) {
+    // var cartIsEmpty = cartWrapper.hasClass('empty');
+    //get localstorage cart product list
+    getProductsFromLocalStorage();
+    //update cart product list
+    addProduct(product);
+    //update number of items
+    // updateCartCount(cartIsEmpty);
+    //show cart
+    // cartWrapper.removeClass('empty');
+  }
+
+  function addProduct(product){
+    let products = [];
+    if(localStorage.getItem('products')){
+        products = JSON.parse(localStorage.getItem('products'));
+    }
+    
+    products.push({'productId' : product, 'quantity': 1});
+    localStorage.setItem('products', JSON.stringify(products));
+  }
+
+  
+
+  function getProductsFromLocalStorage() {
+    const cs = localStorage.getItem('products');
+    if (cs === null) {
+      addProduct();
+    } else {
+      $.each(cs.products, function(key, value) {
+        cartList.prepend($('<li class="product"><div class="product-image"><a href="#0"><img src="'+ value.image +'" alt="placeholder"></a></div><div class="product-details"><h3><a href="#0">' + value.name + '</a></h3><span class="price">${value.price}</span><div class="actions"><a href="#0" class="delete-item">Delete</a><a class="delete-item">' + value.size + '</a><a class="delete-item">' + value.color + '</a><div class="quantity"><label for="cd-product-' + value.productId + '">Qty</label><span class="select"><select id="cd-product-' + value.productId + '" name="quantity"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select></span></div></div></div></li>'));
+      });
+    }
+  }
+
+  // function renderAllProducts(){
+  //   return productsToDisplay.map((product)=>{
+  
+  //        return (
+  //            <div className='allProducts' key={product.id}>
+  //                <h4 className='h4'>{product.title}</h4>
+  //                <h4>{product.brand}</h4>
+  //                <h4>{product.price}</h4>
+  //                <h4>{product.description}</h4>
+  //                <img className='img' src={product.img} alt="img"/>
+  //             </div>
+  //        )
+  // })};
 
   const handleRemove = async (id) => {
       const arr = cart.products.filter((item) => item.id !== id);
@@ -193,12 +257,33 @@ function Cart({ cart, setCart, token, handleAmountChange, userId }) {
       setCart(_cart);
     }
 
-  const handleCheckout = async () => {
-      deleteCart(token, cart.id);
-      await getCart(token, userId);
-      navigate("/checkout");
-  }
+  const showCart = async () => {
+    fetch('http://localhost:3000/cart/', {
+      method: 'GET'
+    }).then(response => console.log("Response status: ", response.status));
+    };
+  
 
+
+  const handleCheckout = async () => {
+      // Confirm purchase
+      console.log(showCart());
+    if (confirm("Are you sure you wish to complete your purchase?")) {
+      // deleteCart(token, id);
+      // await getCart(token, userId);
+      fetch('http://localhost:3000/api/cart/', {
+        method: 'DELETE',
+        credentials: 'include'
+        //other options
+    }).then(response => console.log("Response status: ", response.status));
+      alert("Purchase completed!");
+      navigate("/");
+
+    } else {
+      
+    }
+  }
+  
   useEffect(() => {
       handlePrice();
   });
@@ -236,14 +321,13 @@ function Cart({ cart, setCart, token, handleAmountChange, userId }) {
                   onClick={() => { navigate("/products") }}>Continue Shopping</button>
               <button
                   className="cart-checkout-button"
-                  onClick={handleCheckout}>Checkout</button>
+                  onClick ={()=> {handleCheckout()}}>Checkout</button>
           </div>
       </div>
   );
 };
 
 export default Cart;
-
 
 // const Cart = () => {
 //   const navigate = useNavigate();
@@ -375,4 +459,3 @@ export default Cart;
 // };
 
 // export default Cart;
-
