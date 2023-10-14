@@ -159,7 +159,7 @@ const Button = styled.button`
   }
 `;
 
-const Cart = () => {
+const Cart = ({token}) => {
   const navigate = useNavigate();
   const [cartItems, setCartItems] = useState([
     {
@@ -212,7 +212,7 @@ const Cart = () => {
 
   return (
     <Container>
-      <Navbar />
+      <Navbar token={token}/>
       <Wrapper>
         <Title>YOUR BAG</Title>
         <Top>

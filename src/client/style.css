@@ -1,0 +1,10 @@
+.users {
+    padding: 100px 80px 40px;
+    margin: auto;
+    align-items: center;
+    text-align: left;
+    justify-content: center;
+    background-image: linear-gradient(79deg, #7439db,#c66fbc 48%,#f7944d);
+    min-height: 100vh;
+    color: white;
+}

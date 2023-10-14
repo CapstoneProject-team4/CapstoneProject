@@ -85,7 +85,7 @@ export default function AllProducts({token}){
      
      return (
          <div>
-            <Navbar /> {/* Render the Navbar component */}
+            <Navbar token={token}/> {/* Render the Navbar component */}
               {renderAllProducts()}
              <News/>
              <Footer/>

@@ -87,6 +87,11 @@ const createProduct= async({
 
   async function deleteProduct(id) {
     try {
+      await db.query(`
+      DELETE FROM cartItems
+      WHERE "products_id"=$1
+      RETURNING *;
+      `,[id]);
         const { rows: [product] } = await db.query(`
         DELETE FROM products
         WHERE id = $1

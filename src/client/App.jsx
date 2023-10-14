@@ -12,6 +12,7 @@ import Users from "./Pages/users";
 import EditProduct from "./Components/EditProduct";
 import AddProduct from "./Components/AddProducts";
 import AddProducts from "./Components/AddProducts";
+import Logout from "./Components/Logout";
 
 
 
@@ -28,8 +29,9 @@ function App() {
   <Route path="/products" element={<AllProducts token ={token} setToken={setToken}/>} />
   <Route path="/products/:id" element={<SingleProduct token ={token} setToken={setToken}/>} />
   <Route path="/login" element={<Login token ={token} setToken={setToken} role ={role} setRole={setRole}/>} />
+  <Route path="/logout" element={<Logout token={token} setToken={setToken} />} />
   <Route path="/admin" element={<AdminDashboard token ={token} setToken={setToken} role ={role} setRole={setRole}/>} />
-  <Route path="/register" element={<Register />} />
+  <Route path="/register" element={<Register token={token}/>} />
   <Route path="/cart" element={<Cart token ={token} setToken={setToken}/>} />
   <Route path="/users" element={<Users token ={token} setToken={setToken} role ={role} setRole={setRole}/>} />
   <Route path="/products/:id/edit" element={<EditProduct token ={token} setToken={setToken} role ={role} setRole={setRole}/>} />

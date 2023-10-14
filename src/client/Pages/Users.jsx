@@ -1,10 +1,15 @@
 
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom";
+import Navbar from "../Components/Navbar";
+import "../style.css"
+
 
 
 export default function Users({token,role}){
    
     const[users,setUsers]=useState([])
+    const navigate = useNavigate();
     
     async function fetchAllUsers (){
         try {
@@ -44,10 +49,17 @@ export default function Users({token,role}){
     },[]
     )
     return (
-        <div>
+       <>
+       <div>
+        <Navbar token={token}/>
+       </div>
+        <div className="users">
              {renderAllUsers()}
         </div>
-       
+        <div>
+        <button className="bnUser" onClick={()=> navigate('/admin')}>Back to AdminDashboard</button>
+        </div>
+        </>
         )
 }
 
