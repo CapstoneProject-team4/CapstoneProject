@@ -10,7 +10,6 @@ import { useState } from "react";
 import AdminDashboard from "./Pages/AdminDashboard";
 import Users from "./Pages/users";
 import EditProduct from "./Components/EditProduct";
-import AddProduct from "./Components/AddProducts";
 import AddProducts from "./Components/AddProducts";
 import Logout from "./Components/Logout";
 
