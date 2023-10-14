@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchSingleProduct } from "../api/ajaxhelper";
 import { useParams } from "react-router-dom";
-import Navbar from "./Navbar";
+import Navbar from "../Components/Navbar"
 import styled from 'styled-components';
 
 const Container = styled.div`
