@@ -1,13 +1,15 @@
 import { Badge } from "@mui/material";
 import { ShoppingCartOutlined } from "@mui/icons-material";
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 import { mobile } from "../responsive";
 import { Link } from "react-router-dom";
 
 const Container = styled.div`
   height: 60px;
   ${mobile({ height: "50px" })}
+  
+  
 `;
 
 const Wrapper = styled.div`
@@ -28,6 +30,7 @@ const Language = styled.span`
   font-size: 14px;
   cursor: pointer;
   ${mobile({ display: "none" })}
+  color: black; /* Set text color to black */
 `;
 
 const Center = styled.div`
@@ -54,6 +57,7 @@ const MenuItem = styled.div`
   cursor: pointer;
   margin-left: 25px;
   position: relative;
+  color: black; /* Set text color to black */
 
   &:hover {
     color: #CA226B;
@@ -62,41 +66,43 @@ const MenuItem = styled.div`
   ${mobile({ fontSize: "12px", marginLeft: "10px" })}
 `;
 
-
-const Navbar = ({setToken,setRole}) => {
-    return(
+const Navbar = ({ setToken, setRole }) => {
+  return (
     <Container>
-    <Wrapper>
-    <Left>
-        <Language>EN</Language>
-       
-    </Left>
-    <Center><Logo>HeadPhones</Logo></Center>
-    <Right>
-      <Link to= "/"> 
-        <MenuItem>Home</MenuItem>
-      </Link>
-      <Link to= "/admin"> 
-        <MenuItem>AdminDashBoard</MenuItem>
-      </Link>
-      <Link to= "/products">
-        <MenuItem>Products</MenuItem>
-      </Link>
-      {setToken?null:<Link to= "/login">
-        <MenuItem>Login</MenuItem>
-      </Link>}
-      <Link to= "/register">
-        <MenuItem>Register</MenuItem>
-      </Link>
-      <Link to= "/cart">
-         <MenuItem>
-          <Badge badgeContent={4} color="primary">
-          <ShoppingCartOutlined/>
-          </Badge>
-        </MenuItem>
-        </Link>
-    </Right>
-    </Wrapper>
+      <Wrapper>
+        <Left>
+          <Language>EN</Language>
+        </Left>
+        <Center>
+          <Logo>HeadPhones</Logo>
+        </Center>
+        <Right>
+          <Link to="/">
+            <MenuItem>Home</MenuItem>
+          </Link>
+          <Link to="/admin">
+            <MenuItem>AdminDashBoard</MenuItem>
+          </Link>
+          <Link to="/products">
+            <MenuItem>Products</MenuItem>
+          </Link>
+          {setToken ? null : (
+            <Link to="/login">
+              <MenuItem>Login</MenuItem>
+            </Link>
+          )}
+          <Link to="/register">
+            <MenuItem>Register</MenuItem>
+          </Link>
+          <Link to="/cart">
+            <MenuItem>
+              <Badge badgeContent={4} color="primary">
+                <ShoppingCartOutlined />
+              </Badge>
+            </MenuItem>
+          </Link>
+        </Right>
+      </Wrapper>
     </Container>
   );
 };
