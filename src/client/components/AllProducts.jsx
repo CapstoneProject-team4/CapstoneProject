@@ -7,7 +7,7 @@ import Footer from './Footer';
 import News from './News';
 import { useCart } from './CartContext';
 
-export default function AllProducts({ token }) {
+export default function AllProducts({ token,role }) {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const { setCart } = useCart(); // Get the setCart function from the CartContext
@@ -35,15 +35,14 @@ export default function AllProducts({ token }) {
         <button onClick={() => addToCart(product)}>Add to Cart</button>
 
         {/* Other product actions */}
-        <button className='detail' onClick={() => navigate("/products/" + product.id)}>See Details</button>
-        {token && role === "Admin" ? (
+       <button className='detail' onClick ={()=> navigate("/products/"+product.id)}>See Details</button>
+        {token && role == "Admin"?
           <div>
-            <button className='edit' onClick={() => navigate("/products/" + product.id + "/edit")}>Edit Product</button>
-            <button className='delete' onClick={() => deleteProduct({ token }, product.id) && navigate("/")}>Delete</button>
-            <button className='AddProduct' onClick={() => navigate("/products/addProduct")}>Add Product</button>
-          </div>
-        ) : null}
-      </div>
+          <button className= 'edit' onClick={()=> navigate("/products/"+product.id+"/edit")}>Edit Product</button>
+          <button className= 'delete' onClick={()=>deleteProduct({token},product.id)&&navigate("/")}>Delete</button>
+          <button className= 'AddProduct' onClick={()=>navigate("/products/addProduct")}>Add Product</button>
+          </div>:null }
+        </div>
     ));
   }
 
@@ -57,7 +56,7 @@ export default function AllProducts({ token }) {
 
   return (
     <div>
-      <Navbar token={token} />
+      <Navbar token={token} role={role}/>
       {renderAllProducts()}
       <News />
       <Footer />
