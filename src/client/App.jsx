@@ -4,15 +4,15 @@ import Home from "./Pages/Home";
 import Register from "./Pages/Register";
 import Login from "./Pages/Login";
 import Cart from "./Pages/Cart";
-import  AllProducts from "./Components/AllProducts"
+import  AllProducts from "./components/AllProducts"
 import SingleProduct from "./components/SingleProducts"
 import { useState } from "react";
 import AdminDashboard from "./Pages/AdminDashboard";
 import Users from "./Pages/users";
 import EditProduct from "./Components/EditProduct";
-import AddProduct from "./Components/AddProducts";
 import AddProducts from "./Components/AddProducts";
 import Logout from "./Components/Logout";
+
 
 
 

@@ -77,6 +77,26 @@
     transition: transform 0.3s ease;
     font-family: var(--font-family);
 }
+/* Style for the "Edit" and "Delete" buttons */
+.edit, .delete, .AddProduct {
+    padding: 10px 20px; /* Slightly smaller padding */
+    font-size: 1rem; /* Slightly smaller font size */
+    background: var(--primary-color); /* Use your primary color as the background */
+    color: #fce4ec; /* Violet color for text (you can change this to your preferred shade of violet) */
+    border: none;
+    cursor: pointer;
+    border-radius: 8px; /* Slightly smaller border radius */
+    margin: 5px;
+    transition: transform 0.3s ease;
+    font-family: var(--font-family);
+}
+
+/* Style for the "Edit" and "Delete" buttons on hover */
+.edit:hover, .delete:hover, .AddProduct:hover {
+    transform: translateY(-3px);
+  
+    color: #fff; /* White text color on hover */
+}
 
 .detail:hover {
     transform: translateY(-3px);

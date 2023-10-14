@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React, { useState } from 'react';
-import Navbar from "../Components/Navbar";
+import Navbar from "../components/Navbar";
 
 import {mobile} from "../responsive";
 import {useNavigate} from "react-router-dom"
@@ -73,15 +73,6 @@ const Button = styled.button`
   }
 `;
 
- /* const Link = styled.a`
-  margin: 5px 0;
-  font-size: 14px;
-  text-decoration: underline;
-  cursor: pointer;
-  color: #555;
-  
-`;
-*/
 
 const Login = ({setToken,setRole}) => {
   const [email, setEmail] = useState('');
