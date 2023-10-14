@@ -71,15 +71,6 @@ const Button = styled.button`
   }
 `;
 
- /* const Link = styled.a`
-  margin: 5px 0;
-  font-size: 14px;
-  text-decoration: underline;
-  cursor: pointer;
-  color: #555;
-  
-`;
-*/
 
 const Login = ({setToken,setRole}) => {
   const [email, setEmail] = useState('');
