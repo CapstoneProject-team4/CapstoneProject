@@ -69,16 +69,18 @@ const Product = ({ item }) => {
     <Container>
       <Circle />
       <Image src={item.img} />
+      
       <Info>
         <Link to="/cart">
           <Icon>
             <ShoppingCartOutlined />
           </Icon>
-        </Link>
-        <Link to="/products">
-          <Icon>
-            <SearchOutlined />
-          </Icon>
+          <Link to={`/products/${item.id}`}>
+  <Icon>
+    <SearchOutlined />
+  </Icon>
+</Link>
+          
         </Link>
       </Info>
     </Container>

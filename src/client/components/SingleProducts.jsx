@@ -13,13 +13,13 @@ const Container = styled.div`
 `;
 
 const ProductWrapper = styled.div`
-    border: 1px solid #ffb6c1;
+    background: #fff;
+    border: 1px solid #e1e1e1;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 30px;
     width: 60%;
     text-align: center;
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 12px;
     box-sizing: border-box;
 `;
 
@@ -28,20 +28,41 @@ const ProductImage = styled.img`
     display: block;
     margin: 0 auto 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 `;
 
 const ProductDetail = styled.h4`
     font-size: 1.8rem;
     font-weight: bold;
+    margin-bottom: 10px;
+    color: black;
+`;
+
+const ProductBrand = styled.p`
+    font-size: 1.4rem;
+    font-weight: bold;
+    color:#FFB6C1; /* Dark gray text color */
+    margin-bottom: 5px;
+`;
+
+const ProductSize = styled.p`
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #FFB6C1; /* Dark gray text color */
+    margin-bottom: 5px;
+`;
+
+const ProductPrice = styled.p`
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #FFB6C1; /* Baby pink text color */
     margin-bottom: 15px;
-    color: #ff1493;
 `;
 
 const ProductDescription = styled.p`
     font-size: 1.2rem;
     line-height: 1.6;
-    color: #ff69b4;
+    color: #333; /* Dark gray text color */
 `;
 
 export default function SingleProduct() {
@@ -61,13 +82,12 @@ export default function SingleProduct() {
             <Navbar />
             <Container>
                 <ProductWrapper>
-                    <ProductDetail>{product.title}</ProductDetail>
-                    <ProductDetail>{product.brand}</ProductDetail>
-                    <ProductDetail>{product.price}</ProductDetail>
-                    <ProductDetail>{product.size}</ProductDetail>
-                    <ProductDetail>{product.color}</ProductDetail>
-                    <ProductDescription>{product.description}</ProductDescription>
                     <ProductImage src={product.img} alt="img" />
+                    <ProductDetail>{product.title}</ProductDetail>
+                    <ProductBrand>Brand: {product.brand}</ProductBrand>
+                    <ProductSize>Size: {product.size}</ProductSize>
+                    <ProductPrice>Price: ${product.price}</ProductPrice>
+                    <ProductDescription>{product.description}</ProductDescription>
                 </ProductWrapper>
             </Container>
         </div>
