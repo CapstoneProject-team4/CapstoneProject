@@ -16,7 +16,6 @@ const Home = ({token,role}) => {
       <Slide/>
       <Categories/>
       <Products/>
-      <AdminDashboard />
       <News/>
       <Footer/>
     </div>

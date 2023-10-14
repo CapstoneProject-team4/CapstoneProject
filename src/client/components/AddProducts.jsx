@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { Navigate, useParams } from "react-router-dom";
 
-export default function EditPost({token,role}){
-    const{id}=useParams()
+
+export default function AddProducts({token,role}){
+   
     const[title,setTitle]=useState("");
     const[description,setDescription]=useState("");
     const[price, setPrice]=useState("");
@@ -12,12 +12,11 @@ export default function EditPost({token,role}){
     const[color,setColor]=useState("");
     const[size,setSize] =useState("");
     const[category,setCategory] = useState("")
-
  const handleSubmit = (event) => {
       event.preventDefault();
-     fetch(`http://localhost:3000/api/products/${id}`, 
+     fetch(`http://localhost:3000/api/products`, 
           { 
-            method: 'PATCH', 
+            method: 'POST', 
             headers: { 
               "Content-Type": "application/json" ,
               'Authorization': `Bearer ${token}`
@@ -42,8 +41,8 @@ export default function EditPost({token,role}){
       }
     return (
         <>
-        <div className="EditPost">
-        <h2> Edit Product</h2>
+        <div className="AddProducts">
+        <h2> Add Products</h2>
         <form onSubmit={handleSubmit}>
         <label>
                 Title:{" "}

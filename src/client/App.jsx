@@ -10,6 +10,8 @@ import { useState } from "react";
 import AdminDashboard from "./Pages/AdminDashboard";
 import Users from "./Pages/users";
 import EditProduct from "./Components/EditProduct";
+import AddProduct from "./Components/AddProducts";
+import AddProducts from "./Components/AddProducts";
 
 
 
@@ -31,6 +33,7 @@ function App() {
   <Route path="/cart" element={<Cart token ={token} setToken={setToken}/>} />
   <Route path="/users" element={<Users token ={token} setToken={setToken} role ={role} setRole={setRole}/>} />
   <Route path="/products/:id/edit" element={<EditProduct token ={token} setToken={setToken} role ={role} setRole={setRole}/>} />
+  <Route path="/products/addProduct" element={<AddProducts token ={token} setToken={setToken} role ={role} setRole={setRole}/>} />
 
   </Routes>
   </div>

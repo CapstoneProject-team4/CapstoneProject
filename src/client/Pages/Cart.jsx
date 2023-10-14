@@ -5,6 +5,7 @@ import {useNavigate} from 'react-router-dom'
 import Footer from "../Components/Footer";
 import Navbar from "../Components/Navbar";
 import { mobile } from "../responsive";
+import { useEffect } from "react";
 
 
 const Container = styled.div``;
@@ -286,4 +287,5 @@ const Cart = () => {
 };
 
 export default Cart;
+
 
