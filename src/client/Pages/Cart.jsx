@@ -245,4 +245,3 @@ const Cart = ({ token, role }) => {
 
 export default Cart;
 
-
