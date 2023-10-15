@@ -1,3 +1,4 @@
+
 const db = require('./client');
 const util = require('./util');
 
@@ -49,7 +50,7 @@ const createCartItems= async({users_id,products_id,quantityincart}) => {
   async function getCartItemsByUserId(id){
     try {
       const cartItem = await db.query(`
-      SELECT products.*,cartItems.quantityincart AS cartItems_quantityincart,cartItems.users_id AS cartItems_users_id, cartItems.products_id AS cartItems_products_id
+      SELECT products.*,cartItems.quantityincart AS cartItems_quantityincart, cartItems.id AS cartItems_id,cartItems.users_id AS cartItems_users_id, cartItems.products_id AS cartItems_products_id
       FROM products
       JOIN cartItems ON products.id = cartItems.products_id
       JOIN users ON cartItems.users_id = users.id
@@ -76,17 +77,26 @@ const createCartItems= async({users_id,products_id,quantityincart}) => {
 }
 
 
-async function updateCartItem(users_id, products_id, quantityincart) {
-    try {
-        await db.query(`
-        UPDATE cartItems 
-        SET quantityincart = $1
-        WHERE users_id = $2 AND products_id = $3
-        RETURNING *;
-        `, [users_id, products_id,quantityincart]);
-    } catch (error) {
-        throw error;
+async function updateCartItem({id, ...fields}) {
+  try {
+    const toUpdate = {}
+    for(let column in fields) {
+      if(fields[column] !== undefined) toUpdate[column] = fields[column];
     }
+    let product;
+    if (util.dbFields(fields).insert.length > 0) {
+      const {rows} = await db.query(`
+          UPDATE cartItems 
+          SET ${ util.dbFields(toUpdate).insert }
+          WHERE id=${ id }
+          RETURNING *;
+      `, Object.values(toUpdate));
+      product = rows[0];
+      return product;
+    }
+  } catch (error) {
+    throw error;
+  }
 }
 
 

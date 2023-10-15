@@ -1,0 +1,30 @@
+/* AdminDashboard Page */
+.AdminDashboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f6f2f7;
+    padding: 20px;
+  }
+  
+  .AdminDashboard img {
+    width: 400px; 
+    height: auto; 
+    margin: 20px 0;
+  }
+  
+  .AdminDashboard button {
+    background-color: #ca226b;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 10px 0;
+  }
+  
+  .AdminDashboard button:hover {
+    background-color: #e73d8d;
+  }
+  
