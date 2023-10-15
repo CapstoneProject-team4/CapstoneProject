@@ -7,7 +7,7 @@ const {requireUser, requiredNotSent} = require('./utils')
 
 cartItemsRouter.get('/',async( req, res, next) => {
     try {
-       
+        
         const cartItems = await getAllCartItems();
         res.send(cartItems);
     } catch (error) {
@@ -92,12 +92,6 @@ cartItemsRouter.delete('/users/:users_id/products/:products_id',requireUser, asy
         next(error);
     }
 });
-
-
-
-
-
-
 
 
 module.exports = cartItemsRouter;

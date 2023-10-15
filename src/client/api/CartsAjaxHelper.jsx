@@ -88,109 +88,21 @@ export const updateCart = async (token, cartObj) => {
     } catch (err) {
       console.error(err);
     }
-  }
+}
 
-  export const deleteCart = async (token, id) => {
-    try {
-      const response = await fetch(`${BASE_URL}/cart/${id}`, {
-        method: "DELETE",
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        }
-      });
-      const result = await response.json();
-      console.log(result);
-      return result;
-    } catch (err) {
-      console.error(err);
-    }
-  }
-
-  const Products_Api_Url= 'http://localhost:3000/api/products'
-// const Users_Api_Url = 'http://localhost:3000/api/users'
-// const CookieURL = 'http://localhost:3000/api/cart'
-
-export async function fetchAllProducts() {
+export const deleteCart = async (token, id) => {
   try {
-    const response = await fetch(
-      Products_Api_Url
-    );
+    const response = await fetch(`${BASE_URL}/cart/${id}`, {
+      method: "DELETE",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    });
     const result = await response.json();
+    console.log(result);
     return result;
-    
-  
-  } catch (error) {
-    console.error(error);
-    return error;
+  } catch (err) {
+    console.error(err);
   }
 }
-  
-export async function fetchSingleProduct (id){ 
-  console.log(id,"ajax fetch product") 
-    try {
-      const response = await fetch(
-        `${Products_Api_Url}/${id}`
-      )
-        const product = await response.json();
-        console.log ("issue",product)
-        return product;
-    } catch (err) {
-        console.error( err);
-    }
-};
-
-// export async function fetchCookie() {
-//   try {
-//     const response = await fetch(
-//       `${CookieURL}/${id}`
-//     );
-//     const result = await response.json();
-//     return result;
-    
-  
-//   } catch (error) {
-//     console.error(error);
-//     return error;
-//   }
-// }
-
-// export async function addToCookie(id, quantity) {
-//   try {
-//     const response = await fetch(
-//       `${CookieURL}/${id}/${quantity}`, {
-//         method: "POST",
-//         body: JSON.stringify({
-//           post:{
-//             productID: postObj.id,
-//             quantity: postObj.quantity
-//           }
-//         })
-//       }
-//     );
-//     const result = await response.json();
-//     return result;
-    
-  
-
-  export async function deleteProduct({token},id)
-  {
-    try {
-      const response = await fetch(`${Products_Api_Url}/${id}`, {
-        method: "DELETE",
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        }
-      });
-      const result = await response.json();
-      console.log(result);
-      if(result){
-        alert("Delete Successfully!")
-      }
-      return result
-    } catch (err) {
-      console.error();
-    }
-  }  
-  
