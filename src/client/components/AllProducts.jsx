@@ -7,13 +7,35 @@ import Footer from './Footer';
 import News from './News';
 import { useCart } from './CartContext';
 
+// Display an alert for 3 seconds.
+function displayAlert(text) {
+    const alert = document.createElement('div');
+    alert.style.position = 'fixed';
+    alert.style.top = '10%';
+    alert.style.left = '50%';
+    alert.style.transform = 'translate(-50%, -50%)';
+    alert.style.padding = '10px';
+    alert.style.backgroundColor = '#fff';
+    alert.style.border = '1px solid #ccc';
+    alert.style.zIndex = '1000';
+    alert.textContent = text;
+  
+    document.body.appendChild(alert);
+  
+    setTimeout(() => {
+      document.body.removeChild(alert);
+    }, 3000);
+  }
+  
+
 export default function AllProducts({ token, role }) {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const { dispatch } = useCart(); // Get the dispatch function from the CartContext
 
-  const addToCart = (product) => {
-    
+  const addToCart = (product, title) => {
+    // Display an alert when the button is clicked.
+    displayAlert(`${title} added to cart!`);
     dispatch({ type: 'ADD_TO_CART', product });
   };
 
@@ -29,7 +51,7 @@ export default function AllProducts({ token, role }) {
         <img className="img" src={product.img} alt="img" />
 
         {/* Add to Cart button using Cartcontext */}
-        <button onClick={() => addToCart(product)}>Add to Cart</button>
+        <button onClick={() => addToCart(product, product.title)}>Add to Cart</button>
 
         {/* Other product actions */}
         <button className='detail' onClick={() => navigate("/products/" + product.id)}>See Details</button>
