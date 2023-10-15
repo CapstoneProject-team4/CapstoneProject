@@ -72,7 +72,7 @@ usersRouter.post('/login', async(req, res, next) => {
 });
 
 usersRouter.post('/register', async(req, res, next) => {
-    const { role,name, email, password } = req.body;
+    const { role,name, email, password,billingaddress,phonenumber } = req.body;
 
     try {
         const _user = await getUserByEmail(email);
@@ -88,7 +88,9 @@ usersRouter.post('/register', async(req, res, next) => {
             role,
             name,
             email,
-            password
+            password,
+            billingaddress,
+            phonenumber,
         });
 
         const token = jwt.sign({

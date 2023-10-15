@@ -58,7 +58,7 @@ export default function AllProducts({ token, role }) {
         {token && role === "Admin" ?
           <div>
             <button className='edit' onClick={() => navigate("/products/" + product.id + "/edit")}>Edit Product</button>
-            <button className='delete' onClick={() => deleteProduct({ token }, product.id) && navigate("/")}>Delete</button>
+            <button className='delete' onClick={() => deleteProduct({ token }, product.id) && navigate("/admin")}>Delete</button>
             <button className='AddProduct' onClick={() => navigate("/products/addProduct")}>Add Product</button>
           </div> : null}
       </div>

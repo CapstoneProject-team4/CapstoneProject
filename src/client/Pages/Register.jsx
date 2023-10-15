@@ -87,6 +87,8 @@ const Register = ({token,role}) => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [address,setAddress] =useState("");
+  const [phone,setPhone] =useState("")
   const navigate = useNavigate();
 
   async function handleSubmit(e) {
@@ -102,6 +104,8 @@ const Register = ({token,role}) => {
           name: name,
           password: password,
           email: email,
+          billingaddress:address,
+          phonenumber:phone
         }),
       });
 
@@ -140,6 +144,18 @@ const Register = ({token,role}) => {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <Input
+            placeholder="Phone Number"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            required
+          />
+          <Input
+            placeholder="Address"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
             required
           />
           <Agreement>

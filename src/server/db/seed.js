@@ -224,30 +224,40 @@ const users = [
     name: 'xuan00',
     email: 'xuan00@gmail.com',
     password: '1234',
+    billingaddress: "1 Constitution Avenue Brockton, MA 02301",
+    phonenumber: 123456789,
   },
   { 
     role: 'Customer',
     name: 'Liu Wei',
     email: 'liu@example.com',
     password: 'strongpass',
+    billingaddress: "1 Constitution Avenue Brockton, MA 02301",
+    phonenumber: 123456789,
   },
   {
     role: 'Customer',
     name: 'Isabella García',
     email: 'bella@example.com',
     password: 'pass1234',
+    billingaddress: "1 Constitution Avenue Brockton, MA 02301",
+    phonenumber: 123456789,
   },
   {
     role: 'Customer',
     name: 'Mohammed Ahmed',
     email: 'mohammed@example.com',
     password: 'mysecretpassword',
+    billingaddress: "1 Constitution Avenue Brockton, MA 02301",
+    phonenumber: 123456789,
   },
   { 
     role: 'Customer',
     name: 'xuan08',
     email: 'xuan08@gmail.com',
     password: '1234',
+    billingaddress: "1 Constitution Avenue Brockton, MA 02301",
+    phonenumber: 123456789,
   },
   // Add more user objects as needed
 ];  
@@ -328,7 +338,9 @@ const createTables = async () => {
             role VARCHAR(10) NOT NULL,
             name VARCHAR(255) DEFAULT 'name',
             email VARCHAR(255) UNIQUE NOT NULL,
-            password VARCHAR(255) NOT NULL
+            password VARCHAR(255) NOT NULL,
+            billingaddress TEXT NOT NULL,
+            phonenumber INTEGER
         )    
        `)
        await db.query(`
@@ -385,7 +397,7 @@ const createTables = async () => {
 const insertUsers = async () => {
   try {
     for (const user of users) {
-      await createUser({role:user.role,name: user.name, email: user.email, password: user.password});
+      await createUser({role:user.role,name: user.name, email: user.email, password: user.password, billingaddress:user.billingaddress , phonenumber:user.phonenumber});
     }
     console.log('Seed data inserted successfully.');
   } catch (error) {
