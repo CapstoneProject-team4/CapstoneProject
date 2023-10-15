@@ -166,6 +166,7 @@ const Cart = ({ token, role }) => {
 
   // Calculate total price
   const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  const shipping = cart.reduce((acc, item) => acc + 5.90 * item.quantity, 0);
 
   const confirmation = () => {
     if (confirm("Are you sure you wish to complete your purchase?")) {
@@ -217,7 +218,7 @@ const Cart = ({ token, role }) => {
                     <Add onClick={() => updateQuantity(item.id, item.quantity + 1)} />
                   </ProductAmountContainer>
                   <ProductPrice>$ {item.price * item.quantity}</ProductPrice>
-                  <Remove onClick={() => removeFromCart(item.id)} />
+                  <Button onClick={() => removeFromCart(item.id)}>Remove from Cart </Button>
                 </PriceDetail>
               </Product>
             ))}
@@ -230,7 +231,7 @@ const Cart = ({ token, role }) => {
               </SummaryItem>
               <SummaryItem>
                 <SummaryItemText>Estimated Shipping</SummaryItemText>
-              <SummaryItemPrice>$ 5.90</SummaryItemPrice>
+              <SummaryItemPrice>$ {shipping}</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Shipping Discount</SummaryItemText>

@@ -172,13 +172,6 @@ export async function fetchSingleProduct (id){
 //     return result;
     
   
-<<<<<<< HEAD
-//   } catch (error) {
-//     console.error(error);
-//     return error;
-//   }
-// }
-=======
 
   export async function deleteProduct({token},id)
   {
@@ -201,4 +194,3 @@ export async function fetchSingleProduct (id){
     }
   }  
   
->>>>>>> 5c19a91def886b29788f06cec82c7f65456ba55e
