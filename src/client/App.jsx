@@ -12,7 +12,6 @@ import EditProduct from "./Components/EditProduct";
 import AddProducts from "./Components/AddProducts";
 import Logout from "./Components/Logout";
 import { CartProvider } from "./components/CartContext";
-import CartItems from "../../../../cap2/my-app/backup/CartItems";
 
 function App() {
   const [token, setToken] = useState();
