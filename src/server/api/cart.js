@@ -3,6 +3,16 @@ const cookieParser = require('cookie-parser')
 const cartRouter = express.Router();
 cartRouter.use(cookieParser());
 
+const { 
+  createCart,
+  getAllCarts,
+  getCartById,
+  getCartByProductId,
+  getCartByUserId,
+  updateCartById,
+  deleteCartById,
+} = require('../db');
+
 cartRouter.post('/:productID/:quantity', async( req, res, next) => {
   try {
       // no: set a new cookie
@@ -15,31 +25,6 @@ cartRouter.post('/:productID/:quantity', async( req, res, next) => {
       next(error)
   }
 });
-
-// cartRouter.patch('/:productID/:quantity',  async (req, res, next) => {
-//   const {productID} = req.params;
-//   const {quantity} = req.params;
-
-//   const updateFields = {};
-
-//   if (productID) {
-//     updateFields.productID = productID;
-//   }
-
-//   if (quantity) {
-//     updateFields.quantity = quantity;
-//   }
-
-//   try {
-//     const updateAmount = await updateCartItem(postId);
-
-//     const updatedPost = await updatePost(postId, updateFields);
-//     res.send({ post: updatedPost })
-
-//   } catch ({ name, message }) {
-//     next({ name, message });
-//   }
-// });
 
 cartRouter.get('/', async( req, res, next) => {
   try {

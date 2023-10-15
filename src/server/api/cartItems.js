@@ -1,12 +1,13 @@
 const express = require('express');
-const { getAllCartItems, getCartItemsByUserId, createCartItems, deletedCartItems ,updateCartItem} = require('../db');
+const { getAllCartItems, getCartItemsByUserId, createCartItems, deletedCartItems ,updateCartItem, getCartItemsByTwoId} = require('../db');
 const cartItemsRouter = express.Router();
 const {requireUser, requiredNotSent} = require('./utils')
 
 
+
 cartItemsRouter.get('/',async( req, res, next) => {
     try {
-       
+        
         const cartItems = await getAllCartItems();
         res.send(cartItems);
     } catch (error) {
@@ -29,20 +30,20 @@ cartItemsRouter.get('/users/:id',requireUser,async( req, res, next) => {
 }); 
 
 //  POST  /api/users/:userId/products This api uses for adding products to cart
-cartItemsRouter.post('/users/:id',requireUser,requiredNotSent({requiredParams: ['products_id','quantity']}), async (req, res, next) => {
+cartItemsRouter.post('/users/:id',requireUser,requiredNotSent({requiredParams: ['products_id','quantityincart']}), async (req, res, next) => {
     try {
-      const usersId = req.params;  
-      const {products_id, quantity} = req.body;
-      const existingProduct = await getCartItemsByUserId(usersId.id);
-     
+      const usersId = req.params;
+      const {products_id, quantityincart} = req.body;
+      const existingProduct = await getCartItemsByTwoId(usersId.id,products_id);
+      console.log()
       if(existingProduct) {
         next({
           name: 'Error',
           message: `An product already exists`
         });
       } else {
-        const users_id = usersId.id
-        const createdProduct = await createCartItems({users_id,products_id,quantity});
+        const users_id = usersId.id;
+        const createdProduct = await createCartItems({users_id,products_id,quantityincart});
        
         if(createdProduct) {
           res.send(createdProduct);
@@ -59,12 +60,13 @@ cartItemsRouter.post('/users/:id',requireUser,requiredNotSent({requiredParams: [
     }
   });
 
-cartItemsRouter.patch('/users/:users_id/products/:products_id', requireUser, async (req, res, next) => {
+cartItemsRouter.patch('/users/:id/products', requireUser, async (req, res, next) => {
     try {
-        const user_id = req.params.users_id;
-        const product_id = req.params.products_id;
-        const {quantity } = req.body;
-        await updateCartItem(user_id, product_id, quantity);
+        const usersId = req.params;
+        const users_id = usersId.id;
+        console.log(users_id,"idd")
+        const {products_id,quantityincart} = req.body;
+        await updateCartItem(users_id, products_id, quantityincart);
         
     } catch (error) {
         console.error(error);
@@ -85,12 +87,6 @@ cartItemsRouter.delete('/users/:users_id/products/:products_id',requireUser, asy
         next(error);
     }
 });
-
-
-
-
-
-
 
 
 module.exports = cartItemsRouter;

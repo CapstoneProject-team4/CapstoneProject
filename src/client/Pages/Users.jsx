@@ -51,7 +51,7 @@ export default function Users({token,role}){
     return (
        <>
        <div>
-        <Navbar token={token}/>
+        <Navbar token={token} role={role}/>
        </div>
         <div className="users">
              {renderAllUsers()}
