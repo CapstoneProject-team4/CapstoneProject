@@ -165,10 +165,23 @@ const Cart = ({ token, role }) => {
   };
 
   // Calculate total price
-  const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  const preTotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  const total = (Math.ceil(preTotal * 100)) / 100;
+  const preShipping = cart.reduce((acc, item) => acc + 5.90 * item.quantity, 0);
+  const shipping = (Math.ceil(preShipping * 100)) / 100;
+  const preDiscount = cart.reduce((acc, item) => acc + 2.00 * item.quantity, 0);
+  const discount = (Math.ceil(preDiscount * 100)) / 100;
+  const actualTotal = total-shipping-discount;
 
   const confirmation = () => {
     if (confirm("Are you sure you wish to complete your purchase?")) {
+      // deleteCart(token, id);
+      // await getCart(token, userId);
+      fetch('http://localhost:3000/api/cart/', {
+        method: 'DELETE',
+        credentials: 'include'
+        //other options
+    }).then(response => console.log("Response status: ", response.status));
       alert("Purchase completed!");
       dispatch({ type: 'CLEAR_CART'}); // Dispatch the action to clear the cart
       navigate("/");
@@ -211,7 +224,7 @@ const Cart = ({ token, role }) => {
                     <Add onClick={() => updateQuantity(item.id, item.quantity + 1)} />
                   </ProductAmountContainer>
                   <ProductPrice>$ {item.price * item.quantity}</ProductPrice>
-                  <Remove onClick={() => removeFromCart(item.id)} />
+                  <Button onClick={() => removeFromCart(item.id)}>Remove from Cart </Button>
                 </PriceDetail>
               </Product>
             ))}
@@ -224,15 +237,15 @@ const Cart = ({ token, role }) => {
               </SummaryItem>
               <SummaryItem>
                 <SummaryItemText>Estimated Shipping</SummaryItemText>
-              <SummaryItemPrice>$ 5.90</SummaryItemPrice>
+              <SummaryItemPrice>$ {shipping}</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Shipping Discount</SummaryItemText>
-              <SummaryItemPrice>$ -5.90</SummaryItemPrice>
+              <SummaryItemPrice>$ {discount}</SummaryItemPrice>
             </SummaryItem>
               <SummaryItem type="total">
                 <SummaryItemText>Total</SummaryItemText>
-                <SummaryItemPrice>$ {total}</SummaryItemPrice>
+                <SummaryItemPrice>$ {actualTotal}</SummaryItemPrice>
               </SummaryItem>
               <Button onClick ={()=> confirmation()} >CHECKOUT NOW</Button>
             </Summary>
