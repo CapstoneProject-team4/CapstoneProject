@@ -154,35 +154,40 @@ const Cart = ({ token, role }) => {
 //     },
 //   ]);
 
-  // Function to update the cart, remove items, etc.
+console.log('Cart:', cart);
   // Function to update the cart, remove items, etc.
   const updateQuantity = (id, newQuantity) => {
+    console.log('Updating quantity:', id, newQuantity);
     dispatch({ type: 'UPDATE_QUANTITY', id, quantity: newQuantity });
   };
 
   const removeFromCart = (id) => {
+    console.log('Removing from cart:', id);
     dispatch({ type: 'REMOVE_FROM_CART', id });
   };
-
-  // Calculate total price
+  
+  // Calculate price
   const preTotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
   const total = (Math.ceil(preTotal * 100)) / 100;
-  const preShipping = cart.reduce((acc, item) => acc + 5.90 * item.quantity, 0);
+  const preShipping = cart.reduce((acc, item) => acc + 5.99 * item.quantity, 0);
   const shipping = (Math.ceil(preShipping * 100)) / 100;
-  const preDiscount = cart.reduce((acc, item) => acc + 2.00 * item.quantity, 0);
+  const preDiscount = cart.reduce((acc, item) => acc + 1.00 * item.quantity, 0);
   const discount = (Math.ceil(preDiscount * 100)) / 100;
-  const actualTotal = total-shipping-discount;
+  const preActualTotal = preTotal-preShipping-preDiscount;
+  const actualTotal = (Math.ceil(preActualTotal * 100)) / 100;
 
-  const confirmation = () => {
+  const confirmation = (id) => {
     if (confirm("Are you sure you wish to complete your purchase?")) {
       // deleteCart(token, id);
       // await getCart(token, userId);
-      fetch('http://localhost:3000/api/cart/', {
-        method: 'DELETE',
-        credentials: 'include'
-        //other options
-    }).then(response => console.log("Response status: ", response.status));
+    //   fetch('http://localhost:3000/api/cart/', {
+    //     method: 'DELETE',
+    //     credentials: 'include'
+    //     //other options
+    // })
+    // .then(response => console.log("Response status: ", response.status));
       alert("Purchase completed!");
+      dispatch({ type: 'CLEAR_CART'}); // Dispatch the action to clear the cart
       navigate("/");
     }
   };
@@ -195,7 +200,7 @@ const Cart = ({ token, role }) => {
       <Wrapper>
         <Title>YOUR BAG</Title>
         <Top>
-          <TopButton>CONTINUE SHOPPING</TopButton>
+          <TopButton onClick={() => navigate("/products")}>CONTINUE SHOPPING</TopButton>
           <TopButton onClick={confirmation} type="filled">
             CHECKOUT NOW
           </TopButton>
@@ -257,4 +262,3 @@ const Cart = ({ token, role }) => {
 };
 
 export default Cart;
-

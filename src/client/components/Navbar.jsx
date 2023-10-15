@@ -97,7 +97,7 @@ const Navbar = ({token,role}) => {
       </Link>
       <Link to= "/cart">
          <MenuItem>
-          <Badge badgeContent={4} color="primary">
+          <Badge badgeContent={0} color="primary">
           <ShoppingCartOutlined/>
           </Badge>
         </MenuItem>
