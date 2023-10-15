@@ -13,6 +13,7 @@ export default function AllProducts({ token, role }) {
   const { dispatch } = useCart(); // Get the dispatch function from the CartContext
 
   const addToCart = (product) => {
+    
     dispatch({ type: 'ADD_TO_CART', product });
   };
 
