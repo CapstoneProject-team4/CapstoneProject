@@ -155,7 +155,6 @@ const Cart = ({ token, role }) => {
 //   ]);
 
   // Function to update the cart, remove items, etc.
-  // Function to update the cart, remove items, etc.
   const updateQuantity = (id, newQuantity) => {
     dispatch({ type: 'UPDATE_QUANTITY', id, quantity: newQuantity });
   };
@@ -173,15 +172,20 @@ const Cart = ({ token, role }) => {
   const discount = (Math.ceil(preDiscount * 100)) / 100;
   const actualTotal = total-shipping-discount;
 
-  const confirmation = () => {
+  const confirmation = (id) => {
     if (confirm("Are you sure you wish to complete your purchase?")) {
       // deleteCart(token, id);
       // await getCart(token, userId);
-      fetch('http://localhost:3000/api/cart/', {
-        method: 'DELETE',
-        credentials: 'include'
-        //other options
-    }).then(response => console.log("Response status: ", response.status));
+      for (let index = 0; index < id.length; index++) {
+        const id = index;
+        dispatch({ type: 'REMOVE_FROM_CART', id });
+      }
+    //   fetch('http://localhost:3000/api/cart/', {
+    //     method: 'DELETE',
+    //     credentials: 'include'
+    //     //other options
+    // })
+    // .then(response => console.log("Response status: ", response.status));
       alert("Purchase completed!");
       navigate("/");
     }
@@ -195,7 +199,7 @@ const Cart = ({ token, role }) => {
       <Wrapper>
         <Title>YOUR BAG</Title>
         <Top>
-          <TopButton>CONTINUE SHOPPING</TopButton>
+          <TopButton onClick={() => navigate("/products")}>CONTINUE SHOPPING</TopButton>
           <TopButton onClick={confirmation} type="filled">
             CHECKOUT NOW
           </TopButton>
