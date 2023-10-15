@@ -1,3 +1,4 @@
+
 const db = require('./client');
 const util = require('./util');
 
@@ -49,7 +50,7 @@ const createCartItems= async({users_id,products_id,quantityincart}) => {
   async function getCartItemsByUserId(id){
     try {
       const cartItem = await db.query(`
-      SELECT products.*,cartItems.quantityincart AS cartItems_quantityincart,cartItems.users_id AS cartItems_users_id, cartItems.products_id AS cartItems_products_id
+      SELECT products.*,cartItems.quantityincart AS cartItems_quantityincart, cartItems.id AS cartItems_id,cartItems.users_id AS cartItems_users_id, cartItems.products_id AS cartItems_products_id
       FROM products
       JOIN cartItems ON products.id = cartItems.products_id
       JOIN users ON cartItems.users_id = users.id
@@ -76,7 +77,7 @@ const createCartItems= async({users_id,products_id,quantityincart}) => {
 }
 
 
-async function updateCartItem({id,products_id, ...fields}) {
+async function updateCartItem({id, ...fields}) {
   try {
     const toUpdate = {}
     for(let column in fields) {
@@ -87,7 +88,7 @@ async function updateCartItem({id,products_id, ...fields}) {
       const {rows} = await db.query(`
           UPDATE cartItems 
           SET ${ util.dbFields(toUpdate).insert }
-          WHERE id=${ id } AND products_id = ${products_id}
+          WHERE id=${ id }
           RETURNING *;
       `, Object.values(toUpdate));
       product = rows[0];
@@ -97,7 +98,6 @@ async function updateCartItem({id,products_id, ...fields}) {
     throw error;
   }
 }
-
 
 
 

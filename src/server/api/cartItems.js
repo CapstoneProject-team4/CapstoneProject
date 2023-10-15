@@ -60,19 +60,24 @@ cartItemsRouter.post('/users/:id',requireUser,requiredNotSent({requiredParams: [
     }
   });
 
-cartItemsRouter.patch('/users/:id', requireUser, async (req, res, next) => {
+  cartItemsRouter.patch('/:id',requiredNotSent({requiredParams: ['users_id', 'products_id','quantityincart']}), async (req, res, next) => {
     try {
-        const usersId = req.params;
-        const users_id = usersId.id;
-        console.log(users_id,"idd")
-        const {products_id,quantityincart} = req.body;
-        await updateCartItem(users_id, products_id, quantityincart);
-        
+      const {id} = req.params;
+        const {users_id, products_id,quantityincart} = req.body;
+        const updateProd = await updateCartItem({id: id, users_id, products_id,quantityincart})
+        if(updateProd) {
+          res.send(updateProd);
+        } else {
+          next({
+            name: 'FailedToUpdate',
+            message: 'There was an error updating your product'
+          })
+        }
     } catch (error) {
-        console.error(error);
-        next(error);
+      console.log(error);
+      next(error);
     }
-});
+  });
 
 
 //DELETE /api/users/:users_id/products/:products_id This apis uses for removing the item from cart.
