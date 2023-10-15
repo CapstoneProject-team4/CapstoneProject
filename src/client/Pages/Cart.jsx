@@ -171,7 +171,7 @@ console.log('Cart:', cart);
   const total = (Math.ceil(preTotal * 100)) / 100;
   const preShipping = cart.reduce((acc, item) => acc + 5.99 * item.quantity, 0);
   const shipping = (Math.ceil(preShipping * 100)) / 100;
-  const preDiscount = cart.reduce((acc, item) => acc + 1.00 * item.quantity, 0);
+  const preDiscount = cart.reduce((acc, item) => acc - 1.00 * item.quantity, 0);
   const discount = (Math.ceil(preDiscount * 100)) / 100;
   const preActualTotal = preTotal-preShipping-preDiscount;
   const actualTotal = (Math.ceil(preActualTotal * 100)) / 100;

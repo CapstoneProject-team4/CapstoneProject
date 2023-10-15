@@ -1,15 +1,16 @@
 import React from "react";
 
+
 import { useNavigate } from "react-router-dom";
 import Navbar from "./Components/Navbar";
 import "./AdminDashboard.css"; 
 
-export default function AdminDashboard({ token }) {
+export default function AdminDashboard({ token , role}) {
   const navigate = useNavigate();
 
   return (
     <div className="AdminDashboard"> 
-      <Navbar token={token} />
+      <Navbar token={token} role={role} />
       <img
         src="https://static.prod01.ue1.p.pcomm.net/blackbaud/user_content/photos/000/006/6783/a6132a5cd55abcae190bc82567ca8a47-original-users.png"
         alt="Users"
@@ -20,6 +21,7 @@ export default function AdminDashboard({ token }) {
         alt="Products"
       ></img>
       <button onClick={() => navigate("/products")}>Products Management</button>
+
     </div>
   );
 }
