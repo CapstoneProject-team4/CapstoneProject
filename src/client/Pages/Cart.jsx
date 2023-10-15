@@ -170,6 +170,7 @@ const Cart = ({ token, role }) => {
   const confirmation = () => {
     if (confirm("Are you sure you wish to complete your purchase?")) {
       alert("Purchase completed!");
+      dispatch({ type: 'CLEAR_CART'}); // Dispatch the action to clear the cart
       navigate("/");
     }
   };

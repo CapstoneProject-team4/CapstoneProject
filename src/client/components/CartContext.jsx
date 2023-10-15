@@ -20,7 +20,10 @@ const cartReducer = (state, action) => {
         }
         return item;
       });
-    // Add more cases for other cart-related actions if needed
+    case  'CLEAR_CART':
+      //clear the cart by returning an empty erray
+      return [];
+
     default:
       return state;
   }
