@@ -1,6 +1,6 @@
 import { useState } from "react";
-
-
+import "./AddProducts.css";
+import Navbar from "./Navbar";
 export default function AddProducts({token,role}){
    
     const[title,setTitle]=useState("");
@@ -41,6 +41,7 @@ export default function AddProducts({token,role}){
       }
     return (
         <>
+        <Navbar token={token} role={role} />
         <div className="AddProducts">
         <h2> Add Products</h2>
         <form onSubmit={handleSubmit}>
