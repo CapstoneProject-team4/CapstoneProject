@@ -134,27 +134,7 @@ const Button = styled.button`
 const Cart = ({ token, role }) => {
   const navigate = useNavigate();
   const { cart, dispatch } = useCart();
-
-  //  const [cartItems, setCartItems] = useState([
-//     {
-//       id: 1,
-//       name: "Headphones",
-//       price: 30,
-//       quantity: 2,
-//       color: "black",
-//       img:"https://i.pinimg.com/736x/d9/c6/97/d9c697e5d3fc891bd3e01cb6d1be5821.jpg"
-//     },
-//     {
-//       id: 2,
-//       name: "Headphones",
-//       price: 20,
-//       quantity: 1,
-//       color: "gray",
-//       img:" https://i.pinimg.com/736x/d9/c6/97/d9c697e5d3fc891bd3e01cb6d1be5821.jpg"
-//     },
-//   ]);
-
-console.log('Cart:', cart);
+  
   // Function to update the cart, remove items, etc.
   const updateQuantity = (id, newQuantity) => {
     console.log('Updating quantity:', id, newQuantity);
@@ -227,7 +207,7 @@ console.log('Cart:', cart);
                     <ProductAmount>{item.quantity}</ProductAmount>
                     <Add onClick={() => updateQuantity(item.id, item.quantity + 1)} />
                   </ProductAmountContainer>
-                  <ProductPrice>$ {item.price * item.quantity}</ProductPrice>
+                  <ProductPrice>$ {fixPrice(item.price * item.quantity)}</ProductPrice>
                   <Button onClick={() => removeFromCart(item.id)}>Remove from Cart </Button>
                 </PriceDetail>
               </Product>
