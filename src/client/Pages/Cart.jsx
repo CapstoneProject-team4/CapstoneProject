@@ -155,7 +155,6 @@ const Cart = ({ token, role }) => {
 //   ]);
 
   // Function to update the cart, remove items, etc.
-  // Function to update the cart, remove items, etc.
   const updateQuantity = (id, newQuantity) => {
     dispatch({ type: 'UPDATE_QUANTITY', id, quantity: newQuantity });
   };
