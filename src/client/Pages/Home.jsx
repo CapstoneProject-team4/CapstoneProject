@@ -3,8 +3,8 @@ import Navbar from "../components/Navbar"
 import Slide from "../components/Slider"
 import Categories from "../components/Categories"
 import Products from "../components/Products"
-import News from "../Components/News"
-import Footer from "../Components/Footer"
+import News from "../components/News"
+import Footer from "../components/Footer"
 
 
 

@@ -7,20 +7,21 @@ const initialCartState = []; // Initialize your cart with an empty array
 const cartReducer = (state, action) => {
   switch (action.type) {
     case 'ADD_TO_CART':
-      // Logic to add a product to the cart
-      return [...state, action.product];
-    case 'REMOVE_FROM_CART':
-      // Logic to remove a product from the cart
-      return state.filter(item => item.id !== action.id);
-    case 'UPDATE_QUANTITY':
-      // Logic to update the quantity of an item in the cart
-      return state.map(item => {
-        if (item.id === action.id) {
-          return { ...item, quantity: action.quantity };
-        }
-        return item;
-      });
-    // Add more cases for other cart-related actions if needed
+      const existingItem = state.find(item => item.id === action.product.id);
+
+      if (existingItem) {
+        // If the product already exists in the cart, increment its quantity
+        return state.map(item => {
+          if (item.id === action.product.id) {
+            return { ...item, quantity: item.quantity + 1 };
+          }
+          return item;
+        });
+      } else {
+        // If the product is not in the cart, add it as a new item
+        return [...state, { ...action.product, quantity: 1 }];
+      }
+    // ... Other cases for updating and removing items
     default:
       return state;
   }
@@ -39,4 +40,3 @@ export const CartProvider = ({ children }) => {
 export const useCart = () => {
   return useContext(CartContext);
 };
-

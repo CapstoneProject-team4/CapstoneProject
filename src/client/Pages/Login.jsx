@@ -110,8 +110,7 @@ const Login = ({setToken,setRole}) => {
       if (!response.ok) {
         throw result;
       }
-      
-      setToken(result.token);
+      setToken(result.token); //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ4dWFuMDBAZ21haWwuY29tIiwiaWF0IjoxNjk3MjQyNTgyLCJleHAiOjE2OTc4NDczODJ9.HnLdzNqwLNzvbqYijOdcJPB-7nx4uoisYaoCxZoPKmA
       setRole(result.user.role);
     
       if(result.token){
