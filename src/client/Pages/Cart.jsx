@@ -134,7 +134,7 @@ const Button = styled.button`
 const Cart = ({ token, role }) => {
   const navigate = useNavigate();
   const { cart, dispatch } = useCart();
-
+  
   // Function to update the cart, remove items, etc.
   const updateQuantity = (id, newQuantity) => {
     console.log('Updating quantity:', id, newQuantity);
@@ -147,9 +147,6 @@ const Cart = ({ token, role }) => {
   };
   
   // Calculate price
-  function fixPrice(price) {
-    return (Math.ceil(price * 100)) / 100;
-  }
   const preTotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
   const total = (Math.ceil(preTotal * 100)) / 100;
   const preShipping = cart.reduce((acc, item) => acc + 5.99 * item.quantity, 0);
