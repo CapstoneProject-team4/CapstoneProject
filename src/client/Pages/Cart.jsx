@@ -207,7 +207,7 @@ const Cart = ({ token, role }) => {
                     <ProductAmount>{item.quantity}</ProductAmount>
                     <Add onClick={() => updateQuantity(item.id, item.quantity + 1)} />
                   </ProductAmountContainer>
-                  <ProductPrice>$ {fixPrice(item.price * item.quantity)}</ProductPrice>
+                  <ProductPrice>$ {(item.price * item.quantity)}</ProductPrice>
                   <Button onClick={() => removeFromCart(item.id)}>Remove from Cart </Button>
                 </PriceDetail>
               </Product>
