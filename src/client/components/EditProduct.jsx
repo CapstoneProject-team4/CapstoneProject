@@ -1,9 +1,11 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "./Navbar";
 import { Category } from "@mui/icons-material";
 
+
 export default function EditPost({ token, role }) {
+    const navigate =useNavigate();
   const { id } = useParams();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -68,11 +70,11 @@ export default function EditPost({ token, role }) {
     backgroundColor: "#e73d8d", 
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async(event) => {
     event.preventDefault();
     // Your form submission logic here
-  ;
-fetch(`http://localhost:3000/api/products/${id}`, 
+  try{
+     const response = await fetch(`http://localhost:3000/api/products/${id}`, 
           { 
             method: 'PATCH', 
             headers: { 
@@ -93,9 +95,21 @@ fetch(`http://localhost:3000/api/products/${id}`,
             }
             )
           })
-          .then((resp)=>resp.json())
-          .then((question)=>console.log(question))
-          alert(resp.message)  
+          const result = await response.json();
+          if(result.title=title){
+            alert("Successfully edited !")
+            navigate('/products')
+          } else{
+            alert("Error! Please check your value!")
+          }
+          return result;
+          
+        }catch(error){
+            console.log(error)
+        }
+          //.then((resp)=>resp.json())
+        //  .then((question)=>console.log(question))
+        
   
   }
   return (

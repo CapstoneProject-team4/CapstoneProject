@@ -156,7 +156,7 @@ const Cart = ({ token, role }) => {
   const preActualTotal = preTotal-preShipping-preDiscount;
   const actualTotal = (Math.ceil(preActualTotal * 100)) / 100;
 
-  const confirmation = (id) => {
+  const confirmation = (token) => {
     if (confirm("Are you sure you wish to complete your purchase?")) {
       // deleteCart(token, id);
       // await getCart(token, userId);
@@ -166,9 +166,14 @@ const Cart = ({ token, role }) => {
     //     //other options
     // })
     // .then(response => console.log("Response status: ", response.status));
+    console.log(token,"sjs")
+      if(token){
       alert("Purchase completed!");
       dispatch({ type: 'CLEAR_CART'}); // Dispatch the action to clear the cart
       navigate("/");
+      } else{
+        alert("You need to log in first before you checkout")
+      }
     }
   };
 
@@ -181,7 +186,7 @@ const Cart = ({ token, role }) => {
         <Title>YOUR BAG</Title>
         <Top>
           <TopButton onClick={() => navigate("/products")}>CONTINUE SHOPPING</TopButton>
-          <TopButton onClick={confirmation} type="filled">
+          <TopButton onClick={()=> confirmation(token)} type="filled">
             CHECKOUT NOW
           </TopButton>
         </Top>
@@ -231,7 +236,7 @@ const Cart = ({ token, role }) => {
                 <SummaryItemText>Total</SummaryItemText>
                 <SummaryItemPrice>$ {actualTotal}</SummaryItemPrice>
               </SummaryItem>
-              <Button onClick ={()=> confirmation()} >CHECKOUT NOW</Button>
+              <Button onClick ={()=> confirmation(token)} >CHECKOUT NOW</Button>
             </Summary>
           </Info>
         </Bottom>
