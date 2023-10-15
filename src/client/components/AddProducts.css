@@ -1,0 +1,54 @@
+
+.AddProducts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    padding: 20px;
+    background-color: #f6f2f7; 
+    border: 1px solid #e6e1e5; 
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .AddProducts h2 {
+    font-size: 24px;
+    color: #ca226b; 
+    margin-bottom: 20px;
+  }
+  
+  .AddProducts form {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .AddProducts label {
+    font-size: 16px;
+    color: #000; 
+  }
+  
+  .AddProducts input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #e6e1e5; 
+    border-radius: 5px;
+    background-color: #fff; 
+  }
+  
+  .AddProducts .button {
+    background-color: #ca226b; 
+    color: #fff; 
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .AddProducts .button:hover {
+    background-color: #e73d8d; 
+  }
+  

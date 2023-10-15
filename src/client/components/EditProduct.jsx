@@ -21,15 +21,15 @@ export default function EditPost({ token, role }) {
     alignItems: "center",
     margin: "20px",
     padding: "20px",
-    backgroundColor: "#f6f2f7", /* Light pink background color */
-    border: "1px solid #e6e1e5", /* Light pink border */
+    backgroundColor: "#f6f2f7", 
+    border: "1px solid #e6e1e5", 
     borderRadius: "10px",
     boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
   };
 
   const titleStyle = {
     fontSize: "24px",
-    color: "#ca226b", /* Pink title color */
+    color: "#ca226b", 
     marginBottom: "20px",
   };
 
@@ -65,7 +65,7 @@ export default function EditPost({ token, role }) {
   };
 
   const buttonHoverStyle = {
-    backgroundColor: "#e73d8d", /* Darker pink on hover */
+    backgroundColor: "#e73d8d", 
   };
 
   const handleSubmit = (event) => {
