@@ -1,8 +1,9 @@
 import { useState } from "react";
 import "./AddProducts.css";
 import Navbar from "./Navbar";
+import { useNavigate } from "react-router-dom";
 export default function AddProducts({token,role}){
-   
+    const navigate = useNavigate();
     const[title,setTitle]=useState("");
     const[description,setDescription]=useState("");
     const[price, setPrice]=useState("");
@@ -12,9 +13,9 @@ export default function AddProducts({token,role}){
     const[color,setColor]=useState("");
     const[size,setSize] =useState("");
     const[category,setCategory] = useState("")
- const handleSubmit = (event) => {
+ const handleSubmit = async(event) => {
       event.preventDefault();
-     fetch(`http://localhost:3000/api/products`, 
+     try{ const response = await fetch(`http://localhost:3000/api/products`, 
           { 
             method: 'POST', 
             headers: { 
@@ -35,9 +36,22 @@ export default function AddProducts({token,role}){
             }
             )
           })
-          .then((resp)=>resp.json())
-          .then((question)=>console.log(question))
-          alert(resq.message)
+          const result = await response.json();
+          if(result.title=title){
+            alert("Successfully created !")
+            navigate('/products')
+          } else{
+            alert("Error! Please check your value!")
+          }
+         
+          return result;
+        } catch(error){
+            console.log(error)
+        }
+         // .then((resp)=>resp.json())
+        //  .then((question)=>console.log(question))
+         
+          
       }
     return (
         <>
@@ -99,7 +113,7 @@ export default function AddProducts({token,role}){
                 value={category} onChange={e=>setCategory(e.target.value)}
                 />
             </label><br/>
-            <button className="button" >Submit</button>
+            <button className="button" type="submit"  >Submit</button>
         </form>
         </div>
         </>)

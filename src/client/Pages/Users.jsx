@@ -34,6 +34,8 @@ export default function Users({token,role}){
                     <h4>User Email:{user.email}</h4>
                     <h4>User Role :{user.role}</h4>
                     <h4>User Password:{user.password}</h4>
+                    <h4>User Billing Address:{user.billingaddress}</h4>
+                    <h4>User Phone Number: {user.phonenumber}</h4>
                 </div >
             )
                 
